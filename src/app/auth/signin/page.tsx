@@ -87,7 +87,7 @@ const Login = () => {
 
             <Button
               type="submit"
-              className="flex w-full items-center justify-center space-x-2 rounded-md bg-blue-500 px-4 py-2 font-medium text-white"
+              className="flex w-full items-center justify-center space-x-2 rounded-md bg-[#342D23] hover:bg-[#342D23] px-4 py-2 font-medium text-white"
             >
               <span>تسجيل الدخول</span>
               <Lock size={18} />
