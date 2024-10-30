@@ -158,7 +158,7 @@ const WebSiteEditForm = ({ website, video }: WebsiteEditFormProps) => {
           <div className="mb-4 text-lg font-semibold">فورم المزاد</div>
           <Link
             locale="ar"
-            href={`/${website._id}`}
+            href={`/auction/${website._id}`}
             className="inline-flex items-center gap-2 rounded-md bg-[#342D23] px-4 py-2 text-sm font-medium text-white transition-colors duration-200"
           >
             الذهاب الى وضع العرض

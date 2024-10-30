@@ -1,13 +1,15 @@
 "use client";
 
-import { LogIn, LogOut } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { LogIn, LogOut, Pencil } from "lucide-react";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { useAuth } from "@/context/AuthContext";
 
 const AuthButtons = () => {
+  const { id } = useParams();
   const router = useRouter();
   const { isAdmin, logout } = useAuth();
+  const pathname = usePathname();
 
   const handleLogout = () => {
     logout();
@@ -27,6 +29,14 @@ const AuthButtons = () => {
             <LogOut size={16} />
             تسجيل الخروج
           </Button>
+          {pathname === `/auction/${id}` && (
+            <button
+              onClick={() => router.push(`/dashboard/auctions/${id}`)}
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-white p-2"
+            >
+              <Pencil />
+            </button>
+          )}
         </div>
       ) : (
         <Button

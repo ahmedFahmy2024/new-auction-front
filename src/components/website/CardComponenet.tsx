@@ -24,7 +24,7 @@ type AuctionData = {
 const CardComponenet = ({ item }: { item: AuctionData }) => {
   return (
     <div className="relative">
-      <Link key={item._id} href={`/${item._id}`}>
+      <Link key={item._id} href={`/auction/${item._id}`}>
         <Card className="cursor-pointer overflow-hidden rounded-xl">
           <div className="relative h-40 w-full overflow-hidden">
             <Image
