@@ -21,13 +21,13 @@ const LeftPart = ({ data, price, allprice }: LeftPartProps) => {
   const seek = (open * seekingPercentValue) / 100;
   const OpenWSeek = open + seek;
   const tax = (OpenWSeek * taxValue) / 100;
-  const total = open + seek + tax || 0;
+  const total = open + seek + tax || "";
 
   return (
     <div className="grid grid-cols-2 gap-4">
       <DiagonalHeader title="رقم المضرب" bgColor="bg-[#d8ba8e]" />
       <DiagonalHeader
-        title={price?.paddleNumValue || "0"}
+        title={price?.paddleNumValue || ""}
         bgColor="bg-[#342d23]"
       />
       <DiagonalHeader title="عنوان المزاد" bgColor="bg-[#342d23]" />
@@ -36,16 +36,16 @@ const LeftPart = ({ data, price, allprice }: LeftPartProps) => {
       <DiagonalHeader title={data?.titleKey || ""} bgColor="bg-[#d8ba8e]" />
       <DiagonalHeader title="قيمة الزيادة" bgColor="bg-[#342d23]" />
       <DiagonalHeader
-        title={price?.increaseValue || "0"}
+        title={price?.increaseValue || ""}
         bgColor="bg-[#d8ba8e]"
       />
       <DiagonalHeader title="نسبة السعى" bgColor="bg-[#342d23]" />
       <DiagonalHeader
-        title={price?.seekingPercentValue || "0"}
+        title={price?.seekingPercentValue || ""}
         bgColor="bg-[#d8ba8e]"
       />
       <DiagonalHeader title="نسبة الضريبة" bgColor="bg-[#342d23]" />
-      <DiagonalHeader title={price?.taxValue || "0"} bgColor="bg-[#d8ba8e]" />
+      <DiagonalHeader title={price?.taxValue || ""} bgColor="bg-[#d8ba8e]" />
 
       <div className="col-span-2">
         <DiagonalHeader title={total.toString()} bgColor="bg-[#d8ba8e]" />
