@@ -108,7 +108,8 @@ const PriceEditForm = ({ price, id }: priceEditFormProps) => {
     const taxValue = Number(body.taxValue) || 0;
 
     const seekingNum = (subTotalValue * seekingPercentValue) / 100;
-    const taxNum = (seekingNum * taxValue) / 100;
+    const OpenWSeek = subTotalValue + seekingNum;
+    const taxNum = (OpenWSeek * taxValue) / 100;
 
     body.totalVAlue =
       Number(subTotalValue) + Number(seekingNum) + Number(taxNum);

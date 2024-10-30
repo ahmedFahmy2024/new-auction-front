@@ -13,7 +13,8 @@ const LeftPart = ({ data, price, allprice }: LeftPartProps) => {
   }, 0);
   const open = Number(totalIncreaseValue) + Number(price?.openPriceValue);
   const seek = (open * Number(price?.seekingPercentValue)) / 100;
-  const tax = (seek * Number(price?.taxValue)) / 100;
+  const OpenWSeek = open + seek;
+  const tax = (OpenWSeek * Number(price?.taxValue)) / 100;
   const total = open + seek + tax;
 
   return (

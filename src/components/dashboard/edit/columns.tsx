@@ -220,9 +220,11 @@ export const columns: ColumnDef<priceType>[] = [
       );
       const seekingValue = (soldPrice * seekingPercent) / 100 || 0;
 
+      const OpenWSeek = soldPrice + seekingValue;
+
       // Calculate tax value
       const taxPercent = parseFloat(row.getValue("taxValue") as string) || 0;
-      const taxValue = (seekingValue * taxPercent) / 100 || 0;
+      const taxValue = (OpenWSeek * taxPercent) / 100 || 0;
 
       // Calculate total
       const total = soldPrice + seekingValue + taxValue;
