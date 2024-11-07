@@ -33,3 +33,12 @@ export const priceSchema = z.object({
 });
 
 export type priceType = z.infer<typeof priceSchema>;
+
+export const contactSchema = z.object({
+  fullName: z.string().min(1),
+  email: z.string().email(),
+  phone: z.string().min(1),
+  subject: z.string().min(1),
+});
+
+export type contactType = z.infer<typeof contactSchema>;

@@ -27,3 +27,17 @@ export type price = {
   totalVAlue?: string | undefined;
   subTotalValue?: string | undefined;
 };
+
+export type AuctionData = {
+  _id: string;
+  titleKey: string;
+  titleValue: string;
+  rightLogoValue: string;
+  leftLogoValue: string;
+  imageValue: string[];
+  videoKey: string;
+  videoValue: string;
+  dateStart: string;
+  imageCover: string;
+  status: string;
+};

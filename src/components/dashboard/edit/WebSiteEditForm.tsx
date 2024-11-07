@@ -13,13 +13,13 @@ import {
 import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { ArrowLeft, CalendarIcon } from "lucide-react";
+import { CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { useRouter } from "next/navigation";
 import { auctionSchema } from "@/lib/schema";
 import { AUCTIONS, BASE_URL, VIDEOS } from "@/server/Api";
-import Link from "next/link";
+
 import {
   Popover,
   PopoverContent,
@@ -154,8 +154,7 @@ const WebSiteEditForm = ({ website, video }: WebsiteEditFormProps) => {
   return (
     <div className="flex-1 rounded-lg bg-white px-4 py-6 shadow-sm sm:px-6">
       <div className="h-full min-h-[500px] w-full">
-        <div className="flex items-center justify-between pb-4">
-          <div className="mb-4 text-lg font-semibold">فورم المزاد</div>
+        {/* <div className="flex items-center justify-between pb-4">
           <Link
             locale="ar"
             href={`/auction/${website._id}`}
@@ -164,7 +163,7 @@ const WebSiteEditForm = ({ website, video }: WebsiteEditFormProps) => {
             الذهاب الى وضع العرض
             <ArrowLeft className="h-4 w-4" />
           </Link>
-        </div>
+        </div> */}
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}

@@ -140,3 +140,7 @@ input[type="number"] {
   height: 0;
   overflow: hidden;
 }
+
+html:has(.ahmed) body > .mahmoud {
+  display: none;
+}

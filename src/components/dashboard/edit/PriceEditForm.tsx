@@ -131,7 +131,6 @@ const PriceEditForm = ({ price, id }: priceEditFormProps) => {
   return (
     <div className="flex-1 rounded-lg bg-white px-4 py-6 shadow-sm sm:px-6">
       <div className="h-full min-h-[500px] w-full">
-        <div className="mb-4 text-lg font-semibold">فورم السعر</div>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}

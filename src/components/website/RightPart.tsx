@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import DiagonalHeader from "./DiagonalHeader";
 import { website } from "@/lib/types";
 
 type RightPartProps = {
@@ -63,10 +62,14 @@ const RightPart = ({ data, video }: RightPartProps) => {
 
       {/* Title Section */}
       {data.titleValue && (
-        <DiagonalHeader
-          bgColor="bg-[#342D23]"
-          title="المجموع أعلى مزايدة + قيمة السعي + الضريبة"
-        />
+        <div className="bg-[#342D23] rounded-md py-2 px-4 text-lg font-bold text-white flex items-center flex-col justify-center">
+          <div className="text-[#D8BA8F] font-extrabold text-3xl">
+            {data.titleValue}
+          </div>
+          <span className="text-xs font-medium mt-2">
+            المجموع أعلى مزايدة + قيمة السعي + الضريبة
+          </span>
+        </div>
       )}
     </div>
   );

@@ -23,7 +23,7 @@ const AuthButtons = () => {
           <Button
             variant="outline"
             size="sm"
-            className="text flex items-center gap-2 bg-red-500 px-2 text-white transition-colors border-none "
+            className="text flex items-center rounded-lg gap-2 bg-[#5A4B35] px-2 text-white transition-colors border border-[#F2D8B1] hover:bg-[#5A4B35] hover:text-white"
             onClick={handleLogout}
           >
             <LogOut size={16} />
@@ -32,9 +32,10 @@ const AuthButtons = () => {
           {pathname === `/auction/${id}` && (
             <button
               onClick={() => router.push(`/dashboard/auctions/${id}`)}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-white p-2"
+              className="flex items-center justify-center gap-2 rounded-lg bg-[#BB9155] px-2 py-1 text-white border border-[#F2D8B1]"
             >
-              <Pencil />
+              <Pencil size={16} />
+              تعديل
             </button>
           )}
         </div>
@@ -43,7 +44,7 @@ const AuthButtons = () => {
           onClick={() => router.push("/auth/signin")}
           variant="outline"
           size="sm"
-          className="flex items-center gap-2 transition-colors"
+          className="flex items-center gap-2 transition-colors bg-[#5A4B35] text-white border-none"
         >
           <LogIn size={16} />
           تسجيل الدخول

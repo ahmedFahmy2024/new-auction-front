@@ -1,19 +1,14 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import DashNavbar from "@/components/website/DashNavbar";
 import { AuthProvider } from "@/context/AuthContext";
+import { IBM_Plex_Sans_Arabic } from "next/font/google";
+import Footer from "@/components/website/Footer";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const ibm_plex_sans = IBM_Plex_Sans_Arabic({
+  subsets: ["arabic"],
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -28,12 +23,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ar" dir="rtl">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${ibm_plex_sans.className} antialiased`}>
         <AuthProvider>
           <DashNavbar />
           {children}
+          <Footer />
           <Toaster position="top-right" />
         </AuthProvider>
       </body>

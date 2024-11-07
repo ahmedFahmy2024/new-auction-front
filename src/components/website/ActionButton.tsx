@@ -1,7 +1,8 @@
 "use client";
 import { useAuth } from "@/context/AuthContext";
 import { AUCTIONS, BASE_URL } from "@/server/Api";
-import { Pencil, Trash2 } from "lucide-react";
+import { Trash } from "lucide-react";
+
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -44,25 +45,30 @@ const ActionButton = ({ item }: { item: { _id: string } }) => {
     }
   };
 
-  if (!isAdmin) return null;
+  if (!isAdmin)
+    return (
+      <button className="bg-[#D8BA8E] py-3 px-4 text-[#342D23] rounded-lg text-sm font-semibold border border-[#F2D8B1]">
+        تفاصيل المزاد
+      </button>
+    );
 
   return (
-    <div className="absolute top-0 z-10 flex items-center gap-2 p-2">
+    <div className="flex items-center gap-2">
       <button
         onClick={() => router.push(`/dashboard/auctions/${item._id}`)}
-        className="flex h-8 w-8 items-center justify-center rounded-full bg-white p-2"
+        className="flex items-center justify-center rounded-lg bg-[#D8BA8E] py-3 px-4 text-[#342D23] text-sm font-semibold"
       >
-        <Pencil />
+        تعديل المزاد
       </button>
       <button
         onClick={onDelete}
         disabled={isDeleting}
-        className="flex h-8 w-8 items-center justify-center rounded-full bg-red-500 p-2"
+        className="flex items-center justify-center rounded-lg bg-red-600 p-3 text-white"
       >
         {isDeleting ? (
           <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
         ) : (
-          <Trash2 color="white" />
+          <Trash color="white" />
         )}
       </button>
     </div>
