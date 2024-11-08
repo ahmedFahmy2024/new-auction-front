@@ -59,6 +59,11 @@ const WebSiteForm = () => {
     if (data.dateStart) {
       formData.append("dateStart", data.dateStart.toISOString());
     }
+
+    if (data.auctionStartTime) {
+      formData.append("auctionStartTime", data.auctionStartTime);
+    }
+
     if (data.status) {
       formData.append("status", data.status);
     }
@@ -76,6 +81,11 @@ const WebSiteForm = () => {
       const leftLogoResponse = await fetch(data.leftLogoValue);
       const leftLogoBlob = await leftLogoResponse.blob();
       formData.append("leftLogoValue", leftLogoBlob);
+    }
+    if (data.leftLogoValue2) {
+      const leftLogo2Response = await fetch(data.leftLogoValue2);
+      const leftLogo2Blob = await leftLogo2Response.blob();
+      formData.append("leftLogoValue2", leftLogo2Blob);
     }
     if (data.imageValue && data.imageValue.length > 0) {
       await Promise.all(
@@ -112,7 +122,6 @@ const WebSiteForm = () => {
           "Content-Type": "application/json",
         },
       });
-
       toast.success("تم إضافة المزاد بنجاح");
       form.reset();
       router.push(`/dashboard/auctions/${auctionId}`);
@@ -230,33 +239,52 @@ const WebSiteForm = () => {
               )}
             />
 
-            <div className="col-span-2">
-              <FormField
-                control={form.control}
-                name="status"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>حالة المزاد</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="اختر حالة المزاد" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="upcoming">قريبا</SelectItem>
-                        <SelectItem value="ongoing">جارى التنفيذ</SelectItem>
-                        <SelectItem value="completed">منتهى</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+            <FormField
+              control={form.control}
+              name="auctionStartTime"
+              render={({ field }) => (
+                <FormItem className="flex flex-col justify-end">
+                  <FormLabel>وقت فتح المزاد</FormLabel>
+                  <FormControl>
+                    <input
+                      type="text"
+                      className="h-10 rounded-md border border-gray-300 px-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                      {...field}
+                      placeholder="HH:MM"
+                    />
+                  </FormControl>
+                  <FormMessage>
+                    {form.formState.errors.auctionStartTime?.message}
+                  </FormMessage>
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="status"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>حالة المزاد</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="اختر حالة المزاد" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="upcoming">قريبا</SelectItem>
+                      <SelectItem value="ongoing">جارى التنفيذ</SelectItem>
+                      <SelectItem value="completed">منتهى</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
             <FormField
               control={form.control}
@@ -291,6 +319,26 @@ const WebSiteForm = () => {
                       }
                       value={form.watch("leftLogoValue") || ""}
                       error={form.formState.errors.leftLogoValue?.message}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="leftLogoValue2"
+              render={() => (
+                <FormItem>
+                  <FormControl>
+                    <ImageDropzone
+                      label="اللوغو الأيسر الثانى"
+                      onChange={(value) =>
+                        form.setValue("leftLogoValue2", value as string)
+                      }
+                      value={form.watch("leftLogoValue2") || ""}
+                      error={form.formState.errors.leftLogoValue2?.message}
                     />
                   </FormControl>
                   <FormMessage />

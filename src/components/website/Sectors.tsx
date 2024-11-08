@@ -3,6 +3,7 @@ import banner from "@/assets/banner.png";
 const Sectors = () => {
   return (
     <section
+      id="services"
       style={{ backgroundImage: `url(${banner.src})` }}
       className="relative  bg-cover bg-center flex items-center py-[100px] md:py-6"
     >

@@ -16,23 +16,30 @@ const RightPart = ({ data, video }: RightPartProps) => {
   return (
     <div className="space-y-6">
       {/* Logos Section */}
-      <div className="flex items-center justify-between gap-6">
-        <div className="relative h-16 w-52 overflow-hidden">
-          <Image
-            src={data.rightLogoValue}
-            alt="Right logo"
-            fill
-            sizes="(max-width: 768px) 64px, 96px"
-            priority
-            className="me-auto !w-fit object-contain"
-          />
-        </div>
-        <div className="relative h-16 w-52 overflow-hidden">
+      <div className="flex items-center justify-between gap-6 ">
+        <Image
+          src={data.rightLogoValue}
+          alt="Right logo"
+          width={100}
+          height={100}
+          priority
+          className="me-auto !w-fit object-contain"
+        />
+        <div className="flex items-center gap-6">
           <Image
             src={data.leftLogoValue}
             alt="Left logo"
-            fill
-            sizes="(max-width: 768px) 64px, 96px"
+            width={100}
+            height={100}
+            priority
+            className="ms-auto !w-fit object-contain"
+          />
+
+          <Image
+            src={data.leftLogoValue2}
+            alt="Left logo2"
+            width={100}
+            height={100}
             priority
             className="ms-auto !w-fit object-contain"
           />

@@ -4,6 +4,7 @@ export type website = {
   titleKey?: string | undefined;
   titleValue?: string | undefined;
   leftLogoValue: string;
+  leftLogoValue2: string;
   rightLogoValue: string;
   imageValue: string[];
   imageCover: string;
@@ -40,4 +41,12 @@ export type AuctionData = {
   dateStart: string;
   imageCover: string;
   status: string;
+};
+
+export type ContactData = {
+  _id: string;
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
 };

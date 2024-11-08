@@ -80,7 +80,7 @@ export default async function AuctionEditForm({ id }: { id: string }) {
     fetchPricetwo(id),
     fetchVideo(id),
   ]);
-  console.log(website);
+
   return (
     <div className="my-20">
       <h2 className="text-3xl font-extrabold text-[#342D23] mb-4">

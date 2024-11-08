@@ -6,12 +6,16 @@ export const auctionSchema = z.object({
   titleValue: z.string().optional(),
   rightLogoValue: z.string().optional(),
   leftLogoValue: z.string().optional(),
+  leftLogoValue2: z.string().optional(),
   imageValue: z.array(z.string()).optional(),
   videoKey: z.string().optional(),
   videoValue: z.string().optional(),
   dateStart: z.date(),
+  auctionStartTime: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, {
+    message: "Please use HH:MM format (e.g., 4:30 or 16:30)",
+  }),
   imageCover: z.string().optional(),
-  status: z.string().optional(),
+  status: z.enum(["upcoming", "ongoing", "completed"]),
 });
 
 export type auctionType = z.infer<typeof auctionSchema>;
@@ -35,10 +39,10 @@ export const priceSchema = z.object({
 export type priceType = z.infer<typeof priceSchema>;
 
 export const contactSchema = z.object({
-  fullName: z.string().min(1),
+  name: z.string().min(1),
   email: z.string().email(),
   phone: z.string().min(1),
-  subject: z.string().min(1),
+  message: z.string().min(1),
 });
 
 export type contactType = z.infer<typeof contactSchema>;

@@ -160,7 +160,7 @@ const Projector = () => {
           </Card>
         </div>
 
-        <div className="flex items-center justify-center gap-8 mt-8">
+        <div className="flex items-end md:items-center justify-center flex-col md:flex-row gap-8 mt-8">
           {array.map((item) => (
             <a
               href={item.link}

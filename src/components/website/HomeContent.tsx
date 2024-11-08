@@ -31,6 +31,7 @@ const array = [
 const HomeContent = () => {
   return (
     <section
+      id="about-us"
       style={{ backgroundImage: `url(${background.src})` }}
       className="relative md:h-[100vh] bg-cover bg-center flex items-center py-6"
     >
@@ -41,7 +42,7 @@ const HomeContent = () => {
             شركة كنوز مكة الإستثمارية
           </h2>
 
-          <p className="text-white font-medium text-lg leading-loose tracking-widest">
+          <p className="text-white text-center md:text-right font-medium text-lg leading-loose -tracking-wide">
             عالم فريد من نوعه، زاخر بالفرص والمزايا، لا يقتصر الأمر فيه على مجرد
             تقديم خدمات فحسب، بل ابتكار تجربة ممتعة ببصمة مميزة، داخل بيئة صممت
             لك بشكل استثنائي، تنعم فيها بباقة متنوعة من الحلول الراقية التي
@@ -64,7 +65,7 @@ const HomeContent = () => {
                   priority
                   className="w-[48px] aspect-square object-contain"
                 />
-                <p className="text-white font-normal text-base leading-loose tracking-widest">
+                <p className="text-white font-normal text-base leading-loose tracking-wide">
                   {item.text}
                 </p>
               </div>

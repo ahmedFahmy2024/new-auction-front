@@ -31,8 +31,8 @@ const CardComponenet = ({ item }: { item: AuctionData }) => {
 
   return (
     <div className="relative">
-      <Link key={item._id} href={`/auction/${item._id}`}>
-        <Card className="cursor-pointer rounded-xl p-2">
+      <Card className="cursor-pointer rounded-xl p-2">
+        <Link key={item._id} href={`/auction/${item._id}`}>
           <div className="relative h-[251px] w-full rounded-xl overflow-hidden">
             <Image
               src={item.imageCover}
@@ -71,21 +71,19 @@ const CardComponenet = ({ item }: { item: AuctionData }) => {
               </div>
             </div>
           </CardHeader>
+        </Link>
 
-          <CardFooter className="flex justify-between mt-2 p-0 px-1">
-            <div className="flex flex-col gap-1">
-              <span className="text-[#342D23] font-bold text-xs">
-                باقي على موعد البدايه
-              </span>
-              <span className="text-[#BB9155] font-semibold text-sm">
-                5 ايام
-              </span>
-            </div>
+        <CardFooter className="flex justify-between mt-2 p-0 px-1">
+          <div className="flex flex-col gap-1">
+            <span className="text-[#342D23] font-bold text-xs">
+              باقي على موعد البدايه
+            </span>
+            <span className="text-[#BB9155] font-semibold text-sm">5 ايام</span>
+          </div>
 
-            <ActionButton item={item} />
-          </CardFooter>
-        </Card>
-      </Link>
+          <ActionButton item={item} />
+        </CardFooter>
+      </Card>
 
       <div
         className={`absolute top-4 right-3 m-2 px-2 py-1 text-sm rounded-lg flex items-center gap-1 ${

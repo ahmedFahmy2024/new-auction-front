@@ -1,16 +1,16 @@
-import AuctionTable from "@/components/dashboard/AuctionTable";
+import ContactTable from "@/components/dashboard/contact/ContactTable";
 
-const AuctionsPage = () => {
+const page = () => {
   return (
     <main className="min-h-screen p-8">
       <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-        <h2 className="text-2xl font-bold">المزادات</h2>
+        <h2 className="text-2xl font-bold">التواصل</h2>
       </div>
       <div className="mt-8">
-        <AuctionTable />
+        <ContactTable />
       </div>
     </main>
   );
 };
 
-export default AuctionsPage;
+export default page;

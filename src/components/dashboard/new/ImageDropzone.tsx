@@ -86,9 +86,9 @@ export const ImageDropzone = ({
       {error && <p className="text-sm text-red-500">{error}</p>}
 
       {preview.length > 0 && (
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+        <div className="flex items-center flex-wrap gap-2">
           {preview.map((url, index) => (
-            <Card key={url} className="group relative h-28 w-full">
+            <Card key={url} className="group relative h-28 w-28">
               <Image
                 src={url}
                 alt={`Preview ${index + 1}`}

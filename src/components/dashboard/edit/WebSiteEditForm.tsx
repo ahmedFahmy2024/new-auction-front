@@ -42,10 +42,12 @@ type auctionType = {
   titleValue?: string | undefined;
   rightLogoValue?: string | undefined;
   leftLogoValue?: string | undefined;
+  leftLogoValue2?: string | undefined;
   imageValue?: string[] | undefined;
   videoKey?: string | undefined;
   videoValue: string;
   dateStart: Date;
+  auctionStartTime?: string | undefined;
   imageCover?: string | undefined;
   status?: string | undefined;
 };
@@ -70,8 +72,10 @@ const WebSiteEditForm = ({ website, video }: WebsiteEditFormProps) => {
       imageValue: website?.imageValue || [],
       rightLogoValue: website?.rightLogoValue || "",
       leftLogoValue: website?.leftLogoValue || "",
+      leftLogoValue2: website?.leftLogoValue2 || "",
       imageCover: website?.imageCover || "",
       dateStart: new Date(website.dateStart),
+      auctionStartTime: website?.auctionStartTime || "",
       status: website?.status || "",
     },
   });
@@ -267,33 +271,51 @@ const WebSiteEditForm = ({ website, video }: WebsiteEditFormProps) => {
               )}
             />
 
-            <div className="col-span-2">
-              <FormField
-                control={form.control}
-                name="status"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>حالة المزاد</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="اختر حالة المزاد" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="upcoming">قريبا</SelectItem>
-                        <SelectItem value="ongoing">جارى التنفيذ</SelectItem>
-                        <SelectItem value="completed">منتهى</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+            <FormField
+              control={form.control}
+              name="auctionStartTime"
+              render={({ field }) => (
+                <FormItem className="flex flex-col justify-end">
+                  <FormLabel>وقت فتح المزاد</FormLabel>
+                  <FormControl>
+                    <input
+                      type="text"
+                      className="h-10 rounded-md border border-gray-300 px-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage>
+                    {form.formState.errors.auctionStartTime?.message}
+                  </FormMessage>
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="status"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>حالة المزاد</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="اختر حالة المزاد" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="upcoming">قريبا</SelectItem>
+                      <SelectItem value="ongoing">جارى التنفيذ</SelectItem>
+                      <SelectItem value="completed">منتهى</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
             <FormField
               control={form.control}
@@ -337,6 +359,26 @@ const WebSiteEditForm = ({ website, video }: WebsiteEditFormProps) => {
 
             <FormField
               control={form.control}
+              name="leftLogoValue2"
+              render={() => (
+                <FormItem>
+                  <FormControl>
+                    <ImageDropzone
+                      label="اللوغو الأيسر 2"
+                      onChange={(value) =>
+                        form.setValue("leftLogoValue2", value as string)
+                      }
+                      value={form.watch("leftLogoValue2") || ""}
+                      error={form.formState.errors.leftLogoValue2?.message}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
               name="imageCover"
               render={() => (
                 <FormItem>
@@ -355,26 +397,28 @@ const WebSiteEditForm = ({ website, video }: WebsiteEditFormProps) => {
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="imageValue"
-              render={() => (
-                <FormItem>
-                  <FormControl>
-                    <ImageDropzone
-                      label="صور الموقع"
-                      onChange={(value) =>
-                        form.setValue("imageValue", value as string[])
-                      }
-                      value={form.watch("imageValue") || []}
-                      multiple
-                      error={form.formState.errors.imageValue?.message}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="col-span-2">
+              <FormField
+                control={form.control}
+                name="imageValue"
+                render={() => (
+                  <FormItem>
+                    <FormControl>
+                      <ImageDropzone
+                        label="صور الموقع"
+                        onChange={(value) =>
+                          form.setValue("imageValue", value as string[])
+                        }
+                        value={form.watch("imageValue") || []}
+                        multiple
+                        error={form.formState.errors.imageValue?.message}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <div className="col-span-2 flex items-center justify-end">
               <Button type="submit">تحديث</Button>
