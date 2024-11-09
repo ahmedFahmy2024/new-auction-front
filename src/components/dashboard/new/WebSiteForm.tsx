@@ -53,6 +53,9 @@ const WebSiteForm = () => {
     if (data.titleKey) {
       formData.append("titleKey", data.titleKey);
     }
+    if (data.descAfterTitle) {
+      formData.append("descAfterTitle", data.descAfterTitle);
+    }
     if (data.titleValue) {
       formData.append("titleValue", data.titleValue);
     }
@@ -148,6 +151,24 @@ const WebSiteForm = () => {
                 <FormItem>
                   <FormLabel className="text-sm font-medium text-[#1C1C1C]">
                     عنوان المزاد
+                  </FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage>
+                    {form.formState.errors.titleValue?.message}
+                  </FormMessage>
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="descAfterTitle"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm font-medium text-[#1C1C1C]">
+                    تفاصيل
                   </FormLabel>
                   <FormControl>
                     <Input {...field} />

@@ -10,6 +10,7 @@ export type website = {
   imageCover: string;
   dateStart: string;
   videoValue?: string | undefined;
+  descAfterTitle?: string | undefined;
 };
 
 export type price = {
@@ -41,6 +42,7 @@ export type AuctionData = {
   dateStart: string;
   imageCover: string;
   status: string;
+  auctionStartTime: string;
 };
 
 export type ContactData = {

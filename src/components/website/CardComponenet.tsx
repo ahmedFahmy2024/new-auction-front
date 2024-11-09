@@ -1,6 +1,6 @@
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
-import { format } from "date-fns";
+import { format, differenceInDays } from "date-fns";
 import Link from "next/link";
 
 import ActionButton from "./ActionButton";
@@ -19,15 +19,43 @@ type AuctionData = {
   dateStart: string;
   imageCover: string;
   status: string;
+  auctionStartTime: string;
 };
 
-const CardComponenet = ({ item }: { item: AuctionData }) => {
+const CardComponent = ({ item }: { item: AuctionData }) => {
   const [formattedDate, setFormattedDate] = useState("");
+  const [formattedStartTime, setFormattedStartTime] = useState("");
+  const [remainingTime, setRemainingTime] = useState("");
 
   useEffect(() => {
-    // Only format date on the client side
+    // Format date on the client side
     setFormattedDate(format(new Date(item.dateStart), "dd/MM/yyyy"));
-  }, [item.dateStart]);
+
+    // Format auctionStartTime to show AM/PM
+    const formatStartTime = () => {
+      const [hours, minutes] = item.auctionStartTime.split(":");
+      const startDateTime = new Date();
+      startDateTime.setHours(parseInt(hours), parseInt(minutes));
+
+      setFormattedStartTime(format(startDateTime, "hh:mm a"));
+    };
+
+    // Calculate remaining days from today to dateStart
+    const calculateRemainingDays = () => {
+      const today = new Date();
+      const startDate = new Date(item.dateStart);
+      const daysRemaining = differenceInDays(startDate, today);
+
+      setRemainingTime(
+        daysRemaining > 0
+          ? `${daysRemaining} ${daysRemaining > 1 ? "أيام" : "يوم"}`
+          : "0 يوم"
+      );
+    };
+
+    formatStartTime();
+    calculateRemainingDays();
+  }, [item.dateStart, item.auctionStartTime]);
 
   return (
     <div className="relative">
@@ -66,7 +94,7 @@ const CardComponenet = ({ item }: { item: AuctionData }) => {
                   وقت فتح المزاد
                 </span>
                 <span className="text-[#BB9155] font-semibold text-base">
-                  {formattedDate}
+                  {formattedStartTime}
                 </span>
               </div>
             </div>
@@ -78,7 +106,9 @@ const CardComponenet = ({ item }: { item: AuctionData }) => {
             <span className="text-[#342D23] font-bold text-xs">
               باقي على موعد البدايه
             </span>
-            <span className="text-[#BB9155] font-semibold text-sm">5 ايام</span>
+            <span className="text-[#BB9155] font-semibold text-sm">
+              {remainingTime}
+            </span>
           </div>
 
           <ActionButton item={item} />
@@ -105,4 +135,4 @@ const CardComponenet = ({ item }: { item: AuctionData }) => {
   );
 };
 
-export default CardComponenet;
+export default CardComponent;

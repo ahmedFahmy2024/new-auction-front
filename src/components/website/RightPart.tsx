@@ -23,7 +23,7 @@ const RightPart = ({ data, video }: RightPartProps) => {
           width={100}
           height={100}
           priority
-          className="me-auto !w-fit object-contain"
+          className="me-auto !w-fit object-contain max-h-[50px]"
         />
         <div className="flex items-center gap-6">
           <Image
@@ -32,7 +32,7 @@ const RightPart = ({ data, video }: RightPartProps) => {
             width={100}
             height={100}
             priority
-            className="ms-auto !w-fit object-contain"
+            className="ms-auto !w-fit object-contain max-h-[50px]"
           />
 
           <Image
@@ -41,7 +41,7 @@ const RightPart = ({ data, video }: RightPartProps) => {
             width={100}
             height={100}
             priority
-            className="ms-auto !w-fit object-contain"
+            className="ms-auto !w-fit object-contain max-h-[50px]"
           />
         </div>
       </div>
@@ -74,7 +74,7 @@ const RightPart = ({ data, video }: RightPartProps) => {
             {data.titleValue}
           </div>
           <span className="text-xs font-medium mt-2">
-            المجموع أعلى مزايدة + قيمة السعي + الضريبة
+            {data.descAfterTitle}{" "}
           </span>
         </div>
       )}

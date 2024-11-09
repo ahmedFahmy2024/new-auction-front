@@ -4,6 +4,7 @@ import { z } from "zod";
 export const auctionSchema = z.object({
   titleKey: z.string().optional(),
   titleValue: z.string().optional(),
+  descAfterTitle: z.string().optional(),
   rightLogoValue: z.string().optional(),
   leftLogoValue: z.string().optional(),
   leftLogoValue2: z.string().optional(),

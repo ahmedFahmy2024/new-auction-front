@@ -5,6 +5,11 @@ import AuctionsCards from "@/components/website/AuctionsCards";
 import leftSide from "@/assets/left-side.png";
 import ContactForm from "@/components/website/ContactForm";
 import PrevFooter from "@/components/website/PrevFooter";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "المزادات",
+};
 
 // Mark the route as dynamic
 export const dynamic = "force-dynamic";

@@ -50,6 +50,7 @@ type auctionType = {
   auctionStartTime?: string | undefined;
   imageCover?: string | undefined;
   status?: string | undefined;
+  descAfterTitle?: string | undefined;
 };
 type WebsiteEditFormProps = {
   website: auctionType;
@@ -67,6 +68,7 @@ const WebSiteEditForm = ({ website, video }: WebsiteEditFormProps) => {
     resolver: zodResolver(auctionSchema),
     defaultValues: {
       titleKey: website?.titleKey || "",
+      descAfterTitle: website?.descAfterTitle || "",
       titleValue: website?.titleValue || "",
       videoValue: video?.videoValue || "",
       imageValue: website?.imageValue || [],
@@ -86,12 +88,19 @@ const WebSiteEditForm = ({ website, video }: WebsiteEditFormProps) => {
     if (data.titleKey) {
       formData.append("titleKey", data.titleKey);
     }
+    if (data.descAfterTitle) {
+      formData.append("descAfterTitle", data.descAfterTitle);
+    }
     if (data.titleValue) {
       formData.append("titleValue", data.titleValue);
     }
 
     if (data.dateStart) {
       formData.append("dateStart", data.dateStart.toISOString());
+    }
+
+    if (data.auctionStartTime) {
+      formData.append("auctionStartTime", data.auctionStartTime);
     }
 
     if (data.status) {
@@ -113,6 +122,12 @@ const WebSiteEditForm = ({ website, video }: WebsiteEditFormProps) => {
       const coverImageResponse = await fetch(data.leftLogoValue);
       const coverImageBlob = await coverImageResponse.blob();
       formData.append("leftLogoValue", coverImageBlob);
+    }
+
+    if (data.leftLogoValue2) {
+      const coverImageResponse = await fetch(data.leftLogoValue2);
+      const coverImageBlob = await coverImageResponse.blob();
+      formData.append("leftLogoValue2", coverImageBlob);
     }
 
     if (data.imageValue && data.imageValue.length > 0) {
@@ -180,6 +195,23 @@ const WebSiteEditForm = ({ website, video }: WebsiteEditFormProps) => {
                 <FormItem>
                   <FormLabel className="text-sm font-medium text-[#1C1C1C]">
                     عنوان المزاد
+                  </FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage>
+                    {form.formState.errors.titleValue?.message}
+                  </FormMessage>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="descAfterTitle"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm font-medium text-[#1C1C1C]">
+                    تفاصيل
                   </FormLabel>
                   <FormControl>
                     <Input {...field} />
@@ -397,28 +429,26 @@ const WebSiteEditForm = ({ website, video }: WebsiteEditFormProps) => {
               )}
             />
 
-            <div className="col-span-2">
-              <FormField
-                control={form.control}
-                name="imageValue"
-                render={() => (
-                  <FormItem>
-                    <FormControl>
-                      <ImageDropzone
-                        label="صور الموقع"
-                        onChange={(value) =>
-                          form.setValue("imageValue", value as string[])
-                        }
-                        value={form.watch("imageValue") || []}
-                        multiple
-                        error={form.formState.errors.imageValue?.message}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+            <FormField
+              control={form.control}
+              name="imageValue"
+              render={() => (
+                <FormItem>
+                  <FormControl>
+                    <ImageDropzone
+                      label="صور الموقع"
+                      onChange={(value) =>
+                        form.setValue("imageValue", value as string[])
+                      }
+                      value={form.watch("imageValue") || []}
+                      multiple
+                      error={form.formState.errors.imageValue?.message}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
             <div className="col-span-2 flex items-center justify-end">
               <Button type="submit">تحديث</Button>
