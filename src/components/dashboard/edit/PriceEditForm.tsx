@@ -17,6 +17,7 @@ import { price } from "@/lib/types";
 import { priceSchema, priceType } from "@/lib/schema";
 import { BASE_URL, PRICES } from "@/server/Api";
 import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 
 type priceEditFormProps = {
   price: price;
@@ -293,7 +294,12 @@ const PriceEditForm = ({ price, id }: priceEditFormProps) => {
             />
 
             <div className="col-span-2 flex items-center justify-end">
-              <Button type="submit">حفظ</Button>
+              <Button disabled={form.formState.isSubmitting} type="submit">
+                {form.formState.isSubmitting ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : null}
+                تأكيد
+              </Button>
             </div>
           </form>
         </Form>

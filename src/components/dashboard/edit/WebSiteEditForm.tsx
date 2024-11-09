@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { useRouter } from "next/navigation";
@@ -451,7 +451,12 @@ const WebSiteEditForm = ({ website, video }: WebsiteEditFormProps) => {
             />
 
             <div className="col-span-2 flex items-center justify-end">
-              <Button type="submit">تحديث</Button>
+              <Button disabled={form.formState.isSubmitting} type="submit">
+                {form.formState.isSubmitting ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : null}
+                تحديث
+              </Button>
             </div>
           </form>
         </Form>

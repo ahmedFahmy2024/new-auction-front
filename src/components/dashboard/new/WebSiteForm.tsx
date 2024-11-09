@@ -28,7 +28,7 @@ import {
 
 import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { auctionSchema, auctionType } from "@/lib/schema";
 import { AUCTIONS, BASE_URL, VIDEOS } from "@/server/Api";
@@ -409,7 +409,12 @@ const WebSiteForm = () => {
             />
 
             <div className="col-span-2 flex items-center justify-end">
-              <Button type="submit">تأكيد</Button>
+              <Button disabled={form.formState.isSubmitting} type="submit">
+                {form.formState.isSubmitting ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : null}
+                تأكيد
+              </Button>
             </div>
           </form>
         </Form>
