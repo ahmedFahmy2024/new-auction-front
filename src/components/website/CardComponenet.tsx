@@ -44,7 +44,10 @@ const CardComponent = ({ item }: { item: AuctionData }) => {
     const calculateRemainingDays = () => {
       const today = new Date();
       const startDate = new Date(item.dateStart);
-      const daysRemaining = differenceInDays(startDate, today);
+      let daysRemaining = differenceInDays(startDate, today);
+
+      // Increase daysRemaining by one
+      daysRemaining += 1;
 
       setRemainingTime(
         daysRemaining > 0
