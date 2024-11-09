@@ -29,7 +29,6 @@ async function fetchContacts(page = 1, limit = 10000000) {
 
 const ContactTable = async () => {
   const data = await fetchContacts();
-  console.log(data);
 
   return <DataTable columns={columns} data={data} />;
 };

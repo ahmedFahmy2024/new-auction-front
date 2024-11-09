@@ -24,11 +24,10 @@ const ContactForm = () => {
 
   const onSubmit = async (values: contactType) => {
     try {
-      const response = await axios.post(`${BASE_URL}${CONTACTS}`, values);
+      await axios.post(`${BASE_URL}${CONTACTS}`, values);
       toast.success("تم ارسال الرسالة بنجاح", {
         position: "bottom-center",
       });
-      console.log(response);
     } catch (error) {
       console.error("Error submitting form:", error);
       toast.error("حدث خطأ فى ارسال الرسالة ، الرجاء المحاولة مرة أخرى", {
