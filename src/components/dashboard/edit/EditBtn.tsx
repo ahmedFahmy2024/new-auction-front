@@ -16,6 +16,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { BASE_URL, PRICES } from "@/server/Api";
+import { useAuctionSwitch } from "@/context/AuctionSwitchContext";
 
 type EditbtnProps = {
   id: string | undefined;
@@ -26,22 +27,63 @@ const EditBtn = ({ id }: EditbtnProps) => {
   const [isFetching, setIsFetching] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const { setDeleteRefresh, deleteRefresh } = useAuctionSwitch();
+  const [seekingPercent, setSeekingPercent] = useState("0");
+  const [taxPercent, setTaxPercent] = useState("0");
   const [formData, setFormData] = useState({
-    paddleNumValue: "",
-    increaseValue: "",
+    paddleNum: "",
+    increase: "",
+    soldPrice: "",
+    total: "",
     auctionId: "",
   });
 
+  // Calculate total whenever soldPrice or increase changes
+  useEffect(() => {
+    const calculateTotal = () => {
+      const soldPriceNum = parseFloat(formData.soldPrice || "0");
+      const seekingPercentNum = parseFloat(seekingPercent || "0");
+      const taxPercentNum = parseFloat(taxPercent || "0");
+
+      if (
+        isNaN(soldPriceNum) ||
+        isNaN(seekingPercentNum) ||
+        isNaN(taxPercentNum)
+      ) {
+        setFormData((prev) => ({ ...prev, total: "0.00" }));
+        return;
+      }
+
+      // Calculate seeking amount and tax
+      const seekingAmount = (soldPriceNum * seekingPercentNum) / 100;
+      const taxAmount = (seekingAmount * taxPercentNum) / 100;
+
+      // Calculate total
+      const total = soldPriceNum + seekingAmount + taxAmount;
+
+      // Update the total in formData with 2 decimal places
+      setFormData((prev) => ({ ...prev, total: total.toFixed(2) }));
+    };
+
+    calculateTotal();
+  }, [formData.soldPrice, seekingPercent, taxPercent]);
+
   const fetchPriceData = useCallback(async () => {
+    if (!id) return;
+
     setIsFetching(true);
     try {
       const response = await axios.get(`${BASE_URL}${PRICES}/${id}`);
       const priceData = response.data.data;
       setFormData({
-        paddleNumValue: priceData.paddleNumValue,
-        increaseValue: priceData.increaseValue,
+        paddleNum: priceData.paddleNum,
+        increase: priceData.increase,
+        soldPrice: priceData.soldPrice,
+        total: priceData.total,
         auctionId: priceData.auction._id,
       });
+      setSeekingPercent(priceData.auction.seekingPercent || "0");
+      setTaxPercent(priceData.auction.taxPercent || "0");
     } catch (error) {
       console.error("Error fetching price data:", error);
       toast.error("Failed to load price data");
@@ -49,26 +91,32 @@ const EditBtn = ({ id }: EditbtnProps) => {
     } finally {
       setIsFetching(false);
     }
-  }, [id]);
+  }, [id, deleteRefresh]);
 
   useEffect(() => {
-    if (open) {
+    if (open && id) {
       fetchPriceData();
     }
-  }, [open, fetchPriceData]);
+  }, [open, fetchPriceData, id]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Validate form data
-    if (!formData.paddleNumValue.trim() || !formData.increaseValue.trim()) {
+    if (
+      !formData.paddleNum.trim() ||
+      !formData.soldPrice.trim() ||
+      !formData.total.trim()
+    ) {
       toast.error("الرجاء ادخال جميع الحقول");
       return;
     }
 
     const body = {
-      paddleNumValue: formData.paddleNumValue,
-      increaseValue: formData.increaseValue,
+      paddleNum: formData.paddleNum,
+      increase: formData.increase,
+      soldPrice: formData.soldPrice,
+      total: formData.total,
       auction: formData.auctionId,
     };
 
@@ -83,6 +131,7 @@ const EditBtn = ({ id }: EditbtnProps) => {
 
       toast.success("تم تعديل المزاد بنجاح");
       setOpen(false);
+      setDeleteRefresh((prev) => !prev);
       router.refresh();
     } catch (error) {
       console.error("error", error);
@@ -111,14 +160,15 @@ const EditBtn = ({ id }: EditbtnProps) => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
-          className="flex items-center gap-1 rounded-md bg-blue-500 px-2 text-white hover:bg-blue-600"
+          variant="ghost"
+          className="flex items-center gap-1 rounded-md"
           size="sm"
           disabled={isLoading}
         >
           {isLoading ? (
             <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white" />
           ) : (
-            <Pencil className="h-4 w-4" />
+            <Pencil className="h-4 w-4" color="#D8BA8E" />
           )}
         </Button>
       </DialogTrigger>
@@ -141,19 +191,30 @@ const EditBtn = ({ id }: EditbtnProps) => {
               <Label htmlFor="paddleNumValue">رقم المضرب</Label>
               <Input
                 id="paddleNumValue"
-                name="paddleNumValue"
-                value={formData.paddleNumValue}
+                name="paddleNum"
+                value={formData.paddleNum}
                 onChange={handleChange}
                 disabled={isLoading}
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="increaseValue">قيمة الزيادة</Label>
+              <Label htmlFor="soldPrice">سعر المبيع</Label>
               <Input
-                id="increaseValue"
-                name="increaseValue"
-                value={formData.increaseValue}
+                id="soldPrice"
+                name="soldPrice"
+                value={formData.soldPrice}
+                onChange={handleChange}
+                disabled={isLoading}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="total">المجموع</Label>
+              <Input
+                id="total"
+                name="total"
+                value={formData.total}
                 onChange={handleChange}
                 disabled={isLoading}
               />

@@ -35,7 +35,7 @@ const page = async (props: Props) => {
   const contact = await fetchContact(id);
 
   return (
-    <main className="container mx-auto py-12 h-screen">
+    <main className="container mx-auto py-12 h-screen mt-[80px]">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">معلومات الاتصال</h1>
       </div>

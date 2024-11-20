@@ -1,4 +1,4 @@
-import { fetchAuction } from "@/lib/action";
+import { fetchProjects } from "@/lib/action";
 import Image from "next/image";
 import auctionBanner from "@/assets/auction-banner.png";
 import AuctionsCards from "@/components/website/AuctionsCards";
@@ -15,12 +15,12 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 const AllAuctions = async () => {
-  const data = await fetchAuction();
+  const data = await fetchProjects();
 
   return (
     <main
       style={{ backgroundImage: `url(${leftSide.src})` }}
-      className="bg-[#F7F3EB] bg-contain bg-left bg-no-repeat"
+      className="bg-[#F7F3EB] bg-contain bg-left bg-no-repeat mt-[80px]"
     >
       <div className="container mx-auto pt-10 px-4 md:px-0">
         <div className="relative w-full h-[374px] rounded-xl overflow-hidden ">

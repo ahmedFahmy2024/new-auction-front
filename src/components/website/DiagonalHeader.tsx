@@ -3,18 +3,26 @@ import React from "react";
 const DiagonalHeader = ({
   title,
   bgColor,
+  textColor,
 }: {
   title: string | number | undefined;
-  bgColor: string;
+  bgColor?: string;
+  textColor?: string;
 }) => {
   return (
-    <div className="relative">
+    <div className="relative small-text">
       <div
-        className={`${bgColor} p-4 text-lg font-bold text-white rounded-md min-h-[60px]`}
+        className={`h-12`}
+        style={{
+          clipPath:
+            "polygon(20px 0, 100% 0, 100% 50%, calc(100% - 20px) 100%, 0 100%, 0 50%)",
+          backgroundColor: bgColor,
+        }}
       >
-        <div className="flex items-center justify-center ">
-          {/* Title text */}
-          <span>{title}</span>
+        <div className={`h-full flex items-center justify-center`}>
+          <span style={{ color: textColor }} className={`font-bold text-lg`}>
+            {title}
+          </span>
         </div>
       </div>
     </div>

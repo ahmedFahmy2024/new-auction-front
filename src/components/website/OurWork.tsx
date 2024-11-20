@@ -3,47 +3,54 @@ import { useState } from "react";
 import Image from "next/image";
 import bg from "@/assets/ourwork.png";
 import money from "@/assets/money.png";
+import moneyBg from "@/assets/moneyBg.jpg";
 import build from "@/assets/build.png";
+import buildBg from "@/assets/buildBg.png";
 import haj from "@/assets/haj.png";
+import hajBg from "@/assets/hajbg.png";
 import auctionHammer from "@/assets/auctionHammer.png";
-
+import auctionHammerBg from "@/assets/auctionHammerbj.jpg";
 type ServiceKey = keyof typeof servicesData;
 
 const servicesData = {
   investment: {
-    title: "الاستثمار العقاري",
-    image: money,
+    title: "ادارة الاملاك",
+    image: haj,
+    bg: hajBg,
     content: {
-      heading: "Investment Services",
+      heading: "ادارة الاملاك",
       description:
-        "We provide exceptional investment opportunities in real estate to help grow your portfolio.",
+        "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.",
     },
   },
   hotels: {
-    title: "إدارة وتشغيل الفنادق",
-    image: build,
+    title: "تنظيم المزادات",
+    image: auctionHammer,
+    bg: auctionHammerBg,
     content: {
-      heading: "Hotel Management",
+      heading: "تنظيم المزادات",
       description:
-        "Our hotel management services ensure smooth operations and guest satisfaction.",
+        "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.",
     },
   },
   auctions: {
-    title: "المزادات",
-    image: auctionHammer,
+    title: "إدارة وتشغيل الفنادق",
+    image: build,
+    bg: buildBg,
     content: {
-      heading: "Auction Services",
+      heading: "إدارة وتشغيل الفنادق",
       description:
-        "Join our auctions for exclusive properties and items with great value.",
+        "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.",
     },
   },
   pilgrims: {
-    title: "خدمات المعتمرين",
-    image: haj,
+    title: "الاستثمار العقاري",
+    image: money,
+    bg: moneyBg,
     content: {
-      heading: "Pilgrim Services",
+      heading: "الاستثمار العقاري",
       description:
-        "We offer comprehensive services to ensure a comfortable and fulfilling pilgrimage.",
+        "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.",
     },
   },
 };
@@ -70,12 +77,10 @@ const OurWork = () => {
             <div
               key={key}
               onClick={() => handleClick(key as ServiceKey)}
-              className={`cursor-pointer p-6 rounded-lg transition-all duration-300 ${
-                activeContent &&
-                activeContent.heading === service.content.heading
-                  ? "bg-white shadow-lg"
-                  : "bg-white/80"
-              }`}
+              style={{
+                backgroundImage: `linear-gradient(rgba(244, 234, 213, 0.8), rgba(244, 234, 213, 0.8)), url(${service.bg.src})`,
+              }}
+              className="cursor-pointer p-6 rounded-lg transition-all duration-300 bg-cover bg-center"
             >
               <div className="flex flex-col items-center text-center space-y-4">
                 <div className="w-16 h-16 relative">
@@ -89,7 +94,7 @@ const OurWork = () => {
                     className="object-contain"
                   />
                 </div>
-                <h3 className="text-lg font-bold text-gray-800">
+                <h3 className="text-lg font-bold text-[#594830]">
                   {service.title}
                 </h3>
               </div>
@@ -98,9 +103,15 @@ const OurWork = () => {
         </div>
 
         {activeContent && (
-          <div className="mt-6 p-4 border rounded-lg bg-gray-50">
-            <h3 className="text-xl font-bold mb-2">{activeContent.heading}</h3>
-            <p className="text-gray-600">{activeContent.description}</p>
+          <div className="mt-6 px-4 py-8 border rounded-lg bg-[#F5EBD7]">
+            <div className="gap-4 flex flex-col items-center justify-center max-w-5xl mx-auto">
+              <h3 className="text-2xl font-bold text-[#5A4B35]">
+                {activeContent.heading}
+              </h3>
+              <p className="text-[#342D23] text-lg font-bold">
+                {activeContent.description}
+              </p>
+            </div>
           </div>
         )}
       </div>

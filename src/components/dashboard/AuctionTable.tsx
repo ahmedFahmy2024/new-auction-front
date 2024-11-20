@@ -1,11 +1,11 @@
-import { AUCTIONS, BASE_URL } from "@/server/Api";
+import { BASE_URL, PROJECTS } from "@/server/Api";
 import { DataTable } from "./data-table";
 import { columns } from "./columns";
 
 async function fetchAuctions(page = 1, limit = 10000000) {
   try {
     const response = await fetch(
-      `${BASE_URL}${AUCTIONS}?page=${page}&limit=${limit}`,
+      `${BASE_URL}${PROJECTS}?page=${page}&limit=${limit}`,
       {
         method: "GET",
         headers: {

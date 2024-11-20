@@ -43,6 +43,7 @@ export type AuctionData = {
   imageCover: string;
   status: string;
   auctionStartTime: string;
+  isPublished: boolean;
 };
 
 export type ContactData = {
@@ -51,4 +52,20 @@ export type ContactData = {
   email: string;
   phone: string;
   message: string;
+};
+
+export type Project = {
+  _id: string;
+  title: string;
+  description: string;
+  imageCover: string;
+  images: string[];
+  file: string;
+  city: string;
+  dateStart: string;
+  auctionStartTime: string;
+  status: string;
+  isPublished: boolean;
+  createdAt: string;
+  location: string;
 };

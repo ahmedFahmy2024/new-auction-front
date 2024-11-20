@@ -1,10 +1,10 @@
 "use server";
 
-import { AUCTIONS, BASE_URL } from "@/server/Api";
+import { PROJECTS, BASE_URL } from "@/server/Api";
 
-export async function fetchAuction() {
+export async function fetchProjects() {
   try {
-    const response = await fetch(`${BASE_URL}${AUCTIONS}`, {
+    const response = await fetch(`${BASE_URL}${PROJECTS}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -14,13 +14,13 @@ export async function fetchAuction() {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to fetch auction");
+      throw new Error("Failed to fetch projects");
     }
 
-    const auction = await response.json();
-    return auction.data;
+    const projects = await response.json();
+    return projects.data;
   } catch (error) {
-    console.error("Error fetching Auction:", error);
+    console.error("Error fetching Projects:", error);
     throw error;
   }
 }

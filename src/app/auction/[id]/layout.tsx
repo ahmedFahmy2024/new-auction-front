@@ -1,4 +1,4 @@
-import { AUCTIONS, BASE_URL } from "@/server/Api";
+import { BASE_URL, PROJECTS } from "@/server/Api";
 import { Metadata } from "next";
 
 export async function generateMetadata({
@@ -8,7 +8,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const id = (await params).id;
   try {
-    const response = await fetch(`${BASE_URL}${AUCTIONS}/${id}`, {
+    const response = await fetch(`${BASE_URL}${PROJECTS}/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -23,7 +23,7 @@ export async function generateMetadata({
     const websiteData = data.data;
 
     return {
-      title: websiteData.titleValue,
+      title: websiteData.title,
     };
   } catch (error) {
     console.error("Error fetching metadata:", error);

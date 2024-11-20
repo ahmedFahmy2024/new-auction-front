@@ -53,8 +53,8 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="rounded-md border bg-[white] px-8 py-4">
-      <div className="rounded-md border">
+    <div className="bg-[white] pt-2">
+      <div className="rounded-xl border-[0.89px] border-[#919191] max-h-[400px] overflow-y-scroll scrollbar-hide">
         <Table className="percentagetable">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -105,7 +105,7 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
 
-      <div className="flex items-center justify-end gap-2 py-4">
+      <div className="flex items-center justify-end gap-2 p-4">
         <Button
           variant="outline"
           size="sm"

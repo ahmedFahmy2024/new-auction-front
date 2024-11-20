@@ -1,6 +1,6 @@
 "use client";
 import { useAuth } from "@/context/AuthContext";
-import { AUCTIONS, BASE_URL } from "@/server/Api";
+import { PROJECTS, BASE_URL } from "@/server/Api";
 import { Trash } from "lucide-react";
 
 import { useRouter } from "next/navigation";
@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 
 const handleDelete = async (id: string) => {
   try {
-    const response = await fetch(`${BASE_URL}${AUCTIONS}/${id}`, {
+    const response = await fetch(`${BASE_URL}${PROJECTS}/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -24,7 +24,7 @@ const handleDelete = async (id: string) => {
   }
 };
 
-const ActionButton = ({ item }: { item: { _id: string } }) => {
+const ActionButton = ({ item }: { item: { _id: string; status: string } }) => {
   const { isAdmin } = useAuth();
   const router = useRouter();
   const [isDeleting, setIsDeleting] = useState(false);
@@ -47,16 +47,29 @@ const ActionButton = ({ item }: { item: { _id: string } }) => {
 
   if (!isAdmin)
     return (
-      <button className="bg-[#D8BA8E] py-3 px-4 text-[#342D23] rounded-lg text-sm font-semibold border border-[#F2D8B1]">
+      <button
+        onClick={() => router.push(`/auction/${item._id}`)}
+        className="bg-[#D8BA8E] py-3 px-4 text-[#342D23] rounded-lg text-sm font-semibold border border-[#F2D8B1]"
+      >
         تفاصيل المزاد
       </button>
     );
 
+  const handleClick = () => {
+    if (item.status === "upcoming") {
+      router.push(`/dashboard/projects/${item._id}`);
+    } else if (item.status === "ongoing") {
+      router.push(`/dashboard/auctions/${item._id}`);
+    } else {
+      router.push(`/dashboard/projects/${item._id}`);
+    }
+  };
+
   return (
     <div className="flex items-center gap-2">
       <button
-        onClick={() => router.push(`/dashboard/auctions/${item._id}`)}
-        className="flex items-center justify-center rounded-lg bg-[#D8BA8E] py-3 px-4 text-[#342D23] text-sm font-semibold"
+        onClick={handleClick}
+        className={`flex items-center justify-center rounded-lg bg-[#D8BA8E] py-3 px-4 text-[#342D23] text-sm font-semibold `}
       >
         تعديل المزاد
       </button>

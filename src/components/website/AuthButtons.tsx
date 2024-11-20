@@ -38,14 +38,6 @@ const AuthButtons = () => {
               تعديل
             </button>
           )}
-          {pathname === `/` && (
-            <button
-              onClick={() => router.push(`/dashboard/contacts`)}
-              className="flex items-center justify-center gap-2 rounded-lg bg-[#BB9155] px-2 py-1 text-white border border-[#F2D8B1]"
-            >
-              الرسائل
-            </button>
-          )}
         </div>
       ) : (
         <Button

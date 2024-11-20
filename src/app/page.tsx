@@ -8,17 +8,16 @@ import OurVision from "@/components/website/OurVision";
 import Sectors from "@/components/website/Sectors";
 import OurWork from "@/components/website/OurWork";
 import ContactForm from "@/components/website/ContactForm";
+import PrevFooter from "@/components/website/PrevFooter";
 
 export default function Home() {
   return (
     <main className="ahmed">
-      <div className="md:hidden fixed top-0 left-0 right-0 z-[99999] ">
-        <DashNavbar />
-      </div>
+      <DashNavbar />
 
       <section
         style={{ backgroundImage: `url(${background.src})` }}
-        className="relative md:h-[100vh] bg-cover bg-center flex items-center py-[100px] md:py-6"
+        className="relative h-[100vh] bg-cover bg-center flex items-center py-[100px] md:py-6"
       >
         <div className="absolute inset-0 bg-black opacity-75"></div>
 
@@ -34,10 +33,6 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="hidden md:block md:sticky md:top-0 z-[999999] ">
-        <DashNavbar />
-      </div>
-
       <HomeContent />
 
       <VideoHome />
@@ -49,6 +44,8 @@ export default function Home() {
       <OurWork />
 
       <ContactForm />
+
+      <PrevFooter />
     </main>
   );
 }

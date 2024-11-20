@@ -20,6 +20,12 @@ import { BASE_URL, CONTACTS } from "@/server/Api";
 const ContactForm = () => {
   const form = useForm<contactType>({
     resolver: zodResolver(contactSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+    },
   });
 
   const onSubmit = async (values: contactType) => {
@@ -27,6 +33,12 @@ const ContactForm = () => {
       await axios.post(`${BASE_URL}${CONTACTS}`, values);
       toast.success("تم ارسال الرسالة بنجاح", {
         position: "bottom-center",
+      });
+      form.reset({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
       });
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -39,7 +51,7 @@ const ContactForm = () => {
   return (
     <section
       id="contact-us"
-      className="flex flex-col items-center justify-center gap-8 py-10 px-4 md:px-0"
+      className="flex flex-col items-center justify-center gap-8 py-10 px-4 md:px-0 bg-[#F5EBD7]"
     >
       <h2 className="text-[#342D23] font-bold text-3xl">معلومات التواصل </h2>
       <Form {...form}>

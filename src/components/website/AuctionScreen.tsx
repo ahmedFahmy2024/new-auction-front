@@ -4,14 +4,17 @@ import { Card, CardContent } from "@/components/ui/card";
 import LeftPart from "@/components/website/LeftPart";
 import RightPart from "@/components/website/RightPart";
 
-import { AUCTIONS, BASE_URL, PRICES, VIDEOS } from "@/server/Api";
+import { AUCTIONS, BASE_URL, PRICES, PROJECTS } from "@/server/Api";
 import { useParams } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
-import background from "@/assets/backgo.jpg";
+import { useEffect, useState } from "react";
+import BeforeAuctionStart from "@/components/website/BeforeAuctionStart";
+import { Project } from "@/lib/types";
+import { auctionType, priceType } from "@/lib/schema";
+import { useAuctionSwitch } from "@/context/AuctionSwitchContext";
 
-async function fetchWebsite(id: string) {
+const fetchProjects = async (id: string) => {
   try {
-    const response = await fetch(`${BASE_URL}${AUCTIONS}/${id}`, {
+    const response = await fetch(`${BASE_URL}${PROJECTS}/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -19,118 +22,138 @@ async function fetchWebsite(id: string) {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to fetch website");
+      throw new Error("Failed to fetch project");
     }
 
-    const website = await response.json();
-    return website.data;
+    const project = await response.json();
+    return project.data;
   } catch (error) {
-    console.error("Error fetching Website:", error);
+    console.error("Error fetching Project:", error);
     throw error;
   }
-}
+};
 
-async function fetchPrice(id: string) {
+const fetchAuctions = async (id: string) => {
   try {
-    const response = await fetch(`${BASE_URL}${AUCTIONS}/${id}${PRICES}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${BASE_URL}${PROJECTS}/${id}${AUCTIONS}?isRunning=true`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (!response.ok) {
-      throw new Error("Failed to fetch price");
+      throw new Error("Failed to fetch auction");
     }
 
-    const price = await response.json();
-    return price.data;
+    const auction = await response.json();
+    return auction.data;
   } catch (error) {
-    console.error("Error fetching Price:", error);
+    console.error("Error fetching Auction:", error);
     throw error;
   }
-}
+};
 
-async function fetchVideo(id: string) {
+const fetchPrices = async (auctionId: string) => {
   try {
-    const response = await fetch(`${BASE_URL}${AUCTIONS}/${id}${VIDEOS}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${BASE_URL}${AUCTIONS}/${auctionId}${PRICES}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (!response.ok) {
-      throw new Error("Failed to fetch video");
+      throw new Error("Failed to fetch prices");
     }
 
-    const video = await response.json();
-    return video.data[0];
+    const prices = await response.json();
+    return prices.data;
   } catch (error) {
-    console.error("Error fetching Video:", error);
+    console.error("Error fetching Prices:", error);
     throw error;
   }
-}
+};
 
 const AuctionScreen = () => {
   const { id } = useParams();
-  const [data, setData] = useState(null);
-  const [price, setPrice] = useState([]);
-  const [video, setVideo] = useState<{ videoValue?: string | null }>({});
-
-  // Fetch video only once on component mount
-  const fetchVideoData = useCallback(async () => {
-    try {
-      const videoData = await fetchVideo(id as string);
-      setVideo(videoData);
-    } catch (error) {
-      console.error("Error fetching video:", error);
-    }
-  }, [id]);
-
-  const fetchData = useCallback(async () => {
-    try {
-      const [websiteData, priceData] = await Promise.all([
-        fetchWebsite(id as string),
-        fetchPrice(id as string),
-      ]);
-      setData(websiteData);
-      setPrice(priceData);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  }, [id]);
+  const [project, setProject] = useState<Project | null>(null);
+  const [auctions, setAuctions] = useState<auctionType[]>([]);
+  const [prices, setPrices] = useState<priceType[]>([]);
+  const { auctionId, changeToggleFields, changeBidderNum } = useAuctionSwitch();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchData();
+    const loadData = async () => {
+      try {
+        setIsLoading(true);
 
-    const interval = setInterval(fetchData, 3000);
+        // Fetch project data
+        const projectData = await fetchProjects(id as string);
+        setProject(projectData);
 
-    return () => clearInterval(interval);
-  }, [fetchData]);
+        // Fetch auctions
+        const auctionData = await fetchAuctions(id as string);
+        setAuctions(auctionData);
 
-  // Fetch video only once on component mount
-  useEffect(() => {
-    fetchVideoData();
-  }, []);
+        // Only fetch prices if we have auctions
+        if (auctionData && auctionData.length > 0) {
+          const priceData = await fetchPrices(auctionData[0]._id);
+          setPrices(priceData);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (id) {
+      loadData();
+    }
+  }, [id, auctionId, changeToggleFields, changeBidderNum]);
+
+  if (!project) {
+    return (
+      <section className="text-center p-4 min-h-screen flex items-center justify-center">
+        لا توجد بيانات متاحة
+      </section>
+    );
+  }
+
+  if (project.status === "upcoming") {
+    return <BeforeAuctionStart data={project} />;
+  }
 
   return (
     <main
-      style={{ backgroundImage: `url(${background.src})` }}
-      className=" bg-cover bg-center flex items-center py-6 rounded-xl"
+      style={{
+        backgroundColor: auctions[0]?.bgColor,
+        backgroundImage:
+          auctions[0]?.displayBgImage && auctions[0]?.bgImage
+            ? `url(${auctions[0]?.bgImage})`
+            : "none",
+      }}
+      className="bg-cover bg-center flex items-center py-6 rounded-xl editPage"
     >
-      <div className="container mx-auto px-4 md:px-6 lg:px-8">
+      <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {/* right part */}
-          <Card className="overflow-hidden  bg-[#ffffff29] border-none">
-            <CardContent className="p-6">
-              <RightPart data={data} video={video} />
+          <Card className="overflow-hidden bg-transparent border-none">
+            <CardContent className="p-0">
+              <RightPart data={auctions} />
             </CardContent>
           </Card>
           {/* left part */}
-          <Card className="flex items-center justify-center overflow-hidden  bg-[#ffffff29] border-none">
-            <CardContent className="w-full p-6">
-              <LeftPart price={price[0]} allprice={price} data={data} />
+          <Card className="flex items-center justify-center overflow-hidden bg-transparent border-none">
+            <CardContent className="w-full p-0">
+              <LeftPart data={auctions} prices={prices} />
             </CardContent>
           </Card>
         </div>

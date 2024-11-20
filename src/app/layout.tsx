@@ -3,12 +3,13 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import DashNavbar from "@/components/website/DashNavbar";
 import { AuthProvider } from "@/context/AuthContext";
-import { IBM_Plex_Sans_Arabic } from "next/font/google";
+import { Tajawal } from "next/font/google";
 import Footer from "@/components/website/Footer";
+import { AuctionProvider } from "@/context/AuctionSwitchContext";
 
-const ibm_plex_sans = IBM_Plex_Sans_Arabic({
+const tajawal = Tajawal({
   subsets: ["arabic"],
-  weight: ["100", "200", "300", "400", "500", "600", "700"],
+  weight: ["200", "300", "400", "500", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -22,12 +23,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ar" dir="rtl">
-      <body className={`${ibm_plex_sans.className} antialiased`}>
+      <body className={`${tajawal.className} antialiased`}>
         <AuthProvider>
-          <DashNavbar />
-          {children}
-          <Footer />
-          <Toaster position="top-right" />
+          <AuctionProvider>
+            <DashNavbar />
+            {children}
+            <Footer />
+            <Toaster position="bottom-right" />
+          </AuctionProvider>
         </AuthProvider>
       </body>
     </html>

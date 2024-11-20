@@ -8,3 +8,12 @@ export const formatReleaseDate = (
     day: "numeric",
   }).format(new Date(dateString));
 };
+
+export const formatPrice = (price: string | number) => {
+  return new Intl.NumberFormat("en-SA", {
+    style: "currency",
+    currency: "SAR",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(Number(price));
+};

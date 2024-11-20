@@ -6,6 +6,8 @@ import Link from "next/link";
 import ActionButton from "./ActionButton";
 import { Radio } from "lucide-react";
 import { useEffect, useState } from "react";
+import AdditionalBtns from "./AdditionalBtns";
+import { useAuth } from "@/context/AuthContext";
 
 type AuctionData = {
   _id: string;
@@ -20,12 +22,14 @@ type AuctionData = {
   imageCover: string;
   status: string;
   auctionStartTime: string;
+  isPublished: boolean;
 };
 
 const CardComponent = ({ item }: { item: AuctionData }) => {
   const [formattedDate, setFormattedDate] = useState("");
   const [formattedStartTime, setFormattedStartTime] = useState("");
   const [remainingTime, setRemainingTime] = useState("");
+  const { isAdmin } = useAuth();
 
   useEffect(() => {
     // Format date on the client side
@@ -61,7 +65,9 @@ const CardComponent = ({ item }: { item: AuctionData }) => {
   }, [item.dateStart, item.auctionStartTime]);
 
   return (
-    <div className="relative">
+    <div
+      className={`relative ${item.isPublished ? "" : isAdmin ? "" : "hidden"}`}
+    >
       <Card className="cursor-pointer rounded-xl p-2">
         <Link key={item._id} href={`/auction/${item._id}`}>
           <div className="relative h-[251px] w-full rounded-xl overflow-hidden">
@@ -116,6 +122,7 @@ const CardComponent = ({ item }: { item: AuctionData }) => {
 
           <ActionButton item={item} />
         </CardFooter>
+        <AdditionalBtns item={item} />
       </Card>
 
       <div

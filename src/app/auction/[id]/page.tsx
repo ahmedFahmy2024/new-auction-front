@@ -4,39 +4,16 @@ import { Card, CardContent } from "@/components/ui/card";
 import LeftPart from "@/components/website/LeftPart";
 import RightPart from "@/components/website/RightPart";
 
-import { AUCTIONS, BASE_URL, PRICES, VIDEOS } from "@/server/Api";
+import { AUCTIONS, BASE_URL, PRICES, PROJECTS } from "@/server/Api";
 import { useParams } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
-import background from "@/assets/backgo.jpg";
-import Image from "next/image";
-import { Globe, Mail, PhoneCall } from "lucide-react";
-import twiiter from "@/assets/x.svg";
+import { useCallback, useEffect, useRef, useState } from "react";
+import BeforeAuctionStart from "@/components/website/BeforeAuctionStart";
+import { Project } from "@/lib/types";
+import { auctionType, priceType } from "@/lib/schema";
 
-const array = [
-  { id: 1, text: "920066022", icon: PhoneCall, link: "tel:920066022" },
-  {
-    id: 2,
-    text: "www.konouzmakkah.com",
-    icon: Globe,
-    link: "https://www.konouzmakkah.com",
-  },
-  {
-    id: 3,
-    text: "@Konouzmakkah1",
-    icon: () => <Image src={twiiter} alt="Twitter" width={24} height={24} />,
-    link: "https://twitter.com/Konouzmakkah1",
-  },
-  {
-    id: 4,
-    text: "Konouzmakkah@hotmail.com",
-    icon: Mail,
-    link: "mailto:Konouzmakkah@hotmail.com",
-  },
-];
-
-async function fetchWebsite(id: string) {
+const fetchProjects = async (id: string) => {
   try {
-    const response = await fetch(`${BASE_URL}${AUCTIONS}/${id}`, {
+    const response = await fetch(`${BASE_URL}${PROJECTS}/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -44,137 +21,155 @@ async function fetchWebsite(id: string) {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to fetch website");
+      throw new Error("Failed to fetch project");
     }
 
-    const website = await response.json();
-    return website.data;
+    const project = await response.json();
+    return project.data;
   } catch (error) {
-    console.error("Error fetching Website:", error);
+    console.error("Error fetching Project:", error);
     throw error;
   }
-}
+};
 
-async function fetchPrice(id: string) {
+const fetchAuctions = async (id: string) => {
   try {
-    const response = await fetch(`${BASE_URL}${AUCTIONS}/${id}${PRICES}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${BASE_URL}${PROJECTS}/${id}${AUCTIONS}?isRunning=true`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (!response.ok) {
-      throw new Error("Failed to fetch price");
+      throw new Error("Failed to fetch auction");
     }
 
-    const price = await response.json();
-    return price.data;
+    const auction = await response.json();
+    return auction.data;
   } catch (error) {
-    console.error("Error fetching Price:", error);
+    console.error("Error fetching Auction:", error);
     throw error;
   }
-}
+};
 
-async function fetchVideo(id: string) {
+const fetchPrices = async (auctionId: string) => {
   try {
-    const response = await fetch(`${BASE_URL}${AUCTIONS}/${id}${VIDEOS}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${BASE_URL}${AUCTIONS}/${auctionId}${PRICES}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (!response.ok) {
-      throw new Error("Failed to fetch video");
+      throw new Error("Failed to fetch prices");
     }
 
-    const video = await response.json();
-    return video.data[0];
+    const prices = await response.json();
+    return prices.data;
   } catch (error) {
-    console.error("Error fetching Video:", error);
+    console.error("Error fetching Prices:", error);
     throw error;
   }
-}
+};
 
 const Projector = () => {
   const { id } = useParams();
-  const [data, setData] = useState(null);
-  const [price, setPrice] = useState([]);
-  const [video, setVideo] = useState<{ videoValue?: string | null }>({});
+  const [project, setProject] = useState<Project | null>(null);
+  const [auctions, setAuctions] = useState<auctionType[]>([]);
+  const [prices, setPrices] = useState<priceType[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Fetch video only once on component mount
-  const fetchVideoData = useCallback(async () => {
-    try {
-      const videoData = await fetchVideo(id as string);
-      setVideo(videoData);
-    } catch (error) {
-      console.error("Error fetching video:", error);
-    }
-  }, [id]);
+  // Ref to store the interval ID
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const fetchData = useCallback(async () => {
+  const loadData = useCallback(async () => {
     try {
-      const [websiteData, priceData] = await Promise.all([
-        fetchWebsite(id as string),
-        fetchPrice(id as string),
-      ]);
-      setData(websiteData);
-      setPrice(priceData);
+      // Skip loading state on subsequent fetches to prevent flickering
+      if (!project) setIsLoading(true);
+
+      // Fetch project data
+      const projectData = await fetchProjects(id as string);
+      setProject(projectData);
+
+      // Fetch auctions
+      const auctionData = await fetchAuctions(id as string);
+      setAuctions(auctionData);
+
+      // Only fetch prices if we have auctions
+      if (auctionData && auctionData.length > 0) {
+        const priceData = await fetchPrices(auctionData[0]._id);
+        setPrices(priceData);
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
+    } finally {
+      setIsLoading(false);
     }
   }, [id]);
 
   useEffect(() => {
-    fetchData();
+    // Initial data load
+    if (id) {
+      loadData();
 
-    const interval = setInterval(fetchData, 3000);
+      // Set up interval to fetch data every 3 seconds
+      intervalRef.current = setInterval(loadData, 3000);
 
-    return () => clearInterval(interval);
-  }, [fetchData]);
+      // Clean up interval on component unmount or id change
+      return () => {
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+        }
+      };
+    }
+  }, [id, loadData]);
 
-  // Fetch video only once on component mount
-  useEffect(() => {
-    fetchVideoData();
-  }, []);
+  if (!project) {
+    return (
+      <section className="text-center p-4 min-h-screen flex items-center justify-center">
+        لا توجد بيانات متاحة
+      </section>
+    );
+  }
+
+  if (project.status === "upcoming" || project.status === "completed") {
+    return <BeforeAuctionStart data={project} />;
+  }
 
   return (
     <main
-      style={{ backgroundImage: `url(${background.src})` }}
-      className=" bg-cover bg-center flex items-center py-6"
+      style={{
+        minHeight: "calc(100vh - 250px)",
+        backgroundColor: auctions[0]?.bgColor,
+        backgroundImage:
+          auctions[0]?.displayBgImage && auctions[0]?.bgImage
+            ? `url(${auctions[0]?.bgImage})`
+            : "none",
+      }}
+      className=" bg-cover bg-center flex items-center py-6 mt-[80px]"
     >
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {/* right part */}
-          <Card className="overflow-hidden  bg-[#ffffff29] border-none">
+          <Card className="overflow-hidden bg-transparent border-none">
             <CardContent className="p-6">
-              <RightPart data={data} video={video} />
+              <RightPart data={auctions} />
             </CardContent>
           </Card>
           {/* left part */}
-          <Card className="flex items-center justify-center overflow-hidden  bg-[#ffffff29] border-none">
+          <Card className="flex items-center justify-center overflow-hidden bg-transparent border-none">
             <CardContent className="w-full p-6">
-              <LeftPart price={price[0]} allprice={price} data={data} />
+              <LeftPart data={auctions} prices={prices} />
             </CardContent>
           </Card>
-        </div>
-
-        <div className="flex items-end md:items-center justify-center flex-col md:flex-row gap-8 mt-8">
-          {array.map((item) => (
-            <a
-              href={item.link}
-              key={item.id}
-              className="flex items-center justify-end gap-2 font-semibold text-lg"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span className="text-white">{item.text}</span>
-              <div className="bg-[#D8BA8E] w-[36px] h-[36px] flex items-center justify-center rounded-xl">
-                <span>{<item.icon strokeWidth={1.25} />}</span>
-              </div>
-            </a>
-          ))}
         </div>
       </div>
     </main>
