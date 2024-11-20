@@ -19,12 +19,12 @@ const nextConfig: NextConfig = {
       // Production patterns
       {
         protocol: "https",
-        hostname: "auctionbackend-von8.onrender.com",
+        hostname: "new-auction-pc.onrender.com",
         pathname: "/projects/**",
       },
       {
         protocol: "https",
-        hostname: "auctionbackend-von8.onrender.com",
+        hostname: "new-auction-pc.onrender.com",
         pathname: "/auctions/**",
       },
     ],
