@@ -11,7 +11,6 @@ async function fetchContacts(page = 1, limit = 10000000) {
         headers: {
           "Content-Type": "application/json",
         },
-        next: { revalidate: 0 },
       }
     );
 
