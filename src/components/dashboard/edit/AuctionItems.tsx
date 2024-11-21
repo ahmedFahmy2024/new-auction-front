@@ -106,7 +106,7 @@ const AuctionItems = ({ id, auctions }: Props) => {
                   {index + 1}
                 </span>
 
-                <div className="bg-[#D8BA8E] rounded-sm p-1 text-white font-bold text-lg flex items-center justify-center flex-1 line-clamp-1">
+                <div className="bg-[#D8BA8E] rounded-sm p-1 text-white font-bold text-base flex items-center justify-center flex-1 line-clamp-1">
                   {auction.auctionName}
                 </div>
 

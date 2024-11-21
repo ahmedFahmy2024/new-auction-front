@@ -60,12 +60,31 @@ const BeforeAuctionStart = ({ data }: Props) => {
 
   // Function to handle file download
   const handleDownload = () => {
-    const link = document.createElement("a");
-    link.href = data.file; // URL from the API data
-    link.download = data.title; // Optional: set a download filename
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Create a fetch request to get the file
+    fetch(data.file)
+      .then((response) => response.blob())
+      .then((blob) => {
+        // Create a link element
+        const link = document.createElement("a");
+
+        // Create a URL for the blob
+        const url = window.URL.createObjectURL(blob);
+
+        // Set the download attributes
+        link.href = url;
+        link.download = `${data.title}.pdf`; // Explicitly add .pdf extension
+
+        // Append to body, click, and remove
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // Free up memory
+        window.URL.revokeObjectURL(url);
+      })
+      .catch((error) => {
+        console.error("Download failed:", error);
+      });
   };
 
   return (

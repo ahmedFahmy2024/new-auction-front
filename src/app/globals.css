@@ -195,7 +195,7 @@ html:has(.ahmed) body > .mahmoud {
 }
 
 html:has(.editPage) .small-text span {
-  font-size: 12px;
+  font-size: 10px;
 }
 html:has(.editPage) .small-text > div {
   height: 32px;

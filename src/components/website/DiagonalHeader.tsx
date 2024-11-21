@@ -19,8 +19,11 @@ const DiagonalHeader = ({
           backgroundColor: bgColor,
         }}
       >
-        <div className={`h-full flex items-center justify-center`}>
-          <span style={{ color: textColor }} className={`font-bold text-lg`}>
+        <div className={`h-full flex items-center justify-center line-clamp-1`}>
+          <span
+            style={{ color: textColor }}
+            className={`font-bold text-lg line-clamp-1 px-1`}
+          >
             {title}
           </span>
         </div>
