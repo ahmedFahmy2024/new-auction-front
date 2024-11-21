@@ -30,7 +30,7 @@ export default async function AuctionEditForm({ id }: { id: string }) {
 
   return (
     <div className="my-32">
-      <div className="flex items-center gap-4 md:gap-10 lg:w-1/2 justify-between">
+      <div className="flex items-center gap-4 md:gap-10 lg:w-1/2 justify-between flex-col md:flex-row">
         <h2 className="text-xl font-extrabold text-[#342D23]">شاشة العرض</h2>
         <div className="flex items-center gap-2">
           <Link

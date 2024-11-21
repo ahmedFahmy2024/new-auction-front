@@ -1,6 +1,6 @@
 "use client";
 
-import { AlignJustify, SquarePlus } from "lucide-react";
+import { AlignJustify, X, SquarePlus } from "lucide-react";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -36,6 +36,7 @@ const AuctionItems = ({ id, auctions }: Props) => {
   const [isAdding, setIsAdding] = useState(false);
   const router = useRouter();
   const { setAuctionId, loading } = useAuctionSwitch();
+  const [deleteing, setDeleteing] = useState(false);
   const [loadingAuctionId, setLoadingAuctionId] = useState<string | null>(null);
 
   const handleAdding = () => {
@@ -91,6 +92,20 @@ const AuctionItems = ({ id, auctions }: Props) => {
     }
   };
 
+  const handleRemove = async (auctionId: string) => {
+    setDeleteing(true);
+    try {
+      await axios.delete(`${BASE_URL}${AUCTIONS}/${auctionId}`);
+      toast.success("تم حذف المزاد بنجاح");
+      router.refresh();
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to delete auction");
+    } finally {
+      setDeleteing(false);
+    }
+  };
+
   return (
     <div>
       <h2 className="text-xl font-extrabold text-[#342D23] mb-4">
@@ -101,12 +116,12 @@ const AuctionItems = ({ id, auctions }: Props) => {
         {auctions && (
           <div className="flex flex-col gap-4 w-full max-h-[400px] overflow-y-scroll scrollbar-hide">
             {auctions.map((auction, index) => (
-              <div key={auction._id} className="flex items-center gap-2">
+              <div key={auction._id} className="flex items-center gap-1">
                 <span className="bg-[#D8BA8E] rounded-sm p-1 text-white font-bold text-lg aspect-square min-w-[29px] flex items-center justify-center">
                   {index + 1}
                 </span>
 
-                <div className="bg-[#D8BA8E] rounded-sm p-1 text-white font-bold text-base flex items-center justify-center flex-1 line-clamp-1">
+                <div className="bg-[#D8BA8E] min-h-[32px] rounded-sm p-1 text-white font-bold text-sm flex items-center justify-center flex-1 line-clamp-1">
                   {auction.auctionName}
                 </div>
 
@@ -126,6 +141,20 @@ const AuctionItems = ({ id, auctions }: Props) => {
                     <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
                   ) : (
                     <AlignJustify />
+                  )}
+                </button>
+
+                <button
+                  onClick={() => handleRemove(auction._id as string)}
+                  disabled={deleteing}
+                  className={`bg-[#D8BA8E] rounded-sm p-1 text-white font-bold text-lg aspect-square min-w-[29px] flex items-center justify-center ${
+                    deleteing ? "cursor-not-allowed" : "cursor-pointer"
+                  }`}
+                >
+                  {deleteing ? (
+                    <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
+                  ) : (
+                    <X className="text-white w-6 h-6" />
                   )}
                 </button>
               </div>
