@@ -7,9 +7,11 @@ import NavLinks from "./NavLinks";
 import SmallScreensNavLinks from "./SmallScreensNavLinks";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 const DashNavbar = () => {
   const pathname = usePathname();
+  const { isAdmin } = useAuth();
 
   const [isSticky, setIsSticky] = useState(false);
 
@@ -32,7 +34,7 @@ const DashNavbar = () => {
 
   return (
     <nav
-      className={`flex h-[80px] items-center justify-between bg-[#0D0D0D] px-4 mahmoud z-[99999] left-0 right-0 ${
+      className={`flex h-[80px] items-center justify-between bg-[#0D0D0D] px-4 mahmoud z-[99999] left-0 right-0 overflow-hidden ${
         pathname === `/`
           ? isSticky
             ? "fixed top-0 bottom-auto"
@@ -53,18 +55,19 @@ const DashNavbar = () => {
             />
           </Link>
           <NavLinks />
+
           <div className="flex items-center gap-4">
             <Link
-              className="bg-[#D8BA8F] font-semibold text-base px-2 py-1 rounded-lg text-[#0D0D0D]"
+              className="bg-[#D8BA8F] font-semibold text-base px-2 py-1 rounded-lg text-[#0D0D0D] hidden md:block"
               href="/auction"
             >
               المـــــــــزادات
             </Link>
 
-            {pathname === `/` && (
+            {isAdmin && pathname === `/` && (
               <Link
                 href={`/dashboard/contacts`}
-                className="flex items-center justify-center gap-2 rounded-lg bg-[#BB9155] px-2 py-1 text-white border border-[#F2D8B1]"
+                className="items-center justify-center gap-2 rounded-lg bg-[#BB9155] px-2 py-1 text-white border border-[#F2D8B1] hidden md:flex"
               >
                 الرسائل
               </Link>

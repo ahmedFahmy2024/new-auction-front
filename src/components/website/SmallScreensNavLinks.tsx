@@ -5,10 +5,12 @@ import { useState } from "react";
 import { Drawer, DrawerContent, DrawerTitle } from "@/components/ui/drawer";
 import { links } from "@/lib/links";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 const SmallScreensNavLinks = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const { isAdmin } = useAuth();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -38,6 +40,24 @@ const SmallScreensNavLinks = () => {
                 {link.name}
               </Link>
             ))}
+
+            <div className="flex justify-start items-start flex-col gap-4">
+              <Link
+                className="bg-[#D8BA8F] font-semibold text-base px-2 py-1 rounded-lg text-[#0D0D0D]"
+                href="/auction"
+              >
+                المـــــــــزادات
+              </Link>
+
+              {isAdmin && pathname === `/` && (
+                <Link
+                  href={`/dashboard/contacts`}
+                  className="flex items-center justify-center gap-2 rounded-lg bg-[#BB9155] px-2 py-1 text-white border border-[#F2D8B1]"
+                >
+                  الرسائل
+                </Link>
+              )}
+            </div>
           </div>
         </DrawerContent>
       </Drawer>

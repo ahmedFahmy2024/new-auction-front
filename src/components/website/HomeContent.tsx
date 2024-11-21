@@ -38,7 +38,7 @@ const HomeContent = () => {
       <div className="absolute inset-0 bg-black opacity-70"></div>
       <div className="container mx-auto px-4 md:px-0 w-full h-full">
         <div className="z-10 relative w-full h-full flex items-center justify-center flex-col max-w-5xl mx-auto gap-4">
-          <h2 className="font-extrabold text-3xl text-white">
+          <h2 className="font-extrabold text-2xl md:text-3xl text-white">
             شركة كنوز مكة الإستثمارية
           </h2>
 
