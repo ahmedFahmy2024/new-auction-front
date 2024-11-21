@@ -79,7 +79,8 @@ export const auctionSchema = z.object({
   displayIncrease: z.string().optional(),
   displayVideoUrl: z
     .boolean()
-    .or(z.string().transform((val) => val === "true")),
+    .or(z.string().transform((val) => val === "true"))
+    .optional(),
   bgImage: z.string().optional(),
   displayBgImage: z.string().optional(),
 });

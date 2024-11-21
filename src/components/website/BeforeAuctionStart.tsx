@@ -107,10 +107,10 @@ const BeforeAuctionStart = ({ data }: Props) => {
                 </div>
 
                 <Dialog>
-                  <DialogTrigger className="text-[#342D23] font-semibold text-xl hover:underline flex items-center gap-2">
+                  <DialogTrigger className="text-[#342D23] font-semibold text-xl hover:underline flex items-center gap-2 ">
                     رابط لوكيشن المزاد :
                   </DialogTrigger>
-                  <DialogContent className="max-w-3xl">
+                  <DialogContent className="max-w-3xl z-[99999999]">
                     <DialogHeader>
                       <DialogTitle>موقع المزاد</DialogTitle>
                     </DialogHeader>

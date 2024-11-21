@@ -77,9 +77,9 @@ const WebSiteForm = () => {
       formData.append("status", data.status);
     }
 
-    // if (data.file) {
-    //   formData.append("file", data.file);
-    // }
+    if (data.file) {
+      formData.append("file", data.file);
+    }
 
     if (data.imageCover) {
       const coverImageResponse = await fetch(data.imageCover);
