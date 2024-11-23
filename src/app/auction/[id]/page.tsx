@@ -140,21 +140,21 @@ const Projector = () => {
     );
   }
 
-  if (project.status === "upcoming" || project.status === "completed") {
-    return <BeforeAuctionStart data={project} />;
-  }
+  // if (project.status === "upcoming" || project.status === "completed") {
+  //   return <BeforeAuctionStart data={project} />;
+  // }
 
   return (
     <main
       style={{
-        minHeight: "calc(100vh - 250px)",
-        backgroundColor: auctions[0]?.bgColor,
+        minHeight: "100vh",
+        backgroundColor: auctions[0]?.bgColor || "#121212",
         backgroundImage:
           auctions[0]?.displayBgImage && auctions[0]?.bgImage
             ? `url(${auctions[0]?.bgImage})`
             : "none",
       }}
-      className=" bg-cover bg-center flex items-center py-6 mt-[80px]"
+      className="bg-cover bg-center flex items-center py-6 no-header"
     >
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">

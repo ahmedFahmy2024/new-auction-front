@@ -56,13 +56,15 @@ const ActionButton = ({ item }: { item: { _id: string; status: string } }) => {
     );
 
   const handleClick = () => {
-    if (item.status === "upcoming") {
-      router.push(`/dashboard/projects/${item._id}`);
-    } else if (item.status === "ongoing") {
-      router.push(`/dashboard/auctions/${item._id}`);
-    } else {
-      router.push(`/dashboard/projects/${item._id}`);
-    }
+    // if (item.status === "upcoming") {
+    //   router.push(`/dashboard/projects/${item._id}`);
+    // } else if (item.status === "ongoing") {
+    //   // router.push(`/dashboard/auctions/${item._id}`);
+    //   window.location.href = `/dashboard/auctions/${item._id}`;
+    // } else {
+    //   router.push(`/dashboard/projects/${item._id}`);
+    // }
+    router.push(`/dashboard/projects/${item._id}`);
   };
 
   return (

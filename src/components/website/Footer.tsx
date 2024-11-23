@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer
       style={{ backgroundImage: `url(${group.src})` }}
-      className="bg-[#101011] h-[170px] bg-contain bg-right bg-no-repeat"
+      className="bg-[#101011] h-[170px] bg-contain bg-right bg-no-repeat last-footer"
     >
       <div className="container mx-auto pt-10 px-4 md:px-0">
         <h2 className="flex items-center justify-center md:justify-end text-white font-bold text-xl">

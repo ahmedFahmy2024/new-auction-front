@@ -89,7 +89,7 @@ export function UploadMultipleImages({
             unoptimized={!preview.startsWith("data:")}
           />
           <button
-            className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center"
+            className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center remove-btn"
             onClick={handleRemove(index)}
           >
             <X className="w-3 h-3" color="white" />
@@ -99,7 +99,7 @@ export function UploadMultipleImages({
       {previews.length < 5 && ( // Limit to 5 images
         <button
           onClick={handleBoxClick}
-          className="flex items-center justify-center"
+          className="flex items-center justify-center remove-btn"
         >
           <ImagePlus
             className="w-6 h-6 mr-2"

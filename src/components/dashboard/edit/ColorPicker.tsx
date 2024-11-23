@@ -31,14 +31,14 @@ export default function ColorPicker({
     <div className="flex flex-col items-center !mt-0 mx-auto">
       <Button
         className="w-6 h-6 p-0 rounded-md border-2 border-[#D8BA8E] focus:outline-none"
-        style={{ backgroundColor: value || "#000000" }}
+        style={{ backgroundColor: value }}
         onClick={handleBoxClick}
         aria-label={`Current color: ${value}. Click to change.`}
       />
       <input
         ref={inputRef}
         type="color"
-        value={value || "#000000"}
+        value={value}
         onChange={handleColorChange}
         onBlur={onBlur} // Add the onBlur handler
         name={name} // Add the name attribute

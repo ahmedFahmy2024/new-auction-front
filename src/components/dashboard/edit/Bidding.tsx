@@ -160,11 +160,12 @@ const Bidding = () => {
     };
 
     try {
-      await axios.post(`${BASE_URL}${PRICES}`, body, {
+      const res = await axios.post(`${BASE_URL}${PRICES}`, body, {
         headers: {
           "Content-Type": "application/json",
         },
       });
+      const response = res.data.data;
       toast.success("تم اضافة السعر بنجاح");
       setChangeBidderNum((prev) => !prev);
 
@@ -175,7 +176,7 @@ const Bidding = () => {
       // Reset form but keep the openPrice
       form.reset({
         openPrice: openPrice,
-        increase: "",
+        increase: response.increase,
         paddleNum: "",
         soldPrice: data.soldPrice, // Keep the last soldPrice
         total: data.total,
@@ -188,13 +189,13 @@ const Bidding = () => {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="flex justify-center">
-        <Loader2 className="h-8 w-8 animate-spin" />
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="flex justify-center">
+  //       <Loader2 className="h-8 w-8 animate-spin" />
+  //     </div>
+  //   );
+  // }
 
   return (
     <div>
@@ -252,27 +253,6 @@ const Bidding = () => {
             <div className="col-span-2 md:col-span-1 h-[42px]">
               <FormField
                 control={form.control}
-                name="increase"
-                render={({ field }) => (
-                  <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border">
-                    <FormLabel className="min-w-[100px] text-center font-extrabold text-[#342D23]">
-                      مبلغ المزايدة
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        className="!mt-0 border-none rounded-none"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div className="col-span-2 md:col-span-1 h-[42px]">
-              <FormField
-                control={form.control}
                 name="paddleNum"
                 render={({ field }) => (
                   <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border">
@@ -292,6 +272,27 @@ const Bidding = () => {
             </div>
 
             <div className="col-span-2 md:col-span-1 h-[42px]">
+              <FormField
+                control={form.control}
+                name="increase"
+                render={({ field }) => (
+                  <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border">
+                    <FormLabel className="min-w-[100px] text-center font-extrabold text-[#342D23]">
+                      مبلغ المزايدة
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        className="!mt-0 border-none rounded-none"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            <div className="col-span-2 md:col-span-2 h-[42px]">
               <Button
                 disabled={form.formState.isSubmitting}
                 type="submit"

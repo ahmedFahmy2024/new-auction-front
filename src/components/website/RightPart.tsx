@@ -1,6 +1,10 @@
 import Image from "next/image";
 import React from "react";
 import { auctionType } from "@/lib/schema";
+import rightlogo from "@/assets/rightlogo.png";
+import leftlogofirst from "@/assets/leftlogo1.png";
+import leftlogosecond from "@/assets/leftlogo2.png";
+import auctionlive from "@/assets/auctionlivephoto.jpg";
 
 type RightPartProps = {
   data: auctionType[];
@@ -15,43 +19,51 @@ const RightPart = ({ data }: RightPartProps) => {
     <div className="space-y-6">
       {/* Logos Section */}
       <div className="flex items-center justify-between gap-6">
-        {data[0]?.logoOne && (
+        <Image
+          src={
+            data[0]?.logoOne && data[0]?.displayLogoOne
+              ? data[0]?.logoOne
+              : rightlogo
+          }
+          alt="Right logo"
+          width={100}
+          height={100}
+          priority
+          className={`me-auto !w-fit object-contain max-h-[50px] ${
+            data[0]?.displayLogoOne === false ? "hidden" : "block"
+          }`}
+        />
+
+        <div className="flex items-center gap-6">
           <Image
-            src={data[0]?.logoOne}
-            alt="Right logo"
+            src={
+              data[0]?.logoSecond && data[0]?.displayLogoSecond
+                ? data[0]?.logoSecond
+                : leftlogofirst
+            }
+            alt="Left logo"
             width={100}
             height={100}
             priority
             className={`me-auto !w-fit object-contain max-h-[50px] ${
-              data[0]?.displayLogoOne ? "block" : "hidden"
+              data[0]?.displayLogoSecond === false ? "hidden" : "block"
             }`}
           />
-        )}
-        <div className="flex items-center gap-6">
-          {data[0]?.logoSecond && (
-            <Image
-              src={data[0]?.logoSecond}
-              alt="Left logo"
-              width={100}
-              height={100}
-              priority
-              className={`ms-auto !w-fit object-contain max-h-[50px] ${
-                data[0]?.displayLogoSecond ? "block" : "hidden"
-              }`}
-            />
-          )}
-          {data[0]?.logoThird && (
-            <Image
-              src={data[0]?.logoThird}
-              alt="Left logo2"
-              width={100}
-              height={100}
-              priority
-              className={`ms-auto !w-fit object-contain max-h-[50px] ${
-                data[0]?.displayLogoThird ? "block" : "hidden"
-              }`}
-            />
-          )}
+
+          <Image
+            src={
+              data[0]?.logoThird && data[0]?.displayLogoThird
+                ? data[0]?.logoThird
+                : leftlogosecond
+            }
+            alt="Left logo2"
+            width={100}
+            height={100}
+            priority
+            className={`me-auto !w-fit object-contain max-h-[50px] ${
+              data[0]?.displayLogoThird === false ? "hidden" : "block"
+            }`}
+          />
         </div>
       </div>
 
@@ -64,16 +76,14 @@ const RightPart = ({ data }: RightPartProps) => {
           ></iframe>
         ) : (
           <div className="relative aspect-video w-full">
-            {data[0]?.imageCover && (
-              <Image
-                src={data[0]?.imageCover}
-                alt="Content image"
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                priority
-                className="object-cover"
-              />
-            )}
+            <Image
+              src={data[0]?.imageCover || auctionlive}
+              alt="Content image"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority
+              className="object-cover"
+            />
           </div>
         )}
       </div>
@@ -88,8 +98,8 @@ const RightPart = ({ data }: RightPartProps) => {
       >
         <span
           style={{
-            color: data[0]?.textColor,
-            backgroundColor: data[0]?.textBgColor1,
+            color: data[0]?.textColor || "#D8BA8E",
+            backgroundColor: data[0]?.textBgColor1 || "#342D23",
           }}
           className="w-full h-full flex items-center justify-center font-bold text-lg"
         >
@@ -100,11 +110,11 @@ const RightPart = ({ data }: RightPartProps) => {
           <span
             style={{
               color: data[0]?.notesColor,
-              backgroundColor: data[0]?.textBgColor3,
+              backgroundColor: data[0]?.textBgColor3 || "#ECECEC",
             }}
             className="min-w-[100px] text-center font-medium h-full w-full"
           >
-            {data[0]?.notes2}
+            {data[0]?.notes2 || "-"}
           </span>
         )}
       </div>

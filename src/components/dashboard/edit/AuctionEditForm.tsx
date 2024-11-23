@@ -7,6 +7,7 @@ import Link from "next/link";
 import Bidding from "./Bidding";
 import AuctionItems from "./AuctionItems";
 import InstantBidding from "./InstantBidding";
+import { projectType } from "@/lib/schema";
 
 async function fetchAuctionsProject(id: string) {
   const response = await fetch(`${BASE_URL}${PROJECTS}/${id}${AUCTIONS}`, {
@@ -25,7 +26,12 @@ async function fetchAuctionsProject(id: string) {
   return auctions.data;
 }
 
-export default async function AuctionEditForm({ id }: { id: string }) {
+type Props = {
+  id: string;
+  project: projectType;
+};
+
+export default async function AuctionEditForm({ id, project }: Props) {
   const auctions = await fetchAuctionsProject(id);
 
   return (
@@ -61,7 +67,7 @@ export default async function AuctionEditForm({ id }: { id: string }) {
           <Bidding />
           <InstantBidding />
         </div>
-        <ToggleAuction projectId={id} />
+        <ToggleAuction projectId={id} project={project} />
       </div>
     </div>
   );

@@ -102,16 +102,11 @@ const WebSiteForm = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      const status = response.data.data.status;
       const auctionId = response.data.data._id;
 
       toast.success("تم إضافة المزاد بنجاح");
       form.reset();
-      if (status === "upcoming") {
-        router.push(`/dashboard/projects/${auctionId}`);
-      } else if (status === "ongoing") {
-        router.push(`/dashboard/auctions/${auctionId}`);
-      }
+      window.location.href = `/auction`;
       router.refresh();
     } catch (error) {
       console.error("Error creating auction:", error);

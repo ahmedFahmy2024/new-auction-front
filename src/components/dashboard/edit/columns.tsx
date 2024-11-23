@@ -39,8 +39,13 @@ export const columns: ColumnDef<priceType>[] = [
       );
     },
     cell: ({ row }) => {
+      const increase = row.getValue("increase") as string;
+      const backgroundColor = !increase ? "#FF0000" : "#D8BA8E";
       return (
-        <div className="text-white bg-[#D8BA8E] aspect-square flex items-center justify-center p-1 w-[30px] rounded font-bold text-base">
+        <div
+          style={{ backgroundColor }}
+          className="text-white aspect-square flex items-center justify-center p-1 w-[30px] rounded font-bold text-base"
+        >
           {row.getValue("paddleNum")}
         </div>
       );
@@ -61,8 +66,12 @@ export const columns: ColumnDef<priceType>[] = [
     },
     cell: ({ row }) => {
       const value = row.getValue("increase") as string;
+      const backgroundColor = !value ? "#FF0000" : "#D8BA8E";
       return (
-        <div className="text-[#D8BA8E] font-bold text-lg">
+        <div
+          style={{ color: backgroundColor }}
+          className="text-[#D8BA8E] font-bold text-lg"
+        >
           {value ? value : "-"}
         </div>
       );
@@ -82,8 +91,13 @@ export const columns: ColumnDef<priceType>[] = [
       );
     },
     cell: ({ row }) => {
+      const increase = row.getValue("increase") as string;
+      const backgroundColor = !increase ? "#FF0000" : "#D8BA8E";
       return (
-        <div className="text-[#D8BA8E] font-bold text-lg">
+        <div
+          style={{ color: backgroundColor }}
+          className="text-[#D8BA8E] font-bold text-lg"
+        >
           {row.getValue("soldPrice")}
         </div>
       );
@@ -103,8 +117,13 @@ export const columns: ColumnDef<priceType>[] = [
       );
     },
     cell: ({ row }) => {
+      const increase = row.getValue("increase") as string;
+      const backgroundColor = !increase ? "#FF0000" : "#D8BA8E";
       return (
-        <div className="text-[#D8BA8E] font-bold text-lg">
+        <div
+          style={{ color: backgroundColor }}
+          className="text-[#D8BA8E] font-bold text-lg"
+        >
           {row.getValue("total")}
         </div>
       );
@@ -125,11 +144,16 @@ export const columns: ColumnDef<priceType>[] = [
     },
     cell: ({ row }) => {
       const priceId = row.original._id;
-
+      const increase = row.getValue("increase") as string;
+      const backgroundColor = !increase ? "#FF0000" : "#D8BA8E";
       return (
         <div className="flex items-center justify-center ">
-          <EditBtn id={priceId} />
-          <DeleteBtn priceId={priceId} handleDelete={handleDelete} />
+          <EditBtn id={priceId} backgroundColor={backgroundColor} />
+          <DeleteBtn
+            priceId={priceId}
+            handleDelete={handleDelete}
+            backgroundColor={backgroundColor}
+          />
         </div>
       );
     },

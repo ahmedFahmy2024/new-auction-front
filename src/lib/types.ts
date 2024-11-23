@@ -32,8 +32,7 @@ export type price = {
 
 export type AuctionData = {
   _id: string;
-  titleKey: string;
-  titleValue: string;
+  title: string;
   rightLogoValue: string;
   leftLogoValue: string;
   imageValue: string[];

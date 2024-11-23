@@ -15,19 +15,21 @@ const LeftPart = ({ data, prices }: Props) => {
     <div className="grid grid-cols-2 gap-4">
       <DiagonalHeader
         title="رقم المضرب"
-        bgColor={data[0]?.textBgColor1}
-        textColor={data[0]?.textColor}
+        bgColor={data[0]?.textBgColor1 || "#342D23"}
+        textColor={data[0]?.textColor || "#FFFFFF"}
       />
       <DiagonalHeader
-        title={prices[0]?.paddleNum || ""}
-        bgColor={data[0]?.textBgColor2}
-        textColor={data[0]?.textColor}
+        title={prices[0]?.paddleNum || "-"}
+        bgColor={data[0]?.textBgColor2 || "#D8BA8E"}
+        textColor={data[0]?.textColor || "#FFFFFF"}
       />
       <div className="col-span-2">
         <DiagonalHeader
-          title={prices[0]?.soldPrice ? formatPrice(prices[0]?.soldPrice) : ""}
-          bgColor={data[0]?.textBgColor1}
-          textColor={data[0]?.textColor}
+          title={
+            prices[0]?.soldPrice ? formatPrice(prices[0]?.soldPrice) : "0 SAR"
+          }
+          bgColor={data[0]?.textBgColor1 || "#342D23"}
+          textColor={data[0]?.textColor || "#FFFFFF"}
         />
       </div>
 
@@ -37,14 +39,14 @@ const LeftPart = ({ data, prices }: Props) => {
           style={{
             clipPath:
               "polygon(20px 0, 100% 0, 100% 50%, calc(100% - 20px) 100%, 0 100%, 0 50%)",
-            backgroundColor: data[0]?.textBgColor3,
+            backgroundColor: data[0]?.textBgColor3 || "#342D23",
           }}
           className="flex items-center justify-between h-12 col-span-2 small-text lonely-fields"
         >
           <span
             style={{
-              color: data[0]?.notesColor,
-              backgroundColor: data[0]?.textBgColor3,
+              color: data[0]?.notesColor || "#FFFFFF",
+              backgroundColor: data[0]?.textBgColor3 || "#342D23",
             }}
             className="min-w-[100px] text-center font-medium text-lg"
           >
@@ -52,38 +54,40 @@ const LeftPart = ({ data, prices }: Props) => {
           </span>
           <span
             style={{
-              color: data[0]?.textColor,
-              backgroundColor: data[0]?.textBgColor2,
+              color: data[0]?.textColor || "#FFFFFF",
+              backgroundColor: data[0]?.textBgColor2 || "#D8BA8E",
             }}
             className="w-full h-full flex items-center justify-center font-bold text-lg"
           >
-            {price.total ? formatPrice(price.total) : ""}
+            {price.total ? formatPrice(price.total) : "0 SAR"}
           </span>
         </div>
       ))}
 
       <DiagonalHeader
         title="مسمي العقار"
-        bgColor={data[0]?.textBgColor1}
-        textColor={data[0]?.textColor}
+        bgColor={data[0]?.textBgColor1 || "#342D23"}
+        textColor={data[0]?.textColor || "#FFFFFF"}
       />
       <DiagonalHeader
         title={data[0]?.auctionName || ""}
-        bgColor={data[0]?.textBgColor2}
-        textColor={data[0]?.textColor}
+        bgColor={data[0]?.textBgColor2 || "#D8BA8E"}
+        textColor={data[0]?.textColor || "#FFFFFF"}
       />
 
       {data[0]?.displayOpenPrice && (
         <>
           <DiagonalHeader
             title="سعر الافتتاح"
-            bgColor={data[0]?.textBgColor1}
-            textColor={data[0]?.textColor}
+            bgColor={data[0]?.textBgColor1 || "#342D23"}
+            textColor={data[0]?.textColor || "#FFFFFF"}
           />
           <DiagonalHeader
-            title={data[0]?.openPrice ? formatPrice(data[0]?.openPrice) : ""}
-            bgColor={data[0]?.textBgColor2}
-            textColor={data[0]?.textColor}
+            title={
+              data[0]?.openPrice ? formatPrice(data[0]?.openPrice) : "0 SAR"
+            }
+            bgColor={data[0]?.textBgColor2 || "#D8BA8E"}
+            textColor={data[0]?.textColor || "#FFFFFF"}
           />
         </>
       )}
@@ -92,13 +96,13 @@ const LeftPart = ({ data, prices }: Props) => {
         <>
           <DiagonalHeader
             title="الحد الأدني للمزايدة"
-            bgColor={data[0]?.textBgColor1}
-            textColor={data[0]?.textColor}
+            bgColor={data[0]?.textBgColor1 || "#342D23"}
+            textColor={data[0]?.textColor || "#FFFFFF"}
           />
           <DiagonalHeader
             title={prices[0]?.increase ? formatPrice(prices[0]?.increase) : "-"}
-            bgColor={data[0]?.textBgColor2}
-            textColor={data[0]?.textColor}
+            bgColor={data[0]?.textBgColor2 || "#D8BA8E"}
+            textColor={data[0]?.textColor || "#FFFFFF"}
           />
         </>
       )}
@@ -107,15 +111,15 @@ const LeftPart = ({ data, prices }: Props) => {
         <>
           <DiagonalHeader
             title="سعر المتر م²"
-            bgColor={data[0]?.textBgColor1}
-            textColor={data[0]?.textColor}
+            bgColor={data[0]?.textBgColor1 || "#342D23"}
+            textColor={data[0]?.textColor || "#FFFFFF"}
           />
           <DiagonalHeader
             title={
-              prices[0]?.areaPrice ? formatPrice(prices[0]?.areaPrice) : ""
+              prices[0]?.areaPrice ? formatPrice(prices[0]?.areaPrice) : "0 SAR"
             }
-            bgColor={data[0]?.textBgColor2}
-            textColor={data[0]?.textColor}
+            bgColor={data[0]?.textBgColor2 || "#D8BA8E"}
+            textColor={data[0]?.textColor || "#FFFFFF"}
           />
         </>
       )}
@@ -124,13 +128,13 @@ const LeftPart = ({ data, prices }: Props) => {
         <>
           <DiagonalHeader
             title="المساحة م²"
-            bgColor={data[0]?.textBgColor1}
-            textColor={data[0]?.textColor}
+            bgColor={data[0]?.textBgColor1 || "#342D23"}
+            textColor={data[0]?.textColor || "#FFFFFF"}
           />
           <DiagonalHeader
-            title={data[0]?.area ? `${data[0].area} م²` : ""}
-            bgColor={data[0]?.textBgColor2}
-            textColor={data[0]?.textColor}
+            title={data[0]?.area ? `${data[0].area} م²` : "-"}
+            bgColor={data[0]?.textBgColor2 || "#D8BA8E"}
+            textColor={data[0]?.textColor || "#FFFFFF"}
           />
         </>
       )}
@@ -145,23 +149,23 @@ const LeftPart = ({ data, prices }: Props) => {
         >
           <span
             style={{
-              color: data[0]?.textColor,
-              backgroundColor: data[0]?.textBgColor2,
+              color: data[0]?.textColor || "#FFFFFF",
+              backgroundColor: data[0]?.textBgColor2 || "#D8BA8E",
             }}
             className="w-full h-full flex items-center justify-center font-bold text-lg"
           >
-            {prices[0]?.total ? formatPrice(prices[0]?.total) : ""}
+            {prices[0]?.total ? formatPrice(prices[0]?.total) : "0 SAR"}
           </span>
 
           {data[0]?.displayNotes1 && (
             <span
               style={{
-                color: data[0]?.notesColor,
-                backgroundColor: data[0]?.textBgColor3,
+                color: data[0]?.notesColor || "#000000",
+                backgroundColor: data[0]?.textBgColor3 || "#ECECEC",
               }}
               className="min-w-[100px] text-center font-medium text-base h-full w-full"
             >
-              {data[0]?.notes1}
+              {data[0]?.notes1 || "-"}
             </span>
           )}
         </div>

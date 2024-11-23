@@ -1,59 +1,59 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import bg from "@/assets/ourwork.png";
-import money from "@/assets/money.png";
-import moneyBg from "@/assets/moneyBg.jpg";
-import build from "@/assets/build.png";
-import buildBg from "@/assets/buildBg.png";
-import haj from "@/assets/haj.png";
-import hajBg from "@/assets/hajbg.png";
-import auctionHammer from "@/assets/auctionHammer.png";
-import auctionHammerBg from "@/assets/auctionHammerbj.jpg";
-type ServiceKey = keyof typeof servicesData;
+// import bg from "@/assets/ourwork.png";
+// import money from "@/assets/money.png";
+// import moneyBg from "@/assets/moneyBg.jpg";
+// import build from "@/assets/build.png";
+// import buildBg from "@/assets/buildBg.png";
+// import haj from "@/assets/haj.png";
+// import hajBg from "@/assets/hajbg.png";
+// import auctionHammer from "@/assets/auctionHammer.png";
+// import auctionHammerBg from "@/assets/auctionHammerbj.jpg";
+// type ServiceKey = keyof typeof servicesData;
 
-const servicesData = {
-  investment: {
-    title: "ادارة الاملاك",
-    image: haj,
-    bg: hajBg,
-    content: {
-      heading: "ادارة الاملاك",
-      description:
-        "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.",
-    },
-  },
-  hotels: {
-    title: "تنظيم المزادات",
-    image: auctionHammer,
-    bg: auctionHammerBg,
-    content: {
-      heading: "تنظيم المزادات",
-      description:
-        "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.",
-    },
-  },
-  auctions: {
-    title: "إدارة وتشغيل الفنادق",
-    image: build,
-    bg: buildBg,
-    content: {
-      heading: "إدارة وتشغيل الفنادق",
-      description:
-        "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.",
-    },
-  },
-  pilgrims: {
-    title: "الاستثمار العقاري",
-    image: money,
-    bg: moneyBg,
-    content: {
-      heading: "الاستثمار العقاري",
-      description:
-        "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.",
-    },
-  },
-};
+// const servicesData = {
+//   investment: {
+//     title: "ادارة الاملاك",
+//     image: haj,
+//     bg: hajBg,
+//     content: {
+//       heading: "ادارة الاملاك",
+//       description:
+//         "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.",
+//     },
+//   },
+//   hotels: {
+//     title: "تنظيم المزادات",
+//     image: auctionHammer,
+//     bg: auctionHammerBg,
+//     content: {
+//       heading: "تنظيم المزادات",
+//       description:
+//         "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.",
+//     },
+//   },
+//   auctions: {
+//     title: "إدارة وتشغيل الفنادق",
+//     image: build,
+//     bg: buildBg,
+//     content: {
+//       heading: "إدارة وتشغيل الفنادق",
+//       description:
+//         "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.",
+//     },
+//   },
+//   pilgrims: {
+//     title: "الاستثمار العقاري",
+//     image: money,
+//     bg: moneyBg,
+//     content: {
+//       heading: "الاستثمار العقاري",
+//       description:
+//         "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.",
+//     },
+//   },
+// };
 
 const OurWork = () => {
   const [activeContent, setActiveContent] = useState<{
@@ -61,19 +61,19 @@ const OurWork = () => {
     description: string;
   } | null>(null);
 
-  const handleClick = (key: ServiceKey) => {
-    setActiveContent(servicesData[key].content);
-  };
+  // const handleClick = (key: ServiceKey) => {
+  //   setActiveContent(servicesData[key].content);
+  // };
 
   return (
     <section
-      style={{ backgroundImage: `url(${bg.src})` }}
+      // style={{ backgroundImage: `url(${bg.src})` }}
       className="relative bg-cover bg-center flex items-center py-[100px] md:py-6"
     >
       <div className="absolute inset-0 bg-[#D8BA8F] opacity-95"></div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {Object.entries(servicesData).map(([key, service]) => (
+          {/* {Object.entries(servicesData).map(([key, service]) => (
             <div
               key={key}
               onClick={() => handleClick(key as ServiceKey)}
@@ -99,10 +99,10 @@ const OurWork = () => {
                 </h3>
               </div>
             </div>
-          ))}
+          ))} */}
         </div>
 
-        {activeContent && (
+        {/* {activeContent && (
           <div className="mt-6 px-4 py-8 border rounded-lg bg-[#F5EBD7]">
             <div className="gap-4 flex flex-col items-center justify-center max-w-5xl mx-auto">
               <h3 className="text-2xl font-bold text-[#5A4B35]">
@@ -113,7 +113,7 @@ const OurWork = () => {
               </p>
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </section>
   );

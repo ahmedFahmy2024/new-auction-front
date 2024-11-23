@@ -127,14 +127,14 @@ const AuctionScreen = () => {
     );
   }
 
-  if (project.status === "upcoming") {
-    return <BeforeAuctionStart data={project} />;
-  }
+  // if (project.status === "upcoming") {
+  //   return <BeforeAuctionStart data={project} />;
+  // }
 
   return (
     <main
       style={{
-        backgroundColor: auctions[0]?.bgColor,
+        backgroundColor: auctions[0]?.bgColor || "#121212",
         backgroundImage:
           auctions[0]?.displayBgImage && auctions[0]?.bgImage
             ? `url(${auctions[0]?.bgImage})`

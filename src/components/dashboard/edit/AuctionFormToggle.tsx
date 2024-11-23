@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { auctionSchema, auctionType } from "@/lib/schema";
+import { auctionSchema, auctionType, projectType } from "@/lib/schema";
 import { BASE_URL, AUCTIONS } from "@/server/Api";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
@@ -26,7 +26,12 @@ import { useEffect, useState } from "react";
 import { useAuctionSwitch } from "@/context/AuctionSwitchContext";
 import { Switch } from "@/components/ui/switch";
 
-const AuctionFormToggle = ({ projectId }: { projectId: string }) => {
+type Props = {
+  projectId: string;
+  project: projectType;
+};
+
+const AuctionFormToggle = ({ projectId, project }: Props) => {
   const router = useRouter();
   const { auctionId, setLoading, setAuctionId, setChangeToggleFields } =
     useAuctionSwitch();
@@ -90,8 +95,8 @@ const AuctionFormToggle = ({ projectId }: { projectId: string }) => {
             logoOne: response.data.data.logoOne || "",
             logoSecond: response.data.data.logoSecond || "",
             logoThird: response.data.data.logoThird || "",
-            imageCover: response.data.data.imageCover || "",
-            images: response.data.data.images || [],
+            imageCover: project.imageCover || "",
+            images: project.images || [],
             videoUrl: response.data.data.videoUrl || "",
             bgColor: response.data.data.bgColor || "",
             textColor: response.data.data.textColor || "",
@@ -398,12 +403,12 @@ const AuctionFormToggle = ({ projectId }: { projectId: string }) => {
             </div>
 
             <div className="grid grid-cols-2 gap-2">
-              <div className="col-span-2 md:col-span-1 h-[42px]">
+              <div className="col-span-2 md:col-span-1 h-[42px] hide-remove">
                 <FormField
                   control={form.control}
                   name="imageCover"
                   render={({ field }) => (
-                    <FormItem className="flex items-center overflow-hidden bg-[#342D23] border-[#D8BA8E] rounded-lg border h-full ">
+                    <FormItem className="flex items-center overflow-hidden bg-[#342D23] border-[#D8BA8E] rounded-lg border h-full cursor-not-allowed">
                       <FormLabel className="w-[100px] text-center font-extrabold text-[#342D23] bg-[#D8BA8E] h-full flex items-center justify-center px-1">
                         صورة الغلاف
                       </FormLabel>
@@ -420,12 +425,12 @@ const AuctionFormToggle = ({ projectId }: { projectId: string }) => {
                 />
               </div>
 
-              <div className="col-span-2 md:col-span-1 h-[42px]">
+              <div className="col-span-2 md:col-span-1 h-[42px] hide-remove">
                 <FormField
                   control={form.control}
                   name="images"
                   render={({ field }) => (
-                    <FormItem className="flex items-center overflow-hidden bg-[#342D23] border-[#D8BA8E] rounded-lg border h-full ">
+                    <FormItem className="flex items-center overflow-hidden bg-[#342D23] border-[#D8BA8E] rounded-lg border h-full cursor-not-allowed">
                       <FormLabel className="w-[100px] text-center font-extrabold text-[#342D23] bg-[#D8BA8E] h-full flex items-center justify-center px-1">
                         صور العرض
                       </FormLabel>
@@ -536,7 +541,7 @@ const AuctionFormToggle = ({ projectId }: { projectId: string }) => {
                       </FormLabel>
                       <FormControl>
                         <ColorPicker
-                          value={field.value}
+                          value={field.value || "#000000"}
                           onChange={field.onChange}
                           onBlur={field.onBlur}
                           name={field.name}
@@ -559,7 +564,7 @@ const AuctionFormToggle = ({ projectId }: { projectId: string }) => {
                       </FormLabel>
                       <FormControl>
                         <ColorPicker
-                          value={field.value}
+                          value={field.value || "#FFFFFF"}
                           onChange={field.onChange}
                           onBlur={field.onBlur}
                           name={field.name}
@@ -582,7 +587,7 @@ const AuctionFormToggle = ({ projectId }: { projectId: string }) => {
                       </FormLabel>
                       <FormControl>
                         <ColorPicker
-                          value={field.value}
+                          value={field.value || "#000000"}
                           onChange={field.onChange}
                           onBlur={field.onBlur}
                           name={field.name}
@@ -607,7 +612,7 @@ const AuctionFormToggle = ({ projectId }: { projectId: string }) => {
                       </FormLabel>
                       <FormControl>
                         <ColorPicker
-                          value={field.value}
+                          value={field.value || "#342D23"}
                           onChange={field.onChange}
                           onBlur={field.onBlur}
                           name={field.name}
@@ -630,7 +635,7 @@ const AuctionFormToggle = ({ projectId }: { projectId: string }) => {
                       </FormLabel>
                       <FormControl>
                         <ColorPicker
-                          value={field.value}
+                          value={field.value || "#D8BA8E"}
                           onChange={field.onChange}
                           onBlur={field.onBlur}
                           name={field.name}
@@ -653,7 +658,7 @@ const AuctionFormToggle = ({ projectId }: { projectId: string }) => {
                       </FormLabel>
                       <FormControl>
                         <ColorPicker
-                          value={field.value}
+                          value={field.value || "#FFFFFF"}
                           onChange={field.onChange}
                           onBlur={field.onBlur}
                           name={field.name}

@@ -20,9 +20,10 @@ import { useAuctionSwitch } from "@/context/AuctionSwitchContext";
 
 type EditbtnProps = {
   id: string | undefined;
+  backgroundColor: string;
 };
 
-const EditBtn = ({ id }: EditbtnProps) => {
+const EditBtn = ({ id, backgroundColor }: EditbtnProps) => {
   const router = useRouter();
   const [isFetching, setIsFetching] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -168,7 +169,7 @@ const EditBtn = ({ id }: EditbtnProps) => {
           {isLoading ? (
             <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white" />
           ) : (
-            <Pencil className="h-4 w-4" color="#D8BA8E" />
+            <Pencil className="h-4 w-4" color={backgroundColor} />
           )}
         </Button>
       </DialogTrigger>

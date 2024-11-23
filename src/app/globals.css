@@ -203,3 +203,12 @@ html:has(.editPage) .small-text > div {
 html:has(.editPage) .lonely-fields {
   height: 32px !important;
 }
+
+.hide-remove .remove-btn {
+  display: none;
+}
+
+body:has(.no-header) .mahmoud,
+body:has(.no-header) .last-footer {
+  display: none;
+}

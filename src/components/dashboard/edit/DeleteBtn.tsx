@@ -7,10 +7,15 @@ import { useAuctionSwitch } from "@/context/AuctionSwitchContext";
 
 type DeleteBtnProps = {
   priceId: string | undefined;
+  backgroundColor: string;
   handleDelete: (id: string) => Promise<void>;
 };
 
-const DeleteBtn = ({ priceId, handleDelete }: DeleteBtnProps) => {
+const DeleteBtn = ({
+  priceId,
+  handleDelete,
+  backgroundColor,
+}: DeleteBtnProps) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
   const { setDeleteRefresh } = useAuctionSwitch();
@@ -44,7 +49,7 @@ const DeleteBtn = ({ priceId, handleDelete }: DeleteBtnProps) => {
         {isDeleting ? (
           <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
         ) : (
-          <Trash2 className="h-4 w-4" color="#D8BA8E" />
+          <Trash2 className="h-4 w-4" color={backgroundColor} />
         )}
       </Button>
     </>

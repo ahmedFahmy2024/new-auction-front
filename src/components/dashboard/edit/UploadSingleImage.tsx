@@ -71,7 +71,7 @@ export default function UploadSingleImage({
             unoptimized={!preview.startsWith("data:")}
           />
           <button
-            className="absolute top-1 right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center"
+            className="absolute top-1 right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center remove-btn"
             onClick={handleRemove}
           >
             <X className="w-3 h-3" color="white" />

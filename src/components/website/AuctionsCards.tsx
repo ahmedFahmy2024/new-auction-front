@@ -6,7 +6,8 @@ import { AuctionData } from "@/lib/types";
 import { useMemo, useState } from "react";
 
 const AuctionsCards = ({ data }: { data: AuctionData[] }) => {
-  const [activeTab, setActiveTab] = useState("المزادات القادمة");
+  console.log(data);
+  const [activeTab, setActiveTab] = useState("");
 
   const filteredData = useMemo(() => {
     switch (activeTab) {

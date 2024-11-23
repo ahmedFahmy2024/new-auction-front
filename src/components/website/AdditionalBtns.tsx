@@ -17,29 +17,29 @@ const AdditionalBtns = ({
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
-  const startAuction = async () => {
-    setLoading(true);
+  // const startAuction = async () => {
+  //   setLoading(true);
 
-    const body = {
-      status: "ongoing",
-    };
+  //   const body = {
+  //     status: "ongoing",
+  //   };
 
-    try {
-      await axios.patch(`${BASE_URL}${PROJECTS}/${item._id}/status`, body, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      toast.success("تم بدء المزاد بنجاح");
-      //   router.push(`/dashboard/auctions/${item._id}`);
-      router.refresh();
-    } catch (error) {
-      console.log(error);
-      toast.error("حدث خطأ أثناء بدء المزاد");
-    } finally {
-      setLoading(false);
-    }
-  };
+  //   try {
+  //     await axios.patch(`${BASE_URL}${PROJECTS}/${item._id}/status`, body, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     toast.success("تم بدء المزاد بنجاح");
+  //     //   router.push(`/dashboard/auctions/${item._id}`);
+  //     router.refresh();
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast.error("حدث خطأ أثناء بدء المزاد");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   const toggleIsPublished = async () => {
     setLoading(true);
@@ -69,7 +69,9 @@ const AdditionalBtns = ({
   return (
     <div className="flex items-center gap-2 mt-1">
       <button
-        onClick={startAuction}
+        onClick={() =>
+          (window.location.href = `/dashboard/auctions/${item._id}`)
+        }
         disabled={loading}
         className={`flex items-center justify-between basis-2/3 rounded-lg bg-[#D8BA8E] py-3 px-4 md:px-8 text-[#342D23] text-sm font-semibold disabled:bg-[#D8BA8E]/50 disabled:cursor-not-allowed`}
       >

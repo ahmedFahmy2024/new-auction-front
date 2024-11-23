@@ -11,8 +11,7 @@ import { useAuth } from "@/context/AuthContext";
 
 type AuctionData = {
   _id: string;
-  titleKey: string;
-  titleValue: string;
+  title: string;
   rightLogoValue: string;
   leftLogoValue: string;
   imageValue: string[];
@@ -85,7 +84,7 @@ const CardComponent = ({ item }: { item: AuctionData }) => {
 
           <CardHeader className="p-0">
             <CardTitle className="text-xl my-3 text-center">
-              {item.titleValue}
+              {item.title}
             </CardTitle>
 
             <div className="border border-[#9D9D9D] rounded-lg flex items-center justify-between py-1 px-4">

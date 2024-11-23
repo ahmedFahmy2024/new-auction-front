@@ -4,8 +4,14 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import AuctionFormToggle from "./AuctionFormToggle";
 import PriceFormToggle from "./PriceFormToggle";
+import { projectType } from "@/lib/schema";
 
-const ToggleAuction = ({ projectId }: { projectId: string }) => {
+type Props = {
+  projectId: string;
+  project: projectType;
+};
+
+const ToggleAuction = ({ projectId, project }: Props) => {
   const [activeTab, setActiveTab] = useState("auction");
 
   return (
@@ -35,7 +41,9 @@ const ToggleAuction = ({ projectId }: { projectId: string }) => {
         </Button>
       </div>
 
-      {activeTab === "auction" && <AuctionFormToggle projectId={projectId} />}
+      {activeTab === "auction" && (
+        <AuctionFormToggle projectId={projectId} project={project} />
+      )}
       {activeTab === "price" && <PriceFormToggle projectId={projectId} />}
     </section>
   );
