@@ -162,7 +162,7 @@ const EditBtn = ({ id, backgroundColor }: EditbtnProps) => {
       <DialogTrigger asChild>
         <Button
           variant="ghost"
-          className="flex items-center gap-1 rounded-md"
+          className="flex items-center gap-1 rounded-md p-1"
           size="sm"
           disabled={isLoading}
         >

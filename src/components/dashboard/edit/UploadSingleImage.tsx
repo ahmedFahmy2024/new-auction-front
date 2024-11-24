@@ -60,7 +60,7 @@ export default function UploadSingleImage({
   return (
     <div className="!my-0 mx-auto">
       {preview ? (
-        <div className="relative h-[35px] w-[35px]">
+        <div className="relative h-[35px] w-[35px] image-preview">
           <Image
             src={preview}
             alt="Preview"

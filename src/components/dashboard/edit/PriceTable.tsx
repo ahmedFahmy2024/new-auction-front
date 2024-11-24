@@ -39,11 +39,11 @@ const PriceTable = () => {
 
   return (
     <div>
-      <h2 className="text-xl font-extrabold text-[#342D23] mb-4">
+      <h2 className="text-xl font-extrabold text-[#342D23] mb-2">
         سجل المزايدة
       </h2>
 
-      <div className="flex flex-col gap-2 border border-[#D8BA8E] pt-2 rounded-xl overflow-hidden">
+      <div className="flex flex-col border border-[#D8BA8E] pt-2 rounded-xl overflow-hidden">
         <div className="flex items-center justify-between gap-2 px-4">
           <h3 className="font-bold text-[#342D23] text-xl ">اعلى مزايد</h3>
           <div className="text-[#5a4b35] font-bold text-xl">

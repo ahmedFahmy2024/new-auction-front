@@ -44,7 +44,7 @@ export const columns: ColumnDef<priceType>[] = [
       return (
         <div
           style={{ backgroundColor }}
-          className="text-white aspect-square flex items-center justify-center p-1 w-[30px] rounded font-bold text-base"
+          className="text-white aspect-square flex items-center justify-center px-1 w-[25px] rounded font-bold text-base mx-auto"
         >
           {row.getValue("paddleNum")}
         </div>

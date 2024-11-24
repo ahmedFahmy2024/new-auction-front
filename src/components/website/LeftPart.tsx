@@ -12,7 +12,7 @@ const LeftPart = ({ data, prices }: Props) => {
   const relevantPrices = prices?.slice(1, 3);
 
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="grid grid-cols-2 gap-4 custom-gap">
       <DiagonalHeader
         title="رقم المضرب"
         bgColor={data[0]?.textBgColor1 || "#342D23"}
@@ -100,7 +100,45 @@ const LeftPart = ({ data, prices }: Props) => {
             textColor={data[0]?.textColor || "#FFFFFF"}
           />
           <DiagonalHeader
-            title={prices[0]?.increase ? formatPrice(prices[0]?.increase) : "-"}
+            title={
+              prices[0]?.increase ? formatPrice(prices[0]?.increase) : "0 SAR"
+            }
+            bgColor={data[0]?.textBgColor2 || "#D8BA8E"}
+            textColor={data[0]?.textColor || "#FFFFFF"}
+          />
+        </>
+      )}
+
+      {data[0]?.displaySeekingPercent && (
+        <>
+          <DiagonalHeader
+            title="نسبة السعي"
+            bgColor={data[0]?.textBgColor1 || "#342D23"}
+            textColor={data[0]?.textColor || "#FFFFFF"}
+          />
+          <DiagonalHeader
+            title={
+              data[0]?.seekingPercent
+                ? formatPrice(data[0]?.seekingPercent)
+                : "0 %"
+            }
+            bgColor={data[0]?.textBgColor2 || "#D8BA8E"}
+            textColor={data[0]?.textColor || "#FFFFFF"}
+          />
+        </>
+      )}
+
+      {data[0]?.displayTaxPercent && (
+        <>
+          <DiagonalHeader
+            title="الضريبة على السعي"
+            bgColor={data[0]?.textBgColor1 || "#342D23"}
+            textColor={data[0]?.textColor || "#FFFFFF"}
+          />
+          <DiagonalHeader
+            title={
+              data[0]?.taxPercent ? formatPrice(data[0]?.taxPercent) : "0 %"
+            }
             bgColor={data[0]?.textBgColor2 || "#D8BA8E"}
             textColor={data[0]?.textColor || "#FFFFFF"}
           />
@@ -145,7 +183,7 @@ const LeftPart = ({ data, prices }: Props) => {
             clipPath:
               "polygon(20px 0, 100% 0, 100% 50%, calc(100% - 20px) 100%, 0 100%, 0 50%)",
           }}
-          className="flex flex-col items-center justify-center col-span-2 h-16 small-text"
+          className="flex flex-col items-center justify-center col-span-2 h-16 small-text custom-notes"
         >
           <span
             style={{
@@ -163,7 +201,7 @@ const LeftPart = ({ data, prices }: Props) => {
                 color: data[0]?.notesColor || "#000000",
                 backgroundColor: data[0]?.textBgColor3 || "#ECECEC",
               }}
-              className="min-w-[100px] text-center font-medium text-base h-full w-full"
+              className="min-w-[100px] text-center font-medium h-full w-full"
             >
               {data[0]?.notes1 || "-"}
             </span>

@@ -41,7 +41,7 @@ const DeleteBtn = ({
     <>
       <Button
         variant="ghost"
-        className="flex items-center gap-1"
+        className="flex items-center gap-1 p-1"
         size="sm"
         onClick={onDelete}
         disabled={isDeleting}

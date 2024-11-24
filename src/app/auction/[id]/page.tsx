@@ -140,9 +140,9 @@ const Projector = () => {
     );
   }
 
-  // if (project.status === "upcoming" || project.status === "completed") {
-  //   return <BeforeAuctionStart data={project} />;
-  // }
+  if (project.status === "upcoming" || project.status === "completed") {
+    return <BeforeAuctionStart data={project} />;
+  }
 
   return (
     <main
@@ -161,7 +161,7 @@ const Projector = () => {
           {/* right part */}
           <Card className="overflow-hidden bg-transparent border-none">
             <CardContent className="p-6">
-              <RightPart data={auctions} />
+              <RightPart data={auctions} project={project} />
             </CardContent>
           </Card>
           {/* left part */}

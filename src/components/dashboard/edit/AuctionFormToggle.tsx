@@ -281,20 +281,20 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
   };
 
   return (
-    <div className="bg-[#342D23] rounded-xl rounded-ss-none p-6">
+    <div className="bg-[#342D23] rounded-xl rounded-ss-none p-6 small-images">
       {!auctionId ? (
         <div className="text-white font-bold">
           يرجى تحديد المزاد المراد تعديله
         </div>
       ) : (
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
             <div>
               <FormField
                 control={form.control}
                 name="auctionName"
                 render={({ field }) => (
-                  <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border">
+                  <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border h-8">
                     <FormLabel className="min-w-[100px] text-center font-extrabold text-[#342D23]">
                       اسم المزاد
                     </FormLabel>
@@ -311,7 +311,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
             </div>
 
             <div className="grid grid-cols-3 gap-2">
-              <div className="col-span-3 md:col-span-1 h-[42px]">
+              <div className="col-span-3 md:col-span-1 h-[32px]">
                 <FormField
                   control={form.control}
                   name="logoOne"
@@ -341,7 +341,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
                 />
               </div>
 
-              <div className="col-span-3 md:col-span-1 h-[42px]">
+              <div className="col-span-3 md:col-span-1 h-[32px]">
                 <FormField
                   control={form.control}
                   name="logoSecond"
@@ -371,7 +371,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
                 />
               </div>
 
-              <div className="col-span-3 md:col-span-1 h-[42px]">
+              <div className="col-span-3 md:col-span-1 h-[32px]">
                 <FormField
                   control={form.control}
                   name="logoThird"
@@ -403,7 +403,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
             </div>
 
             <div className="grid grid-cols-2 gap-2">
-              <div className="col-span-2 md:col-span-1 h-[42px] hide-remove">
+              <div className="col-span-2 md:col-span-1 h-[32px] hide-remove">
                 <FormField
                   control={form.control}
                   name="imageCover"
@@ -425,7 +425,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
                 />
               </div>
 
-              <div className="col-span-2 md:col-span-1 h-[42px] hide-remove">
+              <div className="col-span-2 md:col-span-1 h-[32px] hide-remove">
                 <FormField
                   control={form.control}
                   name="images"
@@ -449,12 +449,12 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
             </div>
 
             <div className="grid grid-cols-2 gap-2">
-              <div className="col-span-2 md:col-span-1 h-[42px]">
+              <div className="col-span-2 md:col-span-1 h-[32px]">
                 <FormField
                   control={form.control}
                   name="videoUrl"
                   render={({ field }) => (
-                    <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border">
+                    <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border h-full">
                       <FormLabel className="min-w-[100px] text-center font-extrabold text-[#342D23]">
                         رابط الفيديو
                       </FormLabel>
@@ -470,13 +470,13 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
                 />
               </div>
 
-              <div className="col-span-2 md:col-span-1 h-[42px]">
+              <div className="col-span-2 md:col-span-1 h-[32px]">
                 <FormField
                   control={form.control}
                   name="displayVideoUrl"
                   render={({ field }) => (
-                    <FormItem className="flex items-center justify-between overflow-hidden border-[#D8BA8E] rounded-lg border">
-                      <FormLabel className="min-w-[100px] text-center font-extrabold text-[#342D23] bg-[#D8BA8E] h-full p-3">
+                    <FormItem className="flex items-center justify-between overflow-hidden border-[#D8BA8E] rounded-lg border h-full">
+                      <FormLabel className="min-w-[100px] text-center font-extrabold text-[#342D23] bg-[#D8BA8E] p-3">
                         إظهار الفيديو
                       </FormLabel>
                       <FormControl>
@@ -500,7 +500,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
             </div>
 
             <div className="grid grid-cols-2 gap-2">
-              <div className="col-span-2 md:col-span-1 h-[42px]">
+              <div className="col-span-2 md:col-span-1 h-[32px]">
                 <FormField
                   control={form.control}
                   name="bgImage"
@@ -530,7 +530,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
                 />
               </div>
 
-              <div className="col-span-2 md:col-span-1 h-[42px]">
+              <div className="col-span-2 md:col-span-1 h-[32px]">
                 <FormField
                   control={form.control}
                   name="bgColor"
@@ -553,7 +553,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
                 />
               </div>
 
-              <div className="col-span-2 md:col-span-1 h-[42px]">
+              <div className="col-span-2 md:col-span-1 h-[32px]">
                 <FormField
                   control={form.control}
                   name="textColor"
@@ -576,7 +576,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
                 />
               </div>
 
-              <div className="col-span-2 md:col-span-1 h-[42px]">
+              <div className="col-span-2 md:col-span-1 h-[32px]">
                 <FormField
                   control={form.control}
                   name="notesColor"
@@ -601,7 +601,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
             </div>
 
             <div className="grid grid-cols-4 gap-2">
-              <div className="col-span-4 md:col-span-1 h-[42px]">
+              <div className="col-span-4 md:col-span-1 h-[32px]">
                 <FormField
                   control={form.control}
                   name="textBgColor1"
@@ -624,7 +624,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
                 />
               </div>
 
-              <div className="col-span-4 md:col-span-1 h-[42px]">
+              <div className="col-span-4 md:col-span-1 h-[32px]">
                 <FormField
                   control={form.control}
                   name="textBgColor2"
@@ -647,7 +647,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
                 />
               </div>
 
-              <div className="col-span-4 md:col-span-1 h-[42px]">
+              <div className="col-span-4 md:col-span-1 h-[32px]">
                 <FormField
                   control={form.control}
                   name="textBgColor3"
@@ -674,7 +674,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
                 <Button
                   disabled={form.formState.isSubmitting}
                   type="submit"
-                  className="bg-[#D8BA8E] hover:bg-[#D8BA8E]/90 text-[#342D23] font-extrabold rounded-full w-full"
+                  className="bg-[#D8BA8E] hover:bg-[#D8BA8E]/90 text-[#342D23] font-extrabold rounded-full w-full h-[32px]"
                 >
                   {form.formState.isSubmitting ? (
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />

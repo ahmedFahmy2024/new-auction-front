@@ -217,7 +217,7 @@ const ProjectEdit = ({ project }: Props) => {
                 <FormControl>
                   <Input
                     {...field}
-                    placeholder="latitude,longitude example: 30.0444,31.2357"
+                    placeholder="https://maps.app.goo.gl/vRzpzSBsHj2pJb9g7"
                     className="!mt-0 border-none rounded-none"
                   />
                 </FormControl>

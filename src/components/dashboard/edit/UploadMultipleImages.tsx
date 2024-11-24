@@ -78,7 +78,7 @@ export function UploadMultipleImages({
   return (
     <div className="!my-0 mx-auto flex items-center gap-2">
       {previews.map((preview, index) => (
-        <div key={index} className="relative h-[35px] w-[35px]">
+        <div key={index} className="relative h-[35px] w-[35px] image-preview">
           <Image
             src={preview}
             alt={`Preview ${index + 1}`}

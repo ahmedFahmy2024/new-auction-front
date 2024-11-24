@@ -6,7 +6,6 @@ import { AuctionData } from "@/lib/types";
 import { useMemo, useState } from "react";
 
 const AuctionsCards = ({ data }: { data: AuctionData[] }) => {
-  console.log(data);
   const [activeTab, setActiveTab] = useState("");
 
   const filteredData = useMemo(() => {
@@ -53,7 +52,7 @@ const AuctionsCards = ({ data }: { data: AuctionData[] }) => {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-x-4 gap-y-16 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <AddComponent />
         {filteredData.map((item: AuctionData) => (
           <CardComponenet key={item._id} item={item} />

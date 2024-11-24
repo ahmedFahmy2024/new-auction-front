@@ -108,13 +108,13 @@ const AuctionItems = ({ id, auctions }: Props) => {
 
   return (
     <div>
-      <h2 className="text-xl font-extrabold text-[#342D23] mb-4">
+      <h2 className="text-xl font-extrabold text-[#342D23] mb-2">
         بنود المزاد
       </h2>
 
-      <div className="border border-[#919191] p-4 rounded-2xl flex items-center justify-center flex-col gap-4">
+      <div className="border border-[#919191] p-4 rounded-2xl flex items-center justify-center flex-col gap-2">
         {auctions && (
-          <div className="flex flex-col gap-4 w-full max-h-[400px] overflow-y-scroll scrollbar-hide">
+          <div className="flex flex-col gap-2 w-full max-h-[220px] overflow-y-scroll scrollbar-hide">
             {auctions.map((auction, index) => (
               <div key={auction._id} className="flex items-center gap-1">
                 <span className="bg-[#D8BA8E] rounded-sm p-1 text-white font-bold text-lg aspect-square min-w-[29px] flex items-center justify-center">
@@ -164,7 +164,7 @@ const AuctionItems = ({ id, auctions }: Props) => {
 
         <button
           onClick={handleAdding}
-          className="flex items-center justify-center gap-2 border border-[#D8BA8E] py-3 px-4 text-[#342D23] rounded-md w-full"
+          className="flex items-center justify-center gap-2 border border-[#D8BA8E] py-2 px-4 text-[#342D23] rounded-md w-full"
         >
           <SquarePlus color="#D8BA8E" />
           <span className="text-[#D8BA8E] font-bold text-lg">إضافة منتج</span>

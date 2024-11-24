@@ -166,8 +166,8 @@ const Bidding = () => {
       </h2>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          <div className="flex flex-col md:flex-row gap-4 items-center md:items-end justify-between">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+          <div className="flex flex-col md:flex-row gap-2 items-center md:items-end justify-between">
             <div className="w-full md:basis-1/3">
               <FormField
                 control={form.control}

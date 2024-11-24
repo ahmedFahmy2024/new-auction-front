@@ -51,7 +51,7 @@ const ContactForm = () => {
   return (
     <section
       id="contact-us"
-      className="flex flex-col items-center justify-center gap-8 py-10 px-4 md:px-0 bg-[#F5EBD7]"
+      className="flex flex-col items-center justify-center gap-8 py-10 px-4 md:px-0 bg-[#F5EBD7] bg-color-custom"
     >
       <h2 className="text-[#342D23] font-bold text-3xl">معلومات التواصل </h2>
       <Form {...form}>

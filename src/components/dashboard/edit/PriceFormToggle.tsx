@@ -231,7 +231,6 @@ const PriceFormToggle = ({ projectId }: Props) => {
       );
 
       const updatedData = response.data.data;
-      console.log(updatedData);
       // Update local state to reflect the change
       setDisplayprices((prev) => ({
         ...prev,
@@ -250,9 +249,9 @@ const PriceFormToggle = ({ projectId }: Props) => {
         </div>
       ) : (
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
             <div className="grid grid-cols-2 gap-4">
-              <div className="col-span-2 md:col-span-1 h-[42px]">
+              <div className="col-span-2 md:col-span-1 h-[32px]">
                 <div className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border h-full">
                   <label
                     htmlFor="area-price"
@@ -276,12 +275,12 @@ const PriceFormToggle = ({ projectId }: Props) => {
                 </div>
               </div>
 
-              <div className="col-span-2 md:col-span-1 h-[42px]">
+              <div className="col-span-2 md:col-span-1 h-[32px]">
                 <FormField
                   control={form.control}
                   name="area"
                   render={({ field }) => (
-                    <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border">
+                    <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border h-full">
                       <FormLabel
                         className="min-w-[130px] text-center font-extrabold text-[#342D23] flex items-center justify-center gap-1 px-1"
                         onClick={() => handleToggleDisplay("displayArea")}
@@ -305,12 +304,12 @@ const PriceFormToggle = ({ projectId }: Props) => {
                 />
               </div>
 
-              <div className="col-span-2 md:col-span-1 h-[42px]">
+              <div className="col-span-2 md:col-span-1 h-[32px]">
                 <FormField
                   control={form.control}
                   name="openPrice"
                   render={({ field }) => (
-                    <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border">
+                    <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border h-full">
                       <FormLabel
                         className="min-w-[130px] text-center font-extrabold text-[#342D23] flex items-center justify-center gap-1 px-1"
                         onClick={() => handleToggleDisplay("displayOpenPrice")}
@@ -334,12 +333,12 @@ const PriceFormToggle = ({ projectId }: Props) => {
                 />
               </div>
 
-              <div className="col-span-2 md:col-span-1 h-[42px]">
+              <div className="col-span-2 md:col-span-1 h-[32px]">
                 <FormField
                   control={form.control}
                   name="increase"
                   render={({ field }) => (
-                    <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border">
+                    <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border h-full">
                       <FormLabel
                         className="min-w-[130px] text-center font-extrabold text-[#342D23] flex items-center justify-center gap-1 px-1"
                         onClick={() => handleToggleDisplay("displayIncrease")}
@@ -365,12 +364,12 @@ const PriceFormToggle = ({ projectId }: Props) => {
                 />
               </div>
 
-              <div className="col-span-2 md:col-span-1 h-[42px]">
+              <div className="col-span-2 md:col-span-1 h-[32px]">
                 <FormField
                   control={form.control}
                   name="seekingPercent"
                   render={({ field }) => (
-                    <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border">
+                    <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border h-full">
                       <FormLabel
                         className="min-w-[130px] text-center font-extrabold text-[#342D23] flex items-center justify-center gap-1 px-1"
                         onClick={() =>
@@ -396,12 +395,12 @@ const PriceFormToggle = ({ projectId }: Props) => {
                 />
               </div>
 
-              <div className="col-span-2 md:col-span-1 h-[42px]">
+              <div className="col-span-2 md:col-span-1 h-[32px]">
                 <FormField
                   control={form.control}
                   name="taxPercent"
                   render={({ field }) => (
-                    <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border">
+                    <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border h-full">
                       <FormLabel
                         className="min-w-[130px] text-center font-extrabold text-[#342D23] flex items-center justify-center gap-1 px-1"
                         onClick={() => handleToggleDisplay("displayTaxPercent")}
@@ -426,12 +425,12 @@ const PriceFormToggle = ({ projectId }: Props) => {
               </div>
             </div>
 
-            <div className="h-[42px]">
+            <div className="h-[32px]">
               <FormField
                 control={form.control}
                 name="notes1"
                 render={({ field }) => (
-                  <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border">
+                  <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border h-full">
                     <FormLabel
                       className="min-w-[130px] text-center font-extrabold text-[#342D23] flex items-center justify-center gap-1 px-1"
                       onClick={() => handleToggleDisplay("displayNotes1")}
@@ -455,12 +454,12 @@ const PriceFormToggle = ({ projectId }: Props) => {
               />
             </div>
 
-            <div className="h-[42px]">
+            <div className="h-[32px]">
               <FormField
                 control={form.control}
                 name="notes2"
                 render={({ field }) => (
-                  <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border">
+                  <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border h-full">
                     <FormLabel
                       className="min-w-[130px] text-center font-extrabold text-[#342D23] flex items-center justify-center gap-1 px-1"
                       onClick={() => handleToggleDisplay("displayNotes2")}
@@ -488,7 +487,7 @@ const PriceFormToggle = ({ projectId }: Props) => {
               <Button
                 disabled={form.formState.isSubmitting}
                 type="submit"
-                className="bg-[#D8BA8E] hover:bg-[#D8BA8E]/90 text-[#342D23] font-extrabold rounded-full w-full"
+                className="bg-[#D8BA8E] hover:bg-[#D8BA8E]/90 text-[#342D23] font-extrabold rounded-full w-full h-[32px]"
               >
                 {form.formState.isSubmitting ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />

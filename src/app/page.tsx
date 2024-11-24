@@ -43,7 +43,9 @@ export default function Home() {
 
       <OurWork />
 
-      <ContactForm />
+      <div className="bigger-padding">
+        <ContactForm />
+      </div>
 
       <PrevFooter />
     </main>

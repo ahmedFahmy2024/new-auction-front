@@ -125,6 +125,18 @@ input[type="number"] {
   display: none;
 }
 
+.percentagetable thead tr th {
+  height: 2rem;
+}
+
+.percentagetable tbody tr {
+  border-bottom: none;
+}
+
+.percentagetable tbody tr td {
+  padding: 0 1rem;
+}
+
 .iframDiv:has(iframe) {
   width: 100%;
   height: 100%;
@@ -195,13 +207,26 @@ html:has(.ahmed) body > .mahmoud {
 }
 
 html:has(.editPage) .small-text span {
-  font-size: 10px;
+  font-size: 9px;
 }
+html:has(.editPage) .custom-gap {
+  gap: 8px !important;
+}
+html:has(.editPage) .video-height {
+  height: 15rem !important;
+}
+
 html:has(.editPage) .small-text > div {
-  height: 32px;
+  height: 18px;
 }
 html:has(.editPage) .lonely-fields {
-  height: 32px !important;
+  height: 18px !important;
+}
+html:has(.editPage) .custom-notes {
+  height: 40px !important;
+}
+html:has(.editPage) .custom-notes span {
+  height: 15px !important;
 }
 
 .hide-remove .remove-btn {
@@ -211,4 +236,16 @@ html:has(.editPage) .lonely-fields {
 body:has(.no-header) .mahmoud,
 body:has(.no-header) .last-footer {
   display: none;
+}
+
+html:has(.small-images) .image-preview {
+  height: 25px !important;
+  width: 25px !important;
+}
+
+html:has(.nobg-color) .bg-color-custom {
+  background-color: transparent !important;
+}
+html:has(.bigger-padding) .bg-color-custom {
+  padding: 100px 16px !important;
 }

@@ -140,14 +140,14 @@ const AuctionScreen = () => {
             ? `url(${auctions[0]?.bgImage})`
             : "none",
       }}
-      className="bg-cover bg-center flex items-center py-6 rounded-xl editPage"
+      className="bg-cover bg-center flex items-center rounded-xl editPage py-4"
     >
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {/* right part */}
-          <Card className="overflow-hidden bg-transparent border-none">
+          <Card className="overflow-hidden bg-transparent border-none shadow-none">
             <CardContent className="p-0">
-              <RightPart data={auctions} />
+              <RightPart data={auctions} project={project} />
             </CardContent>
           </Card>
           {/* left part */}

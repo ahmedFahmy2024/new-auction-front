@@ -12,6 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import Link from "next/link";
 
 type Props = {
   data: Project;
@@ -23,7 +24,7 @@ const BeforeAuctionStart = ({ data }: Props) => {
   const [remainingTime, setRemainingTime] = useState("");
 
   // Parse latitude and longitude from the location string
-  const [lat, lng] = data.location.split(",").map(Number);
+  // const [lat, lng] = data.location.split(",").map(Number);
 
   useEffect(() => {
     // Format date on the client side
@@ -89,7 +90,7 @@ const BeforeAuctionStart = ({ data }: Props) => {
 
   return (
     <main className="bg-[#FFFFFF] mt-[80px]">
-      <div className="container mx-auto pt-10 px-4 md:px-0 my-10">
+      <div className="container mx-auto pt-10 px-4 md:px-0 my-40">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div className="md:col-span-2 relative">
             <ProjectSlider images={data.images} />
@@ -125,28 +126,13 @@ const BeforeAuctionStart = ({ data }: Props) => {
                   </span>
                 </div>
 
-                <Dialog>
-                  <DialogTrigger className="text-[#342D23] font-semibold text-xl hover:underline flex items-center gap-2 ">
-                    رابط لوكيشن المزاد :
-                  </DialogTrigger>
-                  <DialogContent className="max-w-3xl z-[99999999]">
-                    <DialogHeader>
-                      <DialogTitle>موقع المزاد</DialogTitle>
-                    </DialogHeader>
-                    <div className="w-full h-96">
-                      <iframe
-                        width="100%"
-                        height="100%"
-                        className="rounded-lg"
-                        style={{ border: "none" }}
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                        src={`https://maps.google.com/maps?q=${lat},${lng}&z=15&output=embed`}
-                        title="google map"
-                      />
-                    </div>
-                  </DialogContent>
-                </Dialog>
+                <Link
+                  className="text-[#342D23] font-semibold text-xl hover:underline flex items-center gap-2 "
+                  href={data.location}
+                  target="_blank"
+                >
+                  رابط لوكيشن المزاد :
+                </Link>
               </div>
             </div>
 
@@ -192,15 +178,17 @@ const BeforeAuctionStart = ({ data }: Props) => {
         </div>
 
         <div className="mt-4">
-          <h5 className="font-extrabold text-2xl">وصف مفصل :</h5>
-          <hr className="border-[#000000] mt-6" />
+          <h5 className="font-extrabold text-2xl mt-10">وصف مفصل :</h5>
+          <hr className="border-[#000000] mt-4" />
           <p className="font-normal text-lg md:text-xl mt-4">
             {data.description}
           </p>
         </div>
       </div>
 
-      <ContactForm />
+      <div className="bigger-padding">
+        <ContactForm />
+      </div>
       <PrevFooter />
     </main>
   );

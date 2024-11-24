@@ -5,18 +5,19 @@ import rightlogo from "@/assets/rightlogo.png";
 import leftlogofirst from "@/assets/leftlogo1.png";
 import leftlogosecond from "@/assets/leftlogo2.png";
 import auctionlive from "@/assets/auctionlivephoto.jpg";
+import { Project } from "@/lib/types";
 
 type RightPartProps = {
   data: auctionType[];
+  project: Project;
 };
 
-const RightPart = ({ data }: RightPartProps) => {
+const RightPart = ({ data, project }: RightPartProps) => {
   if (!data) {
     return null;
   }
-
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col gap-4 custom-gap">
       {/* Logos Section */}
       <div className="flex items-center justify-between gap-6">
         <Image
@@ -29,7 +30,7 @@ const RightPart = ({ data }: RightPartProps) => {
           width={100}
           height={100}
           priority
-          className={`me-auto !w-fit object-contain max-h-[50px] ${
+          className={`me-auto !w-fit object-contain max-h-[30px] ${
             data[0]?.displayLogoOne === false ? "hidden" : "block"
           }`}
         />
@@ -45,7 +46,7 @@ const RightPart = ({ data }: RightPartProps) => {
             width={100}
             height={100}
             priority
-            className={`me-auto !w-fit object-contain max-h-[50px] ${
+            className={`me-auto !w-fit object-contain max-h-[30px] ${
               data[0]?.displayLogoSecond === false ? "hidden" : "block"
             }`}
           />
@@ -60,7 +61,7 @@ const RightPart = ({ data }: RightPartProps) => {
             width={100}
             height={100}
             priority
-            className={`me-auto !w-fit object-contain max-h-[50px] ${
+            className={`me-auto !w-fit object-contain max-h-[30px] ${
               data[0]?.displayLogoThird === false ? "hidden" : "block"
             }`}
           />
@@ -68,7 +69,7 @@ const RightPart = ({ data }: RightPartProps) => {
       </div>
 
       {/* Video/Image Section */}
-      <div className="relative w-full h-96 overflow-hidden rounded-xl shadow-lg">
+      <div className="relative w-full h-96 overflow-hidden rounded-xl video-height">
         {data[0]?.videoUrl && data[0]?.displayVideoUrl ? (
           <iframe
             className="w-full h-full"
@@ -77,7 +78,7 @@ const RightPart = ({ data }: RightPartProps) => {
         ) : (
           <div className="relative aspect-video w-full">
             <Image
-              src={data[0]?.imageCover || auctionlive}
+              src={project?.imageCover || auctionlive}
               alt="Content image"
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -94,7 +95,7 @@ const RightPart = ({ data }: RightPartProps) => {
           clipPath:
             "polygon(20px 0, 100% 0, 100% 50%, calc(100% - 20px) 100%, 0 100%, 0 50%)",
         }}
-        className="flex flex-col items-center justify-center col-span-2 h-16 small-text"
+        className="flex flex-col items-center justify-center col-span-2 h-16 small-text custom-notes"
       >
         <span
           style={{

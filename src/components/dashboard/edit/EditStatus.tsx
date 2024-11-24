@@ -49,7 +49,7 @@ const EditStatus = ({ project }: Props) => {
           status: newStatus,
         };
 
-        const res = await axios.patch(
+        await axios.patch(
           `${BASE_URL}${PROJECTS}/${project._id}/status`,
           body,
           {
@@ -58,7 +58,6 @@ const EditStatus = ({ project }: Props) => {
             },
           }
         );
-        console.log(res);
         toast.success("تم تعديل حالة المزاد بنجاح");
         router.refresh();
       } catch (error) {

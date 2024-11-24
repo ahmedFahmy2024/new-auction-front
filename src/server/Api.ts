@@ -5,5 +5,6 @@ const AUCTIONS = "/auctions";
 const PRICES = "/prices";
 const VIDEOS = "/videos";
 const CONTACTS = "/contacts";
+const BANNERS = "/banners";
 
-export { BASE_URL, PROJECTS, AUCTIONS, PRICES, VIDEOS, CONTACTS };
+export { BASE_URL, PROJECTS, AUCTIONS, PRICES, VIDEOS, CONTACTS, BANNERS };

@@ -16,6 +16,12 @@ const nextConfig: NextConfig = {
         port: "8000",
         pathname: "/auctions/**",
       },
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "8000",
+        pathname: "/banners/**",
+      },
       // Production patterns
       {
         protocol: "https",
@@ -26,6 +32,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "new-auction-pc.onrender.com",
         pathname: "/auctions/**",
+      },
+      {
+        protocol: "https",
+        hostname: "new-auction-pc.onrender.com",
+        pathname: "/banners/**",
       },
     ],
   },
