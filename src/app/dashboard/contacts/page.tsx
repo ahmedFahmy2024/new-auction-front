@@ -2,6 +2,9 @@ import ContactTable from "@/components/dashboard/contact/ContactTable";
 import Loading from "@/components/Loading";
 import { Suspense } from "react";
 
+// Mark the route as dynamic
+export const dynamic = "force-dynamic";
+
 const ContactPage = async () => {
   return (
     <main className="min-h-screen p-8 mt-[80px]">
