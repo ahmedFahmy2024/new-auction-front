@@ -11,6 +11,7 @@ async function fetchAuctions(page = 1, limit = 10000000) {
         headers: {
           "Content-Type": "application/json",
         },
+        next: { revalidate: 0 }, // Disable cache
       }
     );
 
@@ -19,10 +20,10 @@ async function fetchAuctions(page = 1, limit = 10000000) {
     }
 
     const auctions = await response.json();
-    return auctions.data;
+    return auctions.data || [];
   } catch (error) {
     console.error("Error fetching auctions:", error);
-    throw error;
+    return [];
   }
 }
 
