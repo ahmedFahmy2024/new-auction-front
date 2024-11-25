@@ -30,6 +30,7 @@ const Bidding = () => {
   const [seekingPercent, setSeekingPercent] = useState("0");
   const [taxPercent, setTaxPercent] = useState("0");
   const [area, setArea] = useState("0");
+  const [error, setError] = useState("");
 
   const form = useForm<priceType>({
     mode: "onChange",
@@ -106,6 +107,11 @@ const Bidding = () => {
   }, [auctionId, openPriceRefresher]);
 
   const onSubmit: SubmitHandler<priceType> = async (data) => {
+    if (!data.soldPrice || !data.paddleNum) {
+      toast.error("الرجاء ادخال جميع الحقول");
+      setError("الرجاء ادخال جميع الحقول");
+      return;
+    }
     // Ensure total is calculated one final time before submission
     const soldPriceNum = parseFloat(data.soldPrice || "0");
     const seekingPercentNum = parseFloat(seekingPercent);
@@ -228,6 +234,12 @@ const Bidding = () => {
               </Button>
             </div>
           </div>
+
+          {error && (
+            <div className="basis-full">
+              <p className="text-red-500 text-xs font-bold">{error}</p>
+            </div>
+          )}
         </form>
       </Form>
     </div>
