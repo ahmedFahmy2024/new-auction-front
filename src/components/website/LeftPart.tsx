@@ -5,9 +5,10 @@ import { formatPrice } from "@/lib/helpers";
 type Props = {
   data: auctionType[];
   prices: priceType[];
+  first: auctionType[];
 };
 
-const LeftPart = ({ data, prices }: Props) => {
+const LeftPart = ({ data, prices, first }: Props) => {
   // Get the latest two paddle numbers before the last one
   const relevantPrices = prices?.slice(1, 3);
 
@@ -15,21 +16,21 @@ const LeftPart = ({ data, prices }: Props) => {
     <div className="grid grid-cols-2 gap-4 custom-gap h-full">
       <DiagonalHeader
         title="رقم المضرب"
-        bgColor={data[0]?.textBgColor1 || "#342D23"}
-        textColor={data[0]?.textColor || "#FFFFFF"}
+        bgColor={first[0]?.textBgColor1 || "#342D23"}
+        textColor={first[0]?.textColor || "#FFFFFF"}
       />
       <DiagonalHeader
         title={prices[0]?.paddleNum || "-"}
-        bgColor={data[0]?.textBgColor2 || "#D8BA8E"}
-        textColor={data[0]?.textColor || "#FFFFFF"}
+        bgColor={first[0]?.textBgColor2 || "#D8BA8E"}
+        textColor={first[0]?.textColor || "#FFFFFF"}
       />
       <div className="col-span-2">
         <DiagonalHeader
           title={
             prices[0]?.soldPrice ? formatPrice(prices[0]?.soldPrice) : "0 SAR"
           }
-          bgColor={data[0]?.textBgColor1 || "#342D23"}
-          textColor={data[0]?.textColor || "#FFFFFF"}
+          bgColor={first[0]?.textBgColor1 || "#342D23"}
+          textColor={first[0]?.textColor || "#FFFFFF"}
         />
       </div>
 
@@ -39,14 +40,14 @@ const LeftPart = ({ data, prices }: Props) => {
           style={{
             clipPath:
               "polygon(20px 0, 100% 0, 100% 50%, calc(100% - 20px) 100%, 0 100%, 0 50%)",
-            backgroundColor: data[0]?.textBgColor3 || "#342D23",
+            backgroundColor: first[0]?.textBgColor3 || "#342D23",
           }}
           className="flex items-center justify-between h-12 col-span-2 small-text lonely-fields"
         >
           <span
             style={{
-              color: data[0]?.notesColor || "#FFFFFF",
-              backgroundColor: data[0]?.textBgColor3 || "#342D23",
+              color: first[0]?.notesColor || "#FFFFFF",
+              backgroundColor: first[0]?.textBgColor3 || "#342D23",
             }}
             className="min-w-[100px] text-center font-medium text-lg"
           >
@@ -54,8 +55,8 @@ const LeftPart = ({ data, prices }: Props) => {
           </span>
           <span
             style={{
-              color: data[0]?.textColor || "#FFFFFF",
-              backgroundColor: data[0]?.textBgColor2 || "#D8BA8E",
+              color: first[0]?.textColor || "#FFFFFF",
+              backgroundColor: first[0]?.textBgColor2 || "#D8BA8E",
             }}
             className="w-full h-full flex items-center justify-center font-bold text-lg"
           >
@@ -66,28 +67,28 @@ const LeftPart = ({ data, prices }: Props) => {
 
       <DiagonalHeader
         title="مسمي العقار"
-        bgColor={data[0]?.textBgColor1 || "#342D23"}
-        textColor={data[0]?.textColor || "#FFFFFF"}
+        bgColor={first[0]?.textBgColor1 || "#342D23"}
+        textColor={first[0]?.textColor || "#FFFFFF"}
       />
       <DiagonalHeader
         title={data[0]?.auctionName || ""}
-        bgColor={data[0]?.textBgColor2 || "#D8BA8E"}
-        textColor={data[0]?.textColor || "#FFFFFF"}
+        bgColor={first[0]?.textBgColor2 || "#D8BA8E"}
+        textColor={first[0]?.textColor || "#FFFFFF"}
       />
 
       {data[0]?.displayOpenPrice && (
         <>
           <DiagonalHeader
             title="سعر الافتتاح"
-            bgColor={data[0]?.textBgColor1 || "#342D23"}
-            textColor={data[0]?.textColor || "#FFFFFF"}
+            bgColor={first[0]?.textBgColor1 || "#342D23"}
+            textColor={first[0]?.textColor || "#FFFFFF"}
           />
           <DiagonalHeader
             title={
               data[0]?.openPrice ? formatPrice(data[0]?.openPrice) : "0 SAR"
             }
-            bgColor={data[0]?.textBgColor2 || "#D8BA8E"}
-            textColor={data[0]?.textColor || "#FFFFFF"}
+            bgColor={first[0]?.textBgColor2 || "#D8BA8E"}
+            textColor={first[0]?.textColor || "#FFFFFF"}
           />
         </>
       )}
@@ -96,15 +97,15 @@ const LeftPart = ({ data, prices }: Props) => {
         <>
           <DiagonalHeader
             title="الحد الأدني للمزايدة"
-            bgColor={data[0]?.textBgColor1 || "#342D23"}
-            textColor={data[0]?.textColor || "#FFFFFF"}
+            bgColor={first[0]?.textBgColor1 || "#342D23"}
+            textColor={first[0]?.textColor || "#FFFFFF"}
           />
           <DiagonalHeader
             title={
               data[0]?.minIncrese ? formatPrice(data[0]?.minIncrese) : "0 SAR"
             }
-            bgColor={data[0]?.textBgColor2 || "#D8BA8E"}
-            textColor={data[0]?.textColor || "#FFFFFF"}
+            bgColor={first[0]?.textBgColor2 || "#D8BA8E"}
+            textColor={first[0]?.textColor || "#FFFFFF"}
           />
         </>
       )}
@@ -113,8 +114,8 @@ const LeftPart = ({ data, prices }: Props) => {
         <>
           <DiagonalHeader
             title="نسبة السعي"
-            bgColor={data[0]?.textBgColor1 || "#342D23"}
-            textColor={data[0]?.textColor || "#FFFFFF"}
+            bgColor={first[0]?.textBgColor1 || "#342D23"}
+            textColor={first[0]?.textColor || "#FFFFFF"}
           />
           <DiagonalHeader
             title={
@@ -122,8 +123,8 @@ const LeftPart = ({ data, prices }: Props) => {
                 ? formatPrice(data[0]?.seekingPercent)
                 : "0 %"
             }
-            bgColor={data[0]?.textBgColor2 || "#D8BA8E"}
-            textColor={data[0]?.textColor || "#FFFFFF"}
+            bgColor={first[0]?.textBgColor2 || "#D8BA8E"}
+            textColor={first[0]?.textColor || "#FFFFFF"}
           />
         </>
       )}
@@ -132,15 +133,15 @@ const LeftPart = ({ data, prices }: Props) => {
         <>
           <DiagonalHeader
             title="الضريبة على السعي"
-            bgColor={data[0]?.textBgColor1 || "#342D23"}
-            textColor={data[0]?.textColor || "#FFFFFF"}
+            bgColor={first[0]?.textBgColor1 || "#342D23"}
+            textColor={first[0]?.textColor || "#FFFFFF"}
           />
           <DiagonalHeader
             title={
               data[0]?.taxPercent ? formatPrice(data[0]?.taxPercent) : "0 %"
             }
-            bgColor={data[0]?.textBgColor2 || "#D8BA8E"}
-            textColor={data[0]?.textColor || "#FFFFFF"}
+            bgColor={first[0]?.textBgColor2 || "#D8BA8E"}
+            textColor={first[0]?.textColor || "#FFFFFF"}
           />
         </>
       )}
@@ -149,15 +150,15 @@ const LeftPart = ({ data, prices }: Props) => {
         <>
           <DiagonalHeader
             title="سعر المتر م²"
-            bgColor={data[0]?.textBgColor1 || "#342D23"}
-            textColor={data[0]?.textColor || "#FFFFFF"}
+            bgColor={first[0]?.textBgColor1 || "#342D23"}
+            textColor={first[0]?.textColor || "#FFFFFF"}
           />
           <DiagonalHeader
             title={
               prices[0]?.areaPrice ? formatPrice(prices[0]?.areaPrice) : "0 SAR"
             }
-            bgColor={data[0]?.textBgColor2 || "#D8BA8E"}
-            textColor={data[0]?.textColor || "#FFFFFF"}
+            bgColor={first[0]?.textBgColor2 || "#D8BA8E"}
+            textColor={first[0]?.textColor || "#FFFFFF"}
           />
         </>
       )}
@@ -166,13 +167,13 @@ const LeftPart = ({ data, prices }: Props) => {
         <>
           <DiagonalHeader
             title="المساحة م²"
-            bgColor={data[0]?.textBgColor1 || "#342D23"}
-            textColor={data[0]?.textColor || "#FFFFFF"}
+            bgColor={first[0]?.textBgColor1 || "#342D23"}
+            textColor={first[0]?.textColor || "#FFFFFF"}
           />
           <DiagonalHeader
             title={data[0]?.area ? `${data[0].area} م²` : "-"}
-            bgColor={data[0]?.textBgColor2 || "#D8BA8E"}
-            textColor={data[0]?.textColor || "#FFFFFF"}
+            bgColor={first[0]?.textBgColor2 || "#D8BA8E"}
+            textColor={first[0]?.textColor || "#FFFFFF"}
           />
         </>
       )}
@@ -187,8 +188,8 @@ const LeftPart = ({ data, prices }: Props) => {
         >
           <span
             style={{
-              color: data[0]?.textColor || "#FFFFFF",
-              backgroundColor: data[0]?.textBgColor2 || "#D8BA8E",
+              color: first[0]?.textColor || "#FFFFFF",
+              backgroundColor: first[0]?.textBgColor2 || "#D8BA8E",
             }}
             className="w-full h-full flex items-center justify-center font-bold text-lg"
           >
@@ -198,8 +199,8 @@ const LeftPart = ({ data, prices }: Props) => {
           {data[0]?.displayNotes1 && (
             <span
               style={{
-                color: data[0]?.notesColor || "#000000",
-                backgroundColor: data[0]?.textBgColor3 || "#ECECEC",
+                color: first[0]?.notesColor || "#000000",
+                backgroundColor: first[0]?.textBgColor3 || "#ECECEC",
               }}
               className="min-w-[100px] text-center font-medium h-full w-full"
             >

@@ -57,6 +57,30 @@ const fetchAuctions = async (id: string) => {
   }
 };
 
+const fetchFirstAuctions = async (id: string) => {
+  try {
+    const response = await fetch(
+      `${BASE_URL}${PROJECTS}/${id}${AUCTIONS}?sort=createdAt&limit=1`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch auction");
+    }
+
+    const firstauction = await response.json();
+    return firstauction.data;
+  } catch (error) {
+    console.error("Error fetching firstauction:", error);
+    throw error;
+  }
+};
+
 const fetchPrices = async (auctionId: string) => {
   try {
     const response = await fetch(
@@ -88,6 +112,7 @@ const AuctionScreen = () => {
   const [prices, setPrices] = useState<priceType[]>([]);
   const { auctionId, changeToggleFields, changeBidderNum } = useAuctionSwitch();
   const [isLoading, setIsLoading] = useState(true);
+  const [firstAuction, setFirstAuction] = useState<auctionType[]>([]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -101,6 +126,9 @@ const AuctionScreen = () => {
         // Fetch auctions
         const auctionData = await fetchAuctions(id as string);
         setAuctions(auctionData);
+
+        const firstone = await fetchFirstAuctions(id as string);
+        setFirstAuction(firstone);
 
         // Only fetch prices if we have auctions
         if (auctionData && auctionData.length > 0) {
@@ -119,7 +147,9 @@ const AuctionScreen = () => {
     }
   }, [id, auctionId, changeToggleFields, changeBidderNum]);
 
-  if (!project) {
+  console.log("firstAuction", firstAuction);
+
+  if (!project || !firstAuction) {
     return (
       <section className="text-center p-4 min-h-screen flex items-center justify-center">
         لا توجد بيانات متاحة
@@ -134,10 +164,10 @@ const AuctionScreen = () => {
   return (
     <main
       style={{
-        backgroundColor: auctions[0]?.bgColor || "#121212",
+        backgroundColor: firstAuction[0]?.bgColor || "#121212",
         backgroundImage:
-          auctions[0]?.displayBgImage && auctions[0]?.bgImage
-            ? `url(${auctions[0]?.bgImage})`
+          firstAuction[0]?.displayBgImage && firstAuction[0]?.bgImage
+            ? `url(${firstAuction[0]?.bgImage})`
             : "none",
       }}
       className="bg-cover bg-center flex items-center rounded-xl editPage py-4"
@@ -147,13 +177,17 @@ const AuctionScreen = () => {
           {/* right part */}
           <Card className="overflow-hidden bg-transparent border-none shadow-none">
             <CardContent className="p-0">
-              <RightPart data={auctions} project={project} />
+              <RightPart
+                data={auctions}
+                project={project}
+                first={firstAuction}
+              />
             </CardContent>
           </Card>
           {/* left part */}
           <Card className="flex items-center justify-center overflow-hidden bg-transparent border-none">
             <CardContent className="w-full p-0">
-              <LeftPart data={auctions} prices={prices} />
+              <LeftPart data={auctions} prices={prices} first={firstAuction} />
             </CardContent>
           </Card>
         </div>

@@ -56,6 +56,30 @@ const fetchAuctions = async (id: string) => {
   }
 };
 
+const fetchFirstAuctions = async (id: string) => {
+  try {
+    const response = await fetch(
+      `${BASE_URL}${PROJECTS}/${id}${AUCTIONS}?sort=createdAt&limit=1`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch auction");
+    }
+
+    const firstauction = await response.json();
+    return firstauction.data;
+  } catch (error) {
+    console.error("Error fetching firstauction:", error);
+    throw error;
+  }
+};
+
 const fetchPrices = async (auctionId: string) => {
   try {
     const response = await fetch(
@@ -86,6 +110,7 @@ const Projector = () => {
   const [auctions, setAuctions] = useState<auctionType[]>([]);
   const [prices, setPrices] = useState<priceType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [firstAuction, setFirstAuction] = useState<auctionType[]>([]);
 
   // Ref to store the interval ID
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -102,6 +127,9 @@ const Projector = () => {
       // Fetch auctions
       const auctionData = await fetchAuctions(id as string);
       setAuctions(auctionData);
+
+      const firstone = await fetchFirstAuctions(id as string);
+      setFirstAuction(firstone);
 
       // Only fetch prices if we have auctions
       if (auctionData && auctionData.length > 0) {
@@ -148,10 +176,10 @@ const Projector = () => {
     <main
       style={{
         minHeight: "100vh",
-        backgroundColor: auctions[0]?.bgColor || "#121212",
+        backgroundColor: firstAuction[0]?.bgColor || "#121212",
         backgroundImage:
-          auctions[0]?.displayBgImage && auctions[0]?.bgImage
-            ? `url(${auctions[0]?.bgImage})`
+          firstAuction[0]?.displayBgImage && firstAuction[0]?.bgImage
+            ? `url(${firstAuction[0]?.bgImage})`
             : "none",
       }}
       className="bg-cover bg-center flex items-center py-6 no-header"
@@ -161,13 +189,17 @@ const Projector = () => {
           {/* right part */}
           <Card className="overflow-hidden bg-transparent border-none">
             <CardContent className="p-6 h-full">
-              <RightPart data={auctions} project={project} />
+              <RightPart
+                data={auctions}
+                project={project}
+                first={firstAuction}
+              />
             </CardContent>
           </Card>
           {/* left part */}
           <Card className="flex items-center justify-center overflow-hidden bg-transparent border-none">
             <CardContent className="w-full p-6 h-full">
-              <LeftPart data={auctions} prices={prices} />
+              <LeftPart data={auctions} prices={prices} first={firstAuction} />
             </CardContent>
           </Card>
         </div>
