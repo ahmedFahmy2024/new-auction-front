@@ -38,6 +38,21 @@ const nextConfig: NextConfig = {
         hostname: "new-auction-pc.onrender.com",
         pathname: "/banners/**",
       },
+      {
+        protocol: "https",
+        hostname: "konouz.site-pocket.com",
+        pathname: "/projects/**",
+      },
+      {
+        protocol: "https",
+        hostname: "konouz.site-pocket.com",
+        pathname: "/auctions/**",
+      },
+      {
+        protocol: "https",
+        hostname: "konouz.site-pocket.com",
+        pathname: "/banners/**",
+      },
     ],
   },
 };
