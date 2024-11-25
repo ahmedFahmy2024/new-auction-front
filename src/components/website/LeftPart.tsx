@@ -12,7 +12,7 @@ const LeftPart = ({ data, prices }: Props) => {
   const relevantPrices = prices?.slice(1, 3);
 
   return (
-    <div className="grid grid-cols-2 gap-4 custom-gap">
+    <div className="grid grid-cols-2 gap-4 custom-gap h-full">
       <DiagonalHeader
         title="رقم المضرب"
         bgColor={data[0]?.textBgColor1 || "#342D23"}
@@ -101,7 +101,7 @@ const LeftPart = ({ data, prices }: Props) => {
           />
           <DiagonalHeader
             title={
-              prices[0]?.increase ? formatPrice(prices[0]?.increase) : "0 SAR"
+              data[0]?.minIncrese ? formatPrice(data[0]?.minIncrese) : "0 SAR"
             }
             bgColor={data[0]?.textBgColor2 || "#D8BA8E"}
             textColor={data[0]?.textColor || "#FFFFFF"}
@@ -177,7 +177,7 @@ const LeftPart = ({ data, prices }: Props) => {
         </>
       )}
 
-      <div className="col-span-2">
+      <div className="col-span-2 mt-auto">
         <div
           style={{
             clipPath:

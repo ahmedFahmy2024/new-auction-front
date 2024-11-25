@@ -6,7 +6,7 @@ const OurVision = () => {
       style={{ backgroundImage: `url(${image2.src})` }}
       className="bg-[#F7F3EB] bg-contain bg-left bg-no-repeat"
     >
-      <div className="container mx-auto py-16 px-4 md:px-0">
+      <div className="container mx-auto py-20 px-4 md:px-0">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="flex flex-col gap-2  items-center md:items-start">
             <h2 className="font-bold text-2xl">رؤيتنـــــا</h2>
@@ -26,7 +26,7 @@ const OurVision = () => {
         </div>
       </div>
 
-      <div className="bg-[#D8BA8E] py-5">
+      <div className="bg-[#D8BA8E] py-10">
         <div className="container mx-auto py-10 px-4 md:px-0">
           <div className="flex flex-col md:flex-row justify-center md:justify-start items-center md:items-start gap-4 md:col-span-2">
             <h2 className="font-bold text-2xl">قيمنا</h2>

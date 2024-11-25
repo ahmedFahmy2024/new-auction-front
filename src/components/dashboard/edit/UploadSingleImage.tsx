@@ -7,12 +7,14 @@ import Image from "next/image";
 interface UploadImageProps {
   value?: string;
   onChange: (value: string) => void;
+  // onRemove: () => void;
   name: string;
 }
 
 export default function UploadSingleImage({
   value = "",
   onChange,
+  // onRemove,
   name,
 }: UploadImageProps) {
   const [preview, setPreview] = useState<string | null>(null);
@@ -55,6 +57,7 @@ export default function UploadSingleImage({
     if (inputRef.current) {
       inputRef.current.value = "";
     }
+    // onRemove();
   };
 
   return (
@@ -80,7 +83,7 @@ export default function UploadSingleImage({
       ) : (
         <button
           onClick={handleBoxClick}
-          className="flex items-center justify-center"
+          className="flex items-center justify-center not-allowed-icon"
         >
           <ImagePlus
             className="w-6 h-6 mr-2"

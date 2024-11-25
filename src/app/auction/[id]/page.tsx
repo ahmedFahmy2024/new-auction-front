@@ -160,13 +160,13 @@ const Projector = () => {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {/* right part */}
           <Card className="overflow-hidden bg-transparent border-none">
-            <CardContent className="p-6">
+            <CardContent className="p-6 h-full">
               <RightPart data={auctions} project={project} />
             </CardContent>
           </Card>
           {/* left part */}
           <Card className="flex items-center justify-center overflow-hidden bg-transparent border-none">
-            <CardContent className="w-full p-6">
+            <CardContent className="w-full p-6 h-full">
               <LeftPart data={auctions} prices={prices} />
             </CardContent>
           </Card>

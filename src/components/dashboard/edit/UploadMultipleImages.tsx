@@ -7,12 +7,14 @@ import Image from "next/image";
 interface UploadMultipleImagesProps {
   value?: string[];
   onChange: (value: string[]) => void;
+  // onRemove: (removedImage: string) => void;
   name: string;
 }
 
 export function UploadMultipleImages({
   value = [],
   onChange,
+  // onRemove,
   name,
 }: UploadMultipleImagesProps) {
   const [previews, setPreviews] = useState<string[]>([]);
@@ -66,6 +68,10 @@ export function UploadMultipleImages({
     (index: number) => (event: React.MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
       event.stopPropagation();
+
+      const removedImage = previews[index];
+      // onRemove(removedImage);
+
       setPreviews((prev) => {
         const newPreviews = prev.filter((_, i) => i !== index);
         if (JSON.stringify(newPreviews) !== JSON.stringify(prev)) {

@@ -41,6 +41,7 @@ export default async function AuctionEditForm({ id, project }: Props) {
         <div className="flex items-center gap-2">
           <Link
             href={`/auction/${id}`}
+            target="_blank"
             className="bg-[#D8BA8E] rounded-full min-w-[200px] px-4 py-1 flex items-center justify-center text-[#342D23] font-extrabold text-base"
           >
             عرض شاشة المزاد

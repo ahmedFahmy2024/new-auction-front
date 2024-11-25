@@ -249,3 +249,6 @@ html:has(.nobg-color) .bg-color-custom {
 html:has(.bigger-padding) .bg-color-custom {
   padding: 100px 16px !important;
 }
+html:has(.parent-not-allowed) .not-allowed .not-allowed-icon {
+  cursor: not-allowed !important;
+}

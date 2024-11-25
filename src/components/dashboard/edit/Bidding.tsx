@@ -38,6 +38,7 @@ const Bidding = () => {
   const [isFirstBid, setIsFirstBid] = useState(true);
   const [seekingPercent, setSeekingPercent] = useState("0");
   const [taxPercent, setTaxPercent] = useState("0");
+  const [error, setError] = useState("");
 
   const form = useForm<priceType>({
     mode: "onChange",
@@ -125,6 +126,7 @@ const Bidding = () => {
 
         if (pricesResponse.data.data && pricesResponse.data.data.length > 0) {
           const latestPrice = pricesResponse.data.data[0];
+          form.setValue("increase", latestPrice?.increase);
           setIsFirstBid(false);
           setPreviousSoldPrice(latestPrice.soldPrice);
           form.setValue("soldPrice", latestPrice.soldPrice);
@@ -145,6 +147,12 @@ const Bidding = () => {
   }, [auctionId, form, openPriceRefresher, deleteRefresh, changeBidderNum]);
 
   const onSubmit: SubmitHandler<priceType> = async (data) => {
+    if (!data.increase || !data.soldPrice || !data.paddleNum) {
+      toast.error("الرجاء ادخال جميع الحقول");
+      setError("الرجاء ادخال جميع الحقول");
+      return;
+    }
+
     const soldPrice = parseFloat(data.soldPrice || "0");
     const areaValue = parseFloat(area || "0");
     const areaPrice =
@@ -179,7 +187,7 @@ const Bidding = () => {
         soldPrice: data.soldPrice,
         total: data.total,
       });
-
+      setError("");
       router.refresh();
     } catch (error) {
       console.error("Error adding price:", error);
@@ -289,7 +297,9 @@ const Bidding = () => {
                 )}
               />
             </div>
-
+            {error && (
+              <p className="text-red-500 md:col-span-2 text-center">{error}</p>
+            )}
             <div className="col-span-2 md:col-span-2 h-[32px]">
               <Button
                 disabled={form.formState.isSubmitting}

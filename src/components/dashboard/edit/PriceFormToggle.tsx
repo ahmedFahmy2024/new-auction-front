@@ -38,7 +38,6 @@ const PriceFormToggle = ({ projectId }: Props) => {
   const [specificAuction, setSpecificAuction] = useState<auctionType | null>(
     null
   );
-  const [increasePrice, setIncreasePrice] = useState(null);
   const [soldPrice, setSoldPrice] = useState(null);
   const [meterValue, setMeterValue] = useState<string | null>(null);
   const [displayprices, setDisplayprices] = useState({
@@ -102,6 +101,7 @@ const PriceFormToggle = ({ projectId }: Props) => {
 
           form.reset({
             openPrice: response.data.data.openPrice || "",
+            minIncrese: response.data.data.minIncrese || "",
             seekingPercent: response.data.data.seekingPercent || "",
             taxPercent: response.data.data.taxPercent || "",
             areaPrice: response.data.data.areaPrice || "",
@@ -134,7 +134,6 @@ const PriceFormToggle = ({ projectId }: Props) => {
             }
           );
           if (response.data.data.length > 0) {
-            setIncreasePrice(response.data.data[0].increase);
             setSoldPrice(response.data.data[0].soldPrice);
           }
         } catch (error) {
@@ -184,6 +183,10 @@ const PriceFormToggle = ({ projectId }: Props) => {
 
     if (data.notes2 && data.notes2 !== specificAuction?.notes2) {
       formData.append("notes2", data.notes2);
+    }
+
+    if (data.minIncrese && data.minIncrese !== specificAuction?.minIncrese) {
+      formData.append("minIncrese", data.minIncrese);
     }
 
     try {
@@ -250,12 +253,12 @@ const PriceFormToggle = ({ projectId }: Props) => {
       ) : (
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-2">
               <div className="col-span-2 md:col-span-1 h-[32px]">
                 <div className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border h-full">
                   <label
                     htmlFor="area-price"
-                    className="min-w-[130px] text-center font-extrabold text-[#342D23] flex items-center justify-center gap-1 px-1"
+                    className="min-w-[130px] text-center font-extrabold text-[#342D23] flex items-center justify-center gap-1 px-1 text-sm"
                     onClick={() => handleToggleDisplay("displayAreaPrice")}
                   >
                     سعر المتر
@@ -336,7 +339,7 @@ const PriceFormToggle = ({ projectId }: Props) => {
               <div className="col-span-2 md:col-span-1 h-[32px]">
                 <FormField
                   control={form.control}
-                  name="increase"
+                  name="minIncrese"
                   render={({ field }) => (
                     <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border h-full">
                       <FormLabel
@@ -352,9 +355,7 @@ const PriceFormToggle = ({ projectId }: Props) => {
                       </FormLabel>
                       <FormControl>
                         <Input
-                          disabled
                           {...field}
-                          value={increasePrice || ""}
                           className="!mt-0 border-none rounded-none disabled:cursor-not-allowed disabled:opacity-20"
                         />
                       </FormControl>
@@ -494,6 +495,22 @@ const PriceFormToggle = ({ projectId }: Props) => {
                 ) : null}
                 تحديث
               </Button>
+            </div>
+
+            <div className="border border-[#D8BA8E] border-dashed rounded-lg py-1 px-2">
+              <span className="bg-red-500 rounded-full w-2 h-2" />
+              <span className="font-extrabold text-xs text-red-500">
+                ملاحظة :
+              </span>
+              <ul className="list-disc list-inside px-4">
+                <li className="text-[#d8ba8e] text-xs font-normal">
+                  اظهار او اخفاء الخانة لا يؤثر على احتسابها الا في حال عم وجود
+                  قيمه
+                </li>
+                <li className="text-[#d8ba8e] text-xs font-normal">
+                  سعر المتر يتم احتسابه من خلال قسمة اعلى مزايدة على المساحة
+                </li>
+              </ul>
             </div>
           </form>
         </Form>

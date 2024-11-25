@@ -87,6 +87,7 @@ const ProjectEdit = ({ project }: Props) => {
       const coverImageBlob = await coverImageResponse.blob();
       formData.append("imageCover", coverImageBlob);
     }
+
     if (data.images && data.images.length > 0) {
       await Promise.all(
         data.images.map(async (imageUrl) => {

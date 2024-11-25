@@ -5,13 +5,6 @@ import { Download, Radio } from "lucide-react";
 import { Project } from "@/lib/types";
 import { format, differenceInDays } from "date-fns";
 import ProjectSlider from "./ProjectSlider";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import Link from "next/link";
 
 type Props = {
@@ -22,9 +15,6 @@ const BeforeAuctionStart = ({ data }: Props) => {
   const [formattedDate, setFormattedDate] = useState("");
   const [formattedStartTime, setFormattedStartTime] = useState("");
   const [remainingTime, setRemainingTime] = useState("");
-
-  // Parse latitude and longitude from the location string
-  // const [lat, lng] = data.location.split(",").map(Number);
 
   useEffect(() => {
     // Format date on the client side
@@ -73,7 +63,7 @@ const BeforeAuctionStart = ({ data }: Props) => {
 
         // Set the download attributes
         link.href = url;
-        link.download = `${data.title}.pdf`; // Explicitly add .pdf extension
+        link.download = `${data.title}`; // Explicitly add .pdf extension
 
         // Append to body, click, and remove
         document.body.appendChild(link);
@@ -126,13 +116,15 @@ const BeforeAuctionStart = ({ data }: Props) => {
                   </span>
                 </div>
 
-                <Link
-                  className="text-[#342D23] font-semibold text-xl hover:underline flex items-center gap-2 "
-                  href={data.location}
-                  target="_blank"
-                >
-                  رابط لوكيشن المزاد :
-                </Link>
+                {data.location && (
+                  <Link
+                    className="text-[#342D23] font-semibold text-xl hover:underline flex items-center gap-2 "
+                    href={data?.location}
+                    target="_blank"
+                  >
+                    رابط لوكيشن المزاد
+                  </Link>
+                )}
               </div>
             </div>
 

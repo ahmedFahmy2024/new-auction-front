@@ -17,7 +17,7 @@ const RightPart = ({ data, project }: RightPartProps) => {
     return null;
   }
   return (
-    <div className="flex flex-col gap-4 custom-gap">
+    <div className="flex flex-col gap-4 custom-gap h-full">
       {/* Logos Section */}
       <div className="flex items-center justify-between gap-6">
         <Image
@@ -95,7 +95,7 @@ const RightPart = ({ data, project }: RightPartProps) => {
           clipPath:
             "polygon(20px 0, 100% 0, 100% 50%, calc(100% - 20px) 100%, 0 100%, 0 50%)",
         }}
-        className="flex flex-col items-center justify-center col-span-2 h-16 small-text custom-notes"
+        className="flex flex-col items-center justify-center col-span-2 h-16 small-text custom-notes mt-auto"
       >
         <span
           style={{

@@ -70,9 +70,9 @@ const OurWork = () => {
     setActiveContent(servicesData[key].content);
   };
 
-  const handleMouseLeave = () => {
-    setActiveContent(null);
-  };
+  // const handleMouseLeave = () => {
+  //   setActiveContent(null);
+  // };
 
   return (
     <section
@@ -87,7 +87,7 @@ const OurWork = () => {
               href={`${service.path}`}
               key={key}
               onMouseEnter={() => handleMouseEnter(key as ServiceKey)}
-              onMouseLeave={handleMouseLeave}
+              // onMouseLeave={handleMouseLeave}
               style={{
                 backgroundImage: `linear-gradient(rgba(244, 234, 213, 0.8), rgba(244, 234, 213, 0.8)), url(${service.bg.src})`,
               }}

@@ -161,9 +161,14 @@ const Bidding = () => {
   return (
     <div className="mt-10">
       <hr className="mb-2 border-black" />
-      <h2 className="text-3xl font-extrabold text-[#342D23] mb-4">
-        مزايدة فورية بالإجمالى
-      </h2>
+      <div className="flex items-center gap-x-1">
+        <h2 className="text-3xl font-extrabold text-[#342D23] mb-4">
+          مزايدة فورية بالإجمالى
+        </h2>
+        <span className="font-extrabold text-[#FF0004] text-xs">
+          (تقوم هذه العمليه باضافة اخر مزايدة وتقوم باعاده ترتيب المزاد)
+        </span>
+      </div>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">

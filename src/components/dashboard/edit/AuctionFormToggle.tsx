@@ -16,13 +16,13 @@ import toast from "react-hot-toast";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { auctionSchema, auctionType, projectType } from "@/lib/schema";
-import { BASE_URL, AUCTIONS } from "@/server/Api";
+import { BASE_URL, AUCTIONS, PROJECTS } from "@/server/Api";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import ColorPicker from "./ColorPicker";
 import UploadSingleImage from "./UploadSingleImage";
 import { UploadMultipleImages } from "./UploadMultipleImages";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useAuctionSwitch } from "@/context/AuctionSwitchContext";
 import { Switch } from "@/components/ui/switch";
 
@@ -53,7 +53,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
           `${BASE_URL}${AUCTIONS}?project=${projectId}&isRunning=true`
         );
         const fetchedAuctions = response.data.data;
-
+        console.log(fetchedAuctions);
         // If there are auctions and no auction is currently selected
         if (fetchedAuctions.length > 0 && !auctionId) {
           const firstAuctionId = fetchedAuctions[0]._id;
@@ -82,6 +82,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
             }
           );
           const data = response.data.data;
+          console.log("data", data);
           setSpecificAuction(response.data.data);
           setDisplaylogos({
             displayLogoOne: data.displayLogoOne,
@@ -117,6 +118,56 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
 
     fetchAuction();
   }, [auctionId]);
+
+  // useEffect(() => {
+  //   const fetchFirstAuction = async () => {
+
+  //       setLoading(true);
+  //       try {
+  //         const response = await axios.get(
+  //           `${BASE_URL}${PROJECTS}/${auctionId}`,
+  //           {
+  //             headers: {
+  //               "Content-Type": "application/json",
+  //             },
+  //           }
+  //         );
+  //         const data = response.data.data;
+  //         console.log("data", data);
+  //         setSpecificAuction(response.data.data);
+  //         setDisplaylogos({
+  //           displayLogoOne: data.displayLogoOne,
+  //           displayLogoSecond: data.displayLogoSecond,
+  //           displayLogoThird: data.displayLogoThird,
+  //           displayBgImage: data.displayBgImage,
+  //         });
+
+  //         form.reset({
+  //           auctionName: response.data.data.auctionName || "",
+  //           logoOne: response.data.data.logoOne || "",
+  //           logoSecond: response.data.data.logoSecond || "",
+  //           logoThird: response.data.data.logoThird || "",
+  //           imageCover: project.imageCover || "",
+  //           images: project.images || [],
+  //           videoUrl: response.data.data.videoUrl || "",
+  //           bgColor: response.data.data.bgColor || "",
+  //           textColor: response.data.data.textColor || "",
+  //           notesColor: response.data.data.notesColor || "",
+  //           textBgColor1: response.data.data.textBgColor1 || "",
+  //           textBgColor2: response.data.data.textBgColor2 || "",
+  //           textBgColor3: response.data.data.textBgColor3 || "",
+  //           displayVideoUrl: response.data.data.displayVideoUrl || "",
+  //           bgImage: response.data.data.bgImage || "",
+  //         });
+  //       } catch (error) {
+  //         console.error("Error fetching auction:", error);
+  //       } finally {
+  //         setLoading(false);
+  //       }
+  //     }
+
+  //     fetchFirstAuction();
+  // }, [auctionId]);
 
   const form = useForm<auctionType>({
     mode: "onChange",
@@ -402,13 +453,13 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-2 parent-not-allowed">
               <div className="col-span-2 md:col-span-1 h-[32px] hide-remove">
                 <FormField
                   control={form.control}
                   name="imageCover"
                   render={({ field }) => (
-                    <FormItem className="flex items-center overflow-hidden bg-[#342D23] border-[#D8BA8E] rounded-lg border h-full cursor-not-allowed">
+                    <FormItem className="flex items-center overflow-hidden bg-[#342D23] border-[#D8BA8E] rounded-lg border h-full cursor-not-allowed not-allowed">
                       <FormLabel className="w-[100px] text-center font-extrabold text-[#342D23] bg-[#D8BA8E] h-full flex items-center justify-center px-1">
                         صورة الغلاف
                       </FormLabel>
@@ -425,7 +476,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
                 />
               </div>
 
-              <div className="col-span-2 md:col-span-1 h-[32px] hide-remove">
+              <div className="col-span-2 md:col-span-1 h-[32px] hide-remove parent-not-allowed">
                 <FormField
                   control={form.control}
                   name="images"
