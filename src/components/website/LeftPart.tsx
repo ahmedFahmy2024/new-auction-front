@@ -60,7 +60,7 @@ const LeftPart = ({ data, prices, first }: Props) => {
             }}
             className="w-full h-full flex items-center justify-center font-bold text-lg"
           >
-            {price.total ? formatPrice(price.total) : "0 SAR"}
+            {price.soldPrice ? formatPrice(price.soldPrice) : "0 SAR"}
           </span>
         </div>
       ))}
