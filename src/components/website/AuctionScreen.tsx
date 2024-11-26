@@ -11,6 +11,7 @@ import BeforeAuctionStart from "@/components/website/BeforeAuctionStart";
 import { Project } from "@/lib/types";
 import { auctionType, priceType } from "@/lib/schema";
 import { useAuctionSwitch } from "@/context/AuctionSwitchContext";
+import AuctionSkeleton from "../dashboard/edit/AuctionSkeleton";
 
 const fetchProjects = async (id: string) => {
   try {
@@ -160,6 +161,10 @@ const AuctionScreen = () => {
   // if (project.status === "upcoming") {
   //   return <BeforeAuctionStart data={project} />;
   // }
+
+  if (isLoading) {
+    return <AuctionSkeleton />;
+  }
 
   return (
     <main

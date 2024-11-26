@@ -66,7 +66,7 @@ const LeftPart = ({ data, prices, first }: Props) => {
       ))}
 
       <DiagonalHeader
-        title="مسمي العقار"
+        title="البند"
         bgColor={first[0]?.textBgColor1 || "#342D23"}
         textColor={first[0]?.textColor || "#FFFFFF"}
       />
@@ -119,9 +119,7 @@ const LeftPart = ({ data, prices, first }: Props) => {
           />
           <DiagonalHeader
             title={
-              data[0]?.seekingPercent
-                ? formatPrice(data[0]?.seekingPercent)
-                : "0 %"
+              data[0]?.seekingPercent ? data[0]?.seekingPercent + "%" : "0 %"
             }
             bgColor={first[0]?.textBgColor2 || "#D8BA8E"}
             textColor={first[0]?.textColor || "#FFFFFF"}
@@ -137,9 +135,7 @@ const LeftPart = ({ data, prices, first }: Props) => {
             textColor={first[0]?.textColor || "#FFFFFF"}
           />
           <DiagonalHeader
-            title={
-              data[0]?.taxPercent ? formatPrice(data[0]?.taxPercent) : "0 %"
-            }
+            title={data[0]?.taxPercent ? data[0]?.taxPercent + "%" : "0 %"}
             bgColor={first[0]?.textBgColor2 || "#D8BA8E"}
             textColor={first[0]?.textColor || "#FFFFFF"}
           />

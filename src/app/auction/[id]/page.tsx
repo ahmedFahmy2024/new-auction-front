@@ -10,6 +10,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import BeforeAuctionStart from "@/components/website/BeforeAuctionStart";
 import { Project } from "@/lib/types";
 import { auctionType, priceType } from "@/lib/schema";
+import AuctionSkeleton from "@/components/dashboard/edit/AuctionSkeleton";
 
 const fetchProjects = async (id: string) => {
   try {
@@ -176,7 +177,7 @@ const Projector = () => {
     <main
       style={{
         minHeight: "100vh",
-        backgroundColor: firstAuction[0]?.bgColor || "#121212",
+        backgroundColor: firstAuction[0]?.bgColor || "#ffffff",
         backgroundImage:
           firstAuction[0]?.displayBgImage && firstAuction[0]?.bgImage
             ? `url(${firstAuction[0]?.bgImage})`

@@ -2,6 +2,7 @@
 import AuctionEditForm from "@/components/dashboard/edit/AuctionEditForm";
 import Loading from "@/components/Loading";
 import { BASE_URL, PROJECTS } from "@/server/Api";
+import { Metadata } from "next";
 // import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
@@ -21,6 +22,10 @@ async function fetchProject(id: string) {
   const project = await response.json();
   return project.data;
 }
+
+export const metadata: Metadata = {
+  title: "لوحة التحكم",
+};
 
 type Params = Promise<{ id: string }>;
 

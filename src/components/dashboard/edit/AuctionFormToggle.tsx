@@ -345,7 +345,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
                 control={form.control}
                 name="auctionName"
                 render={({ field }) => (
-                  <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border h-8">
+                  <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border h-8 hidden">
                     <FormLabel className="min-w-[100px] text-center font-extrabold text-[#342D23]">
                       اسم المزاد
                     </FormLabel>

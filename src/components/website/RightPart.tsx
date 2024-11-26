@@ -18,7 +18,6 @@ const RightPart = ({ data, project, first }: RightPartProps) => {
     return null;
   }
 
-  console.log("ahmed", first);
   return (
     <div className="flex flex-col gap-4 custom-gap h-full">
       {/* Logos Section */}
@@ -81,7 +80,7 @@ const RightPart = ({ data, project, first }: RightPartProps) => {
         ) : (
           <div className="relative aspect-video w-full">
             <Image
-              src={project?.imageCover || auctionlive}
+              src={project?.imageCover}
               alt="Content image"
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -107,7 +106,7 @@ const RightPart = ({ data, project, first }: RightPartProps) => {
           }}
           className="w-full h-full flex items-center justify-center font-bold text-lg"
         >
-          {data[0]?.auctionName}
+          {project?.title}
         </span>
 
         {first[0]?.displayNotes2 && (

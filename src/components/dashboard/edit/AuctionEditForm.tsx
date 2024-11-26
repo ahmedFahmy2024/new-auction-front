@@ -35,9 +35,9 @@ export default async function AuctionEditForm({ id, project }: Props) {
   const auctions = await fetchAuctionsProject(id);
 
   return (
-    <div className="mt-28 mb-10">
+    <div className="mt-28 mb-10 no-header">
       <div className="flex items-center gap-4 md:gap-10 lg:w-1/2 justify-between flex-col md:flex-row">
-        <h2 className="text-lg font-extrabold text-[#342D23]">شاشة العرض</h2>
+        <h2 className="text-lg font-extrabold text-[#342D23]">لوحة التحكم</h2>
         <div className="flex items-center gap-2">
           <Link
             href={`/auction/${id}`}
