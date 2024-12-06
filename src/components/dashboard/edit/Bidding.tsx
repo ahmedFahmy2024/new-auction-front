@@ -205,9 +205,7 @@ const Bidding = () => {
 
   return (
     <div>
-      <h2 className="text-3xl font-extrabold text-[#342D23] mb-4">
-        المزايادات
-      </h2>
+      <h2 className="text-3xl font-extrabold text-[#342D23] mb-4">المزايدات</h2>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
