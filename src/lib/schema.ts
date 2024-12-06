@@ -25,6 +25,7 @@ export const projectSchema = z.object({
   }),
   status: z.enum(["upcoming", "ongoing", "completed"]).optional(),
   isPublished: z.boolean().optional(),
+  playButton: z.boolean().optional(),
 });
 
 export type projectType = z.infer<typeof projectSchema>;
@@ -84,6 +85,7 @@ export const auctionSchema = z.object({
   bgImage: z.string().optional(),
   displayBgImage: z.string().optional(),
   minIncrese: z.string().optional(),
+  itemImg: z.string().optional(),
 });
 
 export type auctionType = z.infer<typeof auctionSchema>;

@@ -265,7 +265,7 @@ const PriceFormToggle = ({ projectId }: Props) => {
                     {displayprices.displayAreaPrice ? (
                       <Eye className="h-5 w-5 cursor-pointer" />
                     ) : (
-                      <EyeOff className="h-5 w-5 cursor-pointer" />
+                      <EyeOff className="h-5 w-5 cursor-pointer text-red-500" />
                     )}
                   </label>
                   <input
@@ -292,7 +292,7 @@ const PriceFormToggle = ({ projectId }: Props) => {
                         {displayprices.displayArea ? (
                           <Eye className="h-5 w-5 cursor-pointer" />
                         ) : (
-                          <EyeOff className="h-5 w-5 cursor-pointer" />
+                          <EyeOff className="h-5 w-5 cursor-pointer text-red-500" />
                         )}
                       </FormLabel>
                       <FormControl>
@@ -321,7 +321,7 @@ const PriceFormToggle = ({ projectId }: Props) => {
                         {displayprices.displayOpenPrice ? (
                           <Eye className="h-5 w-5 cursor-pointer" />
                         ) : (
-                          <EyeOff className="h-5 w-5 cursor-pointer" />
+                          <EyeOff className="h-5 w-5 cursor-pointer text-red-500" />
                         )}
                       </FormLabel>
                       <FormControl>
@@ -350,7 +350,7 @@ const PriceFormToggle = ({ projectId }: Props) => {
                         {displayprices.displayIncrease ? (
                           <Eye className="h-5 w-5 cursor-pointer" />
                         ) : (
-                          <EyeOff className="h-5 w-5 cursor-pointer" />
+                          <EyeOff className="h-5 w-5 cursor-pointer text-red-500" />
                         )}
                       </FormLabel>
                       <FormControl>
@@ -381,7 +381,7 @@ const PriceFormToggle = ({ projectId }: Props) => {
                         {displayprices.displaySeekingPercent ? (
                           <Eye className="h-5 w-5 cursor-pointer" />
                         ) : (
-                          <EyeOff className="h-5 w-5 cursor-pointer" />
+                          <EyeOff className="h-5 w-5 cursor-pointer text-red-500" />
                         )}
                       </FormLabel>
                       <FormControl>
@@ -410,7 +410,7 @@ const PriceFormToggle = ({ projectId }: Props) => {
                         {displayprices.displayTaxPercent ? (
                           <Eye className="h-5 w-5 cursor-pointer" />
                         ) : (
-                          <EyeOff className="h-5 w-5 cursor-pointer" />
+                          <EyeOff className="h-5 w-5 cursor-pointer text-red-500" />
                         )}
                       </FormLabel>
                       <FormControl>
@@ -440,7 +440,7 @@ const PriceFormToggle = ({ projectId }: Props) => {
                       {displayprices.displayNotes1 ? (
                         <Eye className="h-5 w-5 cursor-pointer" />
                       ) : (
-                        <EyeOff className="h-5 w-5 cursor-pointer" />
+                        <EyeOff className="h-5 w-5 cursor-pointer text-red-500" />
                       )}
                     </FormLabel>
                     <FormControl>

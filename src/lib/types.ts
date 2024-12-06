@@ -67,4 +67,5 @@ export type Project = {
   isPublished: boolean;
   createdAt: string;
   location: string;
+  playButton: boolean;
 };

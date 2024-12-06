@@ -145,7 +145,7 @@ const Bidding = () => {
 
       form.reset({
         paddleNum: "",
-        soldPrice: "",
+        soldPrice: data.soldPrice,
         total: "0.00",
       });
 

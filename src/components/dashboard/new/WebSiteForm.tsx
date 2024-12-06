@@ -86,6 +86,7 @@ const WebSiteForm = () => {
       const coverImageBlob = await coverImageResponse.blob();
       formData.append("imageCover", coverImageBlob);
     }
+
     if (data.images && data.images.length > 0) {
       await Promise.all(
         data.images.map(async (imageUrl) => {
@@ -225,7 +226,7 @@ const WebSiteForm = () => {
                     <FormControl>
                       <Input
                         {...field}
-                        placeholder="latitude,longitude example: 30.0444,31.2357"
+                        placeholder="https://maps.app.goo.gl/vRzpzSBsHj2pJb9g7"
                         className="!mt-0 border-none rounded-none"
                       />
                     </FormControl>

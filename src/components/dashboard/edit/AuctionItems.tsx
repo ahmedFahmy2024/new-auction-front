@@ -20,9 +20,12 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { auctionType } from "@/lib/schema";
 import { useAuctionSwitch } from "@/context/AuctionSwitchContext";
+import UploadSingleImage from "./UploadSingleImage";
+import EditAuctionItem from "./EditAuctionItem";
 
 const FormSchema = z.object({
   auctionName: z.string().optional(),
+  itemImg: z.string().optional(),
 });
 
 type formType = z.infer<typeof FormSchema>;
@@ -48,18 +51,26 @@ const AuctionItems = ({ id, auctions }: Props) => {
   });
 
   async function onSubmit(data: formType) {
-    const body = {
-      project: id,
-      auctionName: data.auctionName,
-    };
-
     try {
-      await axios.post(`${BASE_URL}${AUCTIONS}`, body, {
+      const formData = new FormData();
+
+      if (id) {
+        formData.append("project", id);
+      }
+
+      if (data.auctionName) formData.append("auctionName", data.auctionName);
+
+      if (data.itemImg) {
+        const itemImageResponse = await fetch(data.itemImg);
+        const itemImageBlob = await itemImageResponse.blob();
+        formData.append("itemImg", itemImageBlob);
+      }
+
+      const response = await axios.post(`${BASE_URL}${AUCTIONS}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-
       toast.success("تم إضافة المزاد بنجاح");
       form.reset();
       handleAdding();
@@ -121,9 +132,7 @@ const AuctionItems = ({ id, auctions }: Props) => {
                   {index + 1}
                 </span>
 
-                <div className="bg-[#D8BA8E] min-h-[32px] rounded-sm p-1 text-white font-bold text-sm flex items-center justify-center flex-1 line-clamp-1">
-                  {auction.auctionName}
-                </div>
+                <EditAuctionItem auction={auction} />
 
                 <button
                   onClick={() =>
@@ -174,19 +183,35 @@ const AuctionItems = ({ id, auctions }: Props) => {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="flex items-center justify-between flex-1 gap-4 w-full"
+              className="space-y-2 w-full"
             >
               <FormField
                 control={form.control}
                 name="auctionName"
                 render={({ field }) => (
-                  <FormItem className="flex-1">
+                  <FormItem>
                     <FormControl>
                       <Input
                         autoFocus
                         placeholder="اسم المزاد"
                         {...field}
                         className="!ring-[#d8ba8e]"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="itemImg"
+                render={({ field }) => (
+                  <FormItem className="flex items-center overflow-hidden bg-white border-[#D8BA8E] rounded-lg border h-[40px]">
+                    <FormControl>
+                      <UploadSingleImage
+                        value={field.value}
+                        onChange={field.onChange}
+                        name={field.name}
                       />
                     </FormControl>
                     <FormMessage />

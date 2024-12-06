@@ -6,6 +6,7 @@ import { AuthProvider } from "@/context/AuthContext";
 import { Tajawal } from "next/font/google";
 import Footer from "@/components/website/Footer";
 import { AuctionProvider } from "@/context/AuctionSwitchContext";
+import { ConfettiProvider } from "@/context/ConfettiContext";
 
 const tajawal = Tajawal({
   subsets: ["arabic"],
@@ -26,10 +27,12 @@ export default function RootLayout({
       <body className={`${tajawal.className} antialiased`}>
         <AuthProvider>
           <AuctionProvider>
-            <DashNavbar />
-            {children}
-            <Footer />
-            <Toaster position="bottom-right" />
+            <ConfettiProvider>
+              <DashNavbar />
+              {children}
+              <Footer />
+              <Toaster position="bottom-right" />
+            </ConfettiProvider>
           </AuctionProvider>
         </AuthProvider>
       </body>

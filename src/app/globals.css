@@ -127,6 +127,7 @@ input[type="number"] {
 
 .percentagetable thead tr th {
   height: 2rem;
+  text-align: center;
 }
 
 .percentagetable tbody tr {
@@ -134,7 +135,11 @@ input[type="number"] {
 }
 
 .percentagetable tbody tr td {
-  padding: 0 1rem;
+  padding: 0;
+  text-align: center;
+}
+.percentagetable tbody tr td div {
+  font-size: 14px;
 }
 
 .iframDiv:has(iframe) {
@@ -155,6 +160,10 @@ input[type="number"] {
 
 html:has(.ahmed) body > .mahmoud {
   display: none;
+}
+
+html:has(.dashboard-screen-icons) body .small-size {
+  max-height: 30px !important;
 }
 
 .swiper {

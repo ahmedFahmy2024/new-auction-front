@@ -32,7 +32,7 @@ const RightPart = ({ data, project, first }: RightPartProps) => {
           width={100}
           height={100}
           priority
-          className={`me-auto !w-fit object-contain max-h-[30px] ${
+          className={`me-auto !w-fit object-contain small-size ${
             first[0]?.displayLogoOne === false ? "hidden" : "block"
           }`}
         />
@@ -48,7 +48,7 @@ const RightPart = ({ data, project, first }: RightPartProps) => {
             width={100}
             height={100}
             priority
-            className={`me-auto !w-fit object-contain max-h-[30px] ${
+            className={`me-auto !w-fit object-contain small-size ${
               first[0]?.displayLogoSecond === false ? "hidden" : "block"
             }`}
           />
@@ -63,7 +63,7 @@ const RightPart = ({ data, project, first }: RightPartProps) => {
             width={100}
             height={100}
             priority
-            className={`me-auto !w-fit object-contain max-h-[30px] ${
+            className={`me-auto !w-fit object-contain small-size ${
               first[0]?.displayLogoThird === false ? "hidden" : "block"
             }`}
           />
@@ -80,7 +80,7 @@ const RightPart = ({ data, project, first }: RightPartProps) => {
         ) : (
           <div className="relative aspect-video w-full">
             <Image
-              src={project?.imageCover}
+              src={data[0]?.itemImg || ""}
               alt="Content image"
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

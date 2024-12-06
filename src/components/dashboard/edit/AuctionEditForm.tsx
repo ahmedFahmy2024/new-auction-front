@@ -8,6 +8,7 @@ import Bidding from "./Bidding";
 import AuctionItems from "./AuctionItems";
 import InstantBidding from "./InstantBidding";
 import { projectType } from "@/lib/schema";
+import CongratulationBtn from "./CongratulationBtn";
 
 async function fetchAuctionsProject(id: string) {
   const response = await fetch(`${BASE_URL}${PROJECTS}/${id}${AUCTIONS}`, {
@@ -52,6 +53,7 @@ export default async function AuctionEditForm({ id, project }: Props) {
           >
             تعديل المزاد الأساسى
           </Link>
+          <CongratulationBtn projectId={id} project={project} />
         </div>
       </div>
 

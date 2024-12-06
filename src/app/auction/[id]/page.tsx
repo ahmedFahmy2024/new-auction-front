@@ -10,7 +10,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import BeforeAuctionStart from "@/components/website/BeforeAuctionStart";
 import { Project } from "@/lib/types";
 import { auctionType, priceType } from "@/lib/schema";
-import AuctionSkeleton from "@/components/dashboard/edit/AuctionSkeleton";
+import Confetti from "react-confetti";
 
 const fetchProjects = async (id: string) => {
   try {
@@ -185,6 +185,7 @@ const Projector = () => {
       }}
       className="bg-cover bg-center flex items-center py-6 no-header"
     >
+      {project.playButton && <Confetti />}
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {/* right part */}

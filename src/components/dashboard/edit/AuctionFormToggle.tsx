@@ -345,7 +345,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
                 control={form.control}
                 name="auctionName"
                 render={({ field }) => (
-                  <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border h-8 hidden">
+                  <FormItem className="items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border h-8 hidden">
                     <FormLabel className="min-w-[100px] text-center font-extrabold text-[#342D23]">
                       اسم المزاد
                     </FormLabel>
@@ -376,7 +376,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
                         {displaylogos.displayLogoOne ? (
                           <Eye className="h-5 w-5 cursor-pointer" />
                         ) : (
-                          <EyeOff className="h-5 w-5 cursor-pointer" />
+                          <EyeOff className="h-5 w-5 cursor-pointer text-red-500" />
                         )}
                       </FormLabel>
                       <FormControl>
@@ -406,7 +406,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
                         {displaylogos.displayLogoSecond ? (
                           <Eye className="h-5 w-5 cursor-pointer" />
                         ) : (
-                          <EyeOff className="h-5 w-5 cursor-pointer" />
+                          <EyeOff className="h-5 w-5 cursor-pointer text-red-500" />
                         )}
                       </FormLabel>
                       <FormControl>
@@ -436,7 +436,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
                         {displaylogos.displayLogoThird ? (
                           <Eye className="h-5 w-5 cursor-pointer" />
                         ) : (
-                          <EyeOff className="h-5 w-5 cursor-pointer" />
+                          <EyeOff className="h-5 w-5 cursor-pointer text-red-500" />
                         )}
                       </FormLabel>
                       <FormControl>
@@ -565,7 +565,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
                         {displaylogos.displayBgImage ? (
                           <Eye className="h-5 w-5 cursor-pointer" />
                         ) : (
-                          <EyeOff className="h-5 w-5 cursor-pointer" />
+                          <EyeOff className="h-5 w-5 cursor-pointer text-red-500" />
                         )}
                       </FormLabel>
                       <FormControl>

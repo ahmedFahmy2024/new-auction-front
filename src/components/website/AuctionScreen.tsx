@@ -7,11 +7,12 @@ import RightPart from "@/components/website/RightPart";
 import { AUCTIONS, BASE_URL, PRICES, PROJECTS } from "@/server/Api";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import BeforeAuctionStart from "@/components/website/BeforeAuctionStart";
+import Confetti from "react-confetti";
 import { Project } from "@/lib/types";
 import { auctionType, priceType } from "@/lib/schema";
 import { useAuctionSwitch } from "@/context/AuctionSwitchContext";
 import AuctionSkeleton from "../dashboard/edit/AuctionSkeleton";
+import { useConfettiSwitch } from "@/context/ConfettiContext";
 
 const fetchProjects = async (id: string) => {
   try {
@@ -111,9 +112,16 @@ const AuctionScreen = () => {
   const [project, setProject] = useState<Project | null>(null);
   const [auctions, setAuctions] = useState<auctionType[]>([]);
   const [prices, setPrices] = useState<priceType[]>([]);
-  const { auctionId, changeToggleFields, changeBidderNum } = useAuctionSwitch();
+  const {
+    auctionId,
+    changeToggleFields,
+    changeBidderNum,
+    reloadTrigger,
+    editName,
+  } = useAuctionSwitch();
   const [isLoading, setIsLoading] = useState(true);
   const [firstAuction, setFirstAuction] = useState<auctionType[]>([]);
+  const { showConfetti } = useConfettiSwitch();
 
   useEffect(() => {
     const loadData = async () => {
@@ -146,9 +154,15 @@ const AuctionScreen = () => {
     if (id) {
       loadData();
     }
-  }, [id, auctionId, changeToggleFields, changeBidderNum]);
-
-  console.log("firstAuction", firstAuction);
+  }, [
+    id,
+    auctionId,
+    changeToggleFields,
+    changeBidderNum,
+    reloadTrigger,
+    editName,
+    showConfetti,
+  ]);
 
   if (!project || !firstAuction) {
     return (
@@ -166,6 +180,8 @@ const AuctionScreen = () => {
     return <AuctionSkeleton />;
   }
 
+  console.log("project", project);
+
   return (
     <main
       style={{
@@ -175,12 +191,13 @@ const AuctionScreen = () => {
             ? `url(${firstAuction[0]?.bgImage})`
             : "none",
       }}
-      className="bg-cover bg-center flex items-center rounded-xl editPage py-4"
+      className="bg-cover bg-center flex items-center rounded-xl editPage py-4 relative overflow-hidden"
     >
+      {project.playButton && <Confetti />}
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {/* right part */}
-          <Card className="overflow-hidden bg-transparent border-none shadow-none">
+          <Card className="overflow-hidden bg-transparent border-none shadow-none dashboard-screen-icons">
             <CardContent className="p-0">
               <RightPart
                 data={auctions}
