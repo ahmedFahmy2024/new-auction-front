@@ -144,6 +144,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
 
         form.reset({
           auctionName: data.auctionName || "",
+          itemName: data.itemName || "",
           logoOne: data.logoOne || "",
           logoSecond: data.logoSecond || "",
           logoThird: data.logoThird || "",
@@ -183,6 +184,10 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
 
     if (data.auctionName && data.auctionName !== specificAuction?.auctionName) {
       formData.append("auctionName", data.auctionName);
+    }
+
+    if (data.itemName && data.itemName !== specificAuction?.itemName) {
+      formData.append("itemName", data.itemName);
     }
 
     formData.append(
@@ -281,6 +286,7 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
       toast.success("تم تعديل المزاد بنجاح");
       form.reset({
         auctionName: response.data.data.auctionName || "",
+        itemName: response.data.data.itemName || "",
         logoOne: response.data.data.logoOne || "",
         logoSecond: response.data.data.logoSecond || "",
         logoThird: response.data.data.logoThird || "",
@@ -348,6 +354,27 @@ const AuctionFormToggle = ({ projectId, project }: Props) => {
                   <FormItem className="items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border h-8 hidden">
                     <FormLabel className="min-w-[100px] text-center font-extrabold text-[#342D23]">
                       اسم المزاد
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        className="!mt-0 border-none rounded-none"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            <div>
+              <FormField
+                control={form.control}
+                name="itemName"
+                render={({ field }) => (
+                  <FormItem className="flex items-center overflow-hidden bg-[#D8BA8E] border-[#D8BA8E] rounded-lg border h-8">
+                    <FormLabel className="min-w-[100px] text-center font-extrabold text-[#342D23]">
+                      اسم البند
                     </FormLabel>
                     <FormControl>
                       <Input

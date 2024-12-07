@@ -86,6 +86,7 @@ export const auctionSchema = z.object({
   displayBgImage: z.string().optional(),
   minIncrese: z.string().optional(),
   itemImg: z.string().optional(),
+  itemName: z.string().optional(),
 });
 
 export type auctionType = z.infer<typeof auctionSchema>;

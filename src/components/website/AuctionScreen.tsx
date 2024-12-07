@@ -180,8 +180,6 @@ const AuctionScreen = () => {
     return <AuctionSkeleton />;
   }
 
-  console.log("project", project);
-
   return (
     <main
       style={{

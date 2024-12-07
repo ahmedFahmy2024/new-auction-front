@@ -66,7 +66,7 @@ const LeftPart = ({ data, prices, first }: Props) => {
       ))}
 
       <DiagonalHeader
-        title="البند"
+        title={first[0]?.itemName || ""}
         bgColor={first[0]?.textBgColor1 || "#342D23"}
         textColor={first[0]?.textColor || "#FFFFFF"}
       />
