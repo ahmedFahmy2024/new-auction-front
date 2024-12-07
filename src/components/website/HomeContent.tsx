@@ -9,21 +9,21 @@ const array = [
   {
     id: 1,
     text: "تلبية احتياجات العملاء بتقديم خدمات عقارية مبتكرة ومدروسة.",
-    image: content1,
+    image: content3,
   },
   {
     id: 2,
-    text: "تقديم خدمات فريدة ومميزة لتحقيق تطلعات العملاء.",
+    text: "استثمار خبرة 13 عاماً في العقارات والفنادق وخدمات المعتمرين.",
     image: content2,
   },
   {
     id: 3,
-    text: "تقديم خدمات فريدة ومميزة لتحقيق تطلعات العملاء.",
-    image: content3,
+    text: "وكيل بيع قضائي ومقيم عقاري معتمد وتوثيق عقود الإيجار.",
+    image: content1,
   },
   {
     id: 4,
-    text: "تقديم خدمات فريدة ومميزة لتحقيق تطلعات العملاء.",
+    text: "شريك استراتيجي متخصص في المحاماة والاستشارات القانونية.",
     image: content4,
   },
 ];
@@ -35,7 +35,7 @@ const HomeContent = () => {
       style={{ backgroundImage: `url(${background.src})` }}
       className="relative h-[100vh] bg-cover bg-center flex items-center flex-col pt-10"
     >
-      <div className="absolute inset-0 bg-black opacity-70"></div>
+      <div className="absolute inset-0"></div>
       <div className="container mx-auto px-4 md:px-0 w-full h-full">
         <div className="z-10 relative w-full h-full flex items-center justify-center flex-col max-w-5xl mx-auto gap-4">
           <h2 className="font-extrabold text-2xl md:text-3xl text-white">
@@ -54,7 +54,7 @@ const HomeContent = () => {
       </div>
 
       <div className="w-full bg-[#D8BA8F52] z-10 px-4 md:px-0 py-10">
-        <div className=" relative w-full h-full flex items-center justify-center flex-col max-w-5xl mx-auto gap-4">
+        <div className=" relative w-full h-full flex items-center justify-center flex-col max-w-6xl mx-auto gap-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-20  max-w-full min-w-full">
             {array.map((item) => (
               <div

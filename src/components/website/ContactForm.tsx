@@ -122,7 +122,7 @@ const ContactForm = () => {
           <Button
             type="submit"
             disabled={form.formState.isSubmitting}
-            className="bg-[#D8BA8F] text-white hover:bg-[#D8BA8F] col-span-2"
+            className="bg-[#D8BA8F] text-white hover:bg-[#D8BA8F] col-span-2 w-fit mx-auto px-8 py-6"
           >
             {form.formState.isSubmitting ? (
               <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
